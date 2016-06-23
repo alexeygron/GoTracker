@@ -14,6 +14,8 @@ public class SampleFragmentPagerAdapter extends FragmentStatePagerAdapter {
 
     private Context context;
     private String tabTitles[] = new String[] {"Сервера", "Игроки", "Об игре" };
+    private String tabTitles2[] = new String[] {"Сервера", "Игроки", "Об игре" };
+
 
     public SampleFragmentPagerAdapter(FragmentManager fm, Context context) {
         super(fm);
