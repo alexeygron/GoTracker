@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.lotr.steammonitor.app.test">
+
+    <uses-sdk android:minSdkVersion="14" android:targetSdkVersion="22" />
+
+    <application>
+        <uses-library android:name="android.test.runner" />
+    </application>
+
+    <instrumentation android:name="android.test.InstrumentationTestRunner"
+                     android:targetPackage="com.lotr.steammonitor.app"
+                     android:handleProfiling="false"
+                     android:functionalTest="false"
+                     android:label="Tests for com.lotr.steammonitor.app"/>
+</manifest>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="E:\Android\SDK\extras\android\m2repository\com\android\support\support-annotations\22.2.1\support-annotations-22.2.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="61a0ff5c29295ec56d7e0bd3d25d95dbf71b4b2b">
+        <dex dex="E:\Android\Projects\Monitor\app\build\intermediates\pre-dexed\debug\support-annotations-22.2.1-b203ca1557c99a5b295175997518c5aca7a6e274.jar" />
+    </item>
+    <item
+        jar="E:\Android\Projects\Monitor\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.1\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="f8efd0096475e0daf054267b61544e10dc776503">
+        <dex dex="E:\Android\Projects\Monitor\app\build\intermediates\pre-dexed\debug\classes-1d15c10c60f826430e5e55077cec40446df54e9d.jar" />
+    </item>
+    <item
+        jar="E:\Android\Projects\Monitor\app\libs\commons-compress-1.9.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="cc18955ff1e36d5abd39a14bfe82b19154330a34">
+        <dex dex="E:\Android\Projects\Monitor\app\build\intermediates\pre-dexed\debug\commons-compress-1.9-6faac49cd2415e4d65c127b4333b77ba232e4a6d.jar" />
+    </item>
+    <item
+        jar="E:\Android\Projects\Monitor\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\7.8.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="c0c912d58c9468b1f9d9769c8975afdf2c85d681">
+        <dex dex="E:\Android\Projects\Monitor\app\build\intermediates\pre-dexed\debug\classes-58032ae18670070e2c529b4e66e21568e2d65461.jar" />
+    </item>
+    <item
+        jar="E:\Android\Projects\Monitor\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="4486e953d1f35f8ccab098b1dd67146366d5f731">
+        <dex dex="E:\Android\Projects\Monitor\app\build\intermediates\pre-dexed\debug\classes-c8ee65a65742f7f8cbed14d41c2ae762781fdd8d.jar" />
+    </item>
+    <item
+        jar="E:\Android\Projects\Monitor\app\build\intermediates\exploded-aar\com.android.support\design\22.2.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="fc63b820d54c8a27a3a614bdd93920e0076581c2">
+        <dex dex="E:\Android\Projects\Monitor\app\build\intermediates\pre-dexed\debug\classes-7d3d88c399490e9a2b5e8418b6bcc5d206140e62.jar" />
+    </item>
+    <item
+        jar="E:\Android\Projects\Monitor\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.1\jars\libs\internal_impl-22.2.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="c471eaaba13ff64f6e0383d1c30a9cdc9a97efeb">
+        <dex dex="E:\Android\Projects\Monitor\app\build\intermediates\pre-dexed\debug\internal_impl-22.2.1-bae770f75bc38998574cea7811cf71303e2c5b66.jar" />
+    </item>
+    <item
+        jar="E:\Android\Projects\Monitor\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-ads\7.8.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="1ff30fa49c07a08c3035d7218a3efebf5680d522">
+        <dex dex="E:\Android\Projects\Monitor\app\build\intermediates\pre-dexed\debug\classes-495e3532ab6585636611f09d59ff73abcc20ce2e.jar" />
+    </item>
+    <item
+        jar="E:\Android\Projects\Monitor\app\libs\steam-condenser-1.3.9-sources.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="dcc24806b4efabe04dcca0d99bc948e6e43739e4">
+        <dex dex="E:\Android\Projects\Monitor\app\build\intermediates\pre-dexed\debug\steam-condenser-1.3.9-sources-934f4c0784e6a1946be70e8634526187bff5c37b.jar" />
+    </item>
+    <item
+        jar="E:\Android\Projects\Monitor\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-appindexing\7.8.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="e23ea11124bb700eeddd4ab7aa848c615f493850">
+        <dex dex="E:\Android\Projects\Monitor\app\build\intermediates\pre-dexed\debug\classes-a4f6715fe720c98a85cacf84841d11bd38176b1c.jar" />
+    </item>
+    <item
+        jar="E:\Android\Projects\Monitor\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-analytics\7.8.0\jars\classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="0124ce31248c0e8acfa2b28283c6d1a4d76e73d2">
+        <dex dex="E:\Android\Projects\Monitor\app\build\intermediates\pre-dexed\debug\classes-1aa0df0564a7aa33b059bfaac7e0051460851883.jar" />
+    </item>
+    <item
+        jar="E:\Android\Projects\Monitor\app\libs\commons-lang3-3.4.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="5fe28b9518e58819180a43a850fbc0dd24b7c050">
+        <dex dex="E:\Android\Projects\Monitor\app\build\intermediates\pre-dexed\debug\commons-lang3-3.4-37065192ad630c24a7d95ffee6d799bf6e6b088a.jar" />
+    </item>
+    <item
+        jar="E:\Android\Projects\Monitor\app\libs\steam-condenser-1.3.9.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="fc60f352db1e7137b142589c50678452a24fe26b">
+        <dex dex="E:\Android\Projects\Monitor\app\build\intermediates\pre-dexed\debug\steam-condenser-1.3.9-4ab57e1b5275365a50bb3eebc83744687bd5471e.jar" />
+    </item>
+
+</items>

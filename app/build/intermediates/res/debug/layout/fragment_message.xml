@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/message"
+    android:gravity="center|center_vertical|center_horizontal"
+    android:foregroundGravity="center|fill_horizontal|center_horizontal"
+    android:padding="20dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/check_massage"
+        android:id="@+id/textView5"
+        android:textColor="#fff"
+        android:textSize="18sp"
+        android:layout_gravity="center"
+        android:layout_weight="4"
+        android:gravity="left" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView"
+        android:background="@drawable/ic_autorenew_white_48dp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
+</LinearLayout><!-- From: file:/E:/Android/Projects/Monitor/app/src/main/res/layout/fragment_message.xml -->

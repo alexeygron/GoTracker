@@ -1,0 +1,9 @@
+
+<selector
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#5b636d"/>
+        </shape>
+    </item>
+</selector><!-- From: file:/home/lotr/AndroidStudioProjects/Monitor/app/src/main/res/drawable/clip.xml -->

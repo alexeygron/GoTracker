@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle" >
+            <solid android:color="#444d59" />
+
+            <stroke android:width="3dip"
+                android:color="#eee"
+                android:dashWidth="13dp"
+                android:dashGap="5dp" />
+        </shape>
+    </item>
+</selector><!-- From: file:/home/lotr/AndroidStudioProjects/Monitor/app/src/main/res/drawable/message.xml -->

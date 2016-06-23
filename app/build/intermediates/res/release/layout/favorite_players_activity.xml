@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#eee">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="3">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/action_fon"
+            android:layout_marginBottom="10dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <ImageButton
+                    android:id="@+id/menu_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="6dp"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/ic_list_white_18dp" />
+
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_weight="3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    style="@style/TextTitle" />
+
+                <ImageButton
+                    android:id="@+id/btn_add_ip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:background="@drawable/ic_add_circle_outline_white_48dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="3dp"/>
+
+                <ImageButton
+                    android:id="@+id/update_list"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/ic_autorenew_white_48dp"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginBottom="3dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="35sp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp">
+
+                    <Button
+                    android:id="@+id/nav_favorite_but"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/text_servers"
+                        style="@style/TabFalse" />
+
+
+                <Button
+                    android:id="@+id/nav_servers_but"
+                    android:text="@string/text_players"
+                    style="@style/TabTrue" />
+
+                <Button
+                    android:id="@+id/nav_home_but"
+                    android:text="@string/text_info"
+                    style="@style/TabFalse" />
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView1" />
+
+        <FrameLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/fragmentContainer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp" />
+
+        <FrameLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/fragmentContainer2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginRight="30dp"
+            android:layout_marginLeft="30dp" />
+
+        <ListView
+            android:id="@+id/pServers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:dividerHeight="8dp"
+            android:background="#eee"
+            android:divider="#eee">
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="140dp"
+        </ListView>
+
+    </LinearLayout>
+
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner_id"
+        android:layout_gravity="center">
+
+    </com.google.android.gms.ads.AdView>
+
+</LinearLayout><!-- From: file:/home/lotr/AndroidStudioProjects/Monitor/app/src/main/res/layout/favorite_players_activity.xml -->
