@@ -200,7 +200,7 @@ public class FavoriteServersActivity extends Activity implements OnClickListener
 		              Log.d("Добавление в массив", " " + "ip = " + c.getString(ipColIndex));
 		              
 		              // запись в объект ip из базы
-		              masSrv[i] = new Server(c.getString(ipColIndex));
+		              masSrv[i] = new com.lotr.steammonitor.app.Server(c.getString(ipColIndex));
 		              i = i + 1;
 		             
 		              // переход на следующую строку 
