@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="material_blue_grey_800">#444d59</color>
+    <color name="material_blue_grey_900">#3b424c</color>
+    <color name="accent_material_light">#aea28e</color>
+</resources>

@@ -10,7 +10,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:tabMaxWidth="0dp"
-        app:tabGravity="fill"/>
+        app:tabGravity="fill"
+        style="@style/TabLayoutStyle"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager"

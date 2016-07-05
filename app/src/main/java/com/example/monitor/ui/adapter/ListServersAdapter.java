@@ -12,7 +12,7 @@ import com.lotr.steammonitor.app.Server;
 import java.util.List;
 
 /**
- * Адаптер для списка врачей.
+ * Адаптер для списка серверов.
  */
 
 public class ListServersAdapter extends RecyclerView.Adapter<ListServersAdapter.Holder> {
@@ -25,7 +25,6 @@ public class ListServersAdapter extends RecyclerView.Adapter<ListServersAdapter.
 
     @Override
     public Holder onCreateViewHolder(ViewGroup parent, int viewType) {
-
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
         View view = layoutInflater.inflate(R.layout.item_list_servers, parent, false);
         return new Holder(view);
@@ -48,7 +47,6 @@ public class ListServersAdapter extends RecyclerView.Adapter<ListServersAdapter.
 
         public Holder(View itemView) {
             super(itemView);
-
             info = (TextView)itemView.findViewById(R.id.info_text);
             itemView.setOnClickListener(this);
         }
