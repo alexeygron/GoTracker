@@ -1,6 +1,4 @@
-package com.lotr.steammonitor.app;
-
-import android.app.Activity;
+package com.example.monitor.servers;
 
 public class Server {
 	
@@ -12,13 +10,12 @@ public class Server {
 	protected String srvGame;
 	protected String srvTags;
 	
-	public Server (){
+	public Server(){
 		
 		
 	}
 	
-	public Server (String ip){
-	
+	public Server(String ip){
 		ipAddr = ip;
 	}
 	
@@ -87,9 +84,9 @@ public class Server {
 
 		return srvMap;
 	}
-	
 
-
-
-	
+	@Override
+	public String toString(){
+		return "IpAddr " + ipAddr;
+	}
 }

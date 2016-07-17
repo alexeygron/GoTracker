@@ -1,4 +1,4 @@
-package com.lotr.steammonitor.app;
+package com.example.monitor.model;
 
 import android.graphics.Bitmap;
 

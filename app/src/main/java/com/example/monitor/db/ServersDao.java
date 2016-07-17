@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-public class DBWorker {
+public class ServersDao {
 
     private Context mContext;
     private SQLiteDatabase mBase;
@@ -14,7 +14,9 @@ public class DBWorker {
     private String mTableName;
     private String mColumnName;
 
-    public DBWorker(Context context, String tableName){
+    private static final String TAG = "db_worker";
+
+    public ServersDao(Context context, String tableName){
         mContext = context;
         mTableName = tableName;
         mHelper = new DBHelper(mContext, tableName);
@@ -34,15 +36,23 @@ public class DBWorker {
         mBase.insert(mTableName, null, cv);
     }
 
+    public void delete (String ipAddr, int position){
+       // mBase.delete(mTableName, position "ip" + "='" + ipAddr + "'", null);
+        mBase.delete(mTableName, "id=" + position, null);
+    }
+
     public String[] read() {
         Cursor cursor = mBase.query(mTableName, null, null, null, null, null, null);
-        Log.d("FROM_DB_COL_COUNT", " " + cursor.getCount());
+        Log.d(TAG, " to string " + cursor.toString());
         String[] mas = new String[cursor.getCount()];
         int index = 0;
         if (cursor.moveToFirst()) {
             int ipColIndex = cursor.getColumnIndex(mColumnName);
+            int ipColIndex2 = cursor.getColumnIndex("id");
+
             do {
-                Log.d("FROM_DB_VALUE", " " + "ip = " + cursor.getString(ipColIndex));
+                Log.d(TAG, " " + "ip = " + cursor.getString(ipColIndex));
+                Log.d(TAG, " " + "ip = " + cursor.getString(ipColIndex2));
                 mas[index] = cursor.getString(ipColIndex);
                 index++;
             } while (cursor.moveToNext());
