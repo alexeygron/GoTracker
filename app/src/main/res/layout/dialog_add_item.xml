@@ -3,4 +3,34 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:text="@string/dialog_ip_text"
+        android:paddingLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp"
+        android:background="#dedede" />
+
+    <EditText
+        android:id="@+id/add_item_field"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp" />
+
+    <TextView
+        android:id="@+id/error_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Неверный формат"
+        android:textSize="14sp"
+        android:textColor="@color/error_text"
+        android:layout_marginLeft="20dp"
+        android:visibility="invisible"/>
+
 </LinearLayout>

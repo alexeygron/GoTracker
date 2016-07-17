@@ -27,5 +27,6 @@ public abstract class BaseLoader extends AsyncTaskLoader<Cursor> {
         }
     }
 
+
     protected abstract Cursor apiCall() throws IOException;
 }

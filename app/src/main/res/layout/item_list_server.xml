@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -21,6 +21,8 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
+            android:ellipsize="end"
+            android:lines="1"
             android:paddingLeft="2dp"
             style="@style/TextViewBold" />
 
@@ -30,6 +32,8 @@
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/players"
             android:layout_alignBottom="@+id/players"
+            android:ellipsize="end"
+            android:lines="1"
             android:layout_marginLeft="26dp"
             android:layout_toRightOf="@+id/players"
             style="@style/TextViewSmall" />
@@ -53,7 +57,7 @@
             android:layout_alignLeft="@+id/srv_ip"
             android:layout_below="@+id/srv_name"
             android:layout_marginLeft="180dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="15dp"
             style="@style/TextViewSmall" />
 
         <ImageButton

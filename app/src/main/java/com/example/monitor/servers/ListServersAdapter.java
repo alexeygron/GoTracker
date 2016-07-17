@@ -87,6 +87,7 @@ public class ListServersAdapter extends RecyclerView.Adapter<ListServersAdapter.
                     mPresenter.onClickDelButton(pos);
                     //ListServersAdapter.this.notifyDataSetChanged();
                     //mData.remove(mPosition);
+
                     break;
             }
         }

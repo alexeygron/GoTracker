@@ -1,6 +1,6 @@
 <resources>
 
-    <style name="AppBaseTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppBaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/material_blue_grey_800</item>
         <item name="colorPrimaryDark">@color/material_blue_grey_900</item>
     </style>
@@ -15,6 +15,11 @@
         <item name="cardCornerRadius">1dp</item>
         <item name="cardElevation">3dp</item>
         <item name="cardBackgroundColor">#515861</item>
+    </style>
+
+    <style name="CustomToolbar" parent="ThemeOverlay.AppCompat.ActionBar">
+        <item name="android:background">@color/material_blue_grey_800</item>
+        <item name="titleTextColor">#fff</item>
     </style>
 
     <style name="MyTabTextAppearance" parent="TextAppearance.Design.Tab">

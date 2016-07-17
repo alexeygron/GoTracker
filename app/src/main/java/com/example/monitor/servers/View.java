@@ -4,15 +4,13 @@ import java.util.ArrayList;
 
 public interface View {
 
-    void showList(ArrayList<ServerModel> data);
+    void updateList();
+
+    void setData(ArrayList<Server> data);
 
     void showSnackBar(String message);
 
     void showProgress();
 
     void hideProgress();
-
-    void onPositiveClick();
-
-
 }

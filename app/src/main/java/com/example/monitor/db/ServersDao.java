@@ -6,58 +6,55 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.example.monitor.servers.Server;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class ServersDao {
 
     private Context mContext;
     private SQLiteDatabase mBase;
     private DBHelper mHelper;
-    private String mTableName;
-    private String mColumnName;
 
     private static final String TAG = "db_worker";
+    private static final String TABLE_MANE = "favorites";
 
-    public ServersDao(Context context, String tableName){
+    public ServersDao(Context context){
         mContext = context;
-        mTableName = tableName;
-        mHelper = new DBHelper(mContext, tableName);
+        mHelper = new DBHelper(mContext, TABLE_MANE);
         mBase = mHelper.getWritableDatabase();
-
-        if (mTableName.equals("favorites")) {
-            mColumnName = "ip";
-        } else {
-            mColumnName = "id";
-        }
-
     }
 
     public void insert (String value){
         ContentValues cv = new ContentValues();
-        cv.put(mColumnName, value);
-        mBase.insert(mTableName, null, cv);
+        cv.put("ip", value);
+        mBase.insert(TABLE_MANE, null, cv);
     }
 
-    public void delete (String ipAddr, int position){
+    public void delete (String id){
        // mBase.delete(mTableName, position "ip" + "='" + ipAddr + "'", null);
-        mBase.delete(mTableName, "id=" + position, null);
+        mBase.delete(TABLE_MANE, "id=" + id, null);
     }
 
-    public String[] read() {
-        Cursor cursor = mBase.query(mTableName, null, null, null, null, null, null);
-        Log.d(TAG, " to string " + cursor.toString());
-        String[] mas = new String[cursor.getCount()];
-        int index = 0;
-        if (cursor.moveToFirst()) {
-            int ipColIndex = cursor.getColumnIndex(mColumnName);
-            int ipColIndex2 = cursor.getColumnIndex("id");
+    public ArrayList<Server> readToList() {
+        SQLiteDatabase mBase = new DBHelper(mContext, TABLE_MANE).getWritableDatabase();
 
+        ArrayList data = new ArrayList();
+        Cursor cursor = mBase.query(TABLE_MANE, null, null, null, null, null, null);
+        if (cursor.moveToFirst()) {
+            int ipIndex = cursor.getColumnIndex("ip");
+            int idIndex = cursor.getColumnIndex("id");
             do {
-                Log.d(TAG, " " + "ip = " + cursor.getString(ipColIndex));
-                Log.d(TAG, " " + "ip = " + cursor.getString(ipColIndex2));
-                mas[index] = cursor.getString(ipColIndex);
-                index++;
+                Server server = new Server();
+                Log.d(TAG, " " + "ip = " + cursor.getString(ipIndex));
+                Log.d(TAG, " " + "id = " + cursor.getString(idIndex));
+                server.setIpAddr(cursor.getString(ipIndex));
+                server.setDbId(cursor.getString(idIndex));
+                data.add(server);
             } while (cursor.moveToNext());
         }
-        return mas;
+        return data;
     }
 
     public void close(){
@@ -65,6 +62,6 @@ public class ServersDao {
     }
 
     public void clear(){
-        mBase.delete(mTableName, null, null);
+        mBase.delete(TABLE_MANE, null, null);
     }
 }

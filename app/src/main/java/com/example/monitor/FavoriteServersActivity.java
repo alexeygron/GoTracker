@@ -3,6 +3,7 @@ package com.lotr.steammonitor.app;
 import java.util.HashMap;
 import java.util.concurrent.TimeoutException;
 
+import com.example.monitor.servers.Server;
 import com.github.koraktor.steamcondenser.exceptions.SteamCondenserException;
 import com.github.koraktor.steamcondenser.steam.servers.SourceServer;
 import com.github.koraktor.steamcondenser.steam.sockets.SteamSocket;
@@ -21,7 +22,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -200,7 +200,7 @@ public class FavoriteServersActivity extends Activity implements OnClickListener
 		              Log.d("Добавление в массив", " " + "ip = " + c.getString(ipColIndex));
 		              
 		              // запись в объект ip из базы
-		              masSrv[i] = new com.lotr.steammonitor.app.Server(c.getString(ipColIndex));
+		              masSrv[i] = new Server(c.getString(ipColIndex));
 		              i = i + 1;
 		             
 		              // переход на следующую строку 
@@ -350,7 +350,7 @@ public class FavoriteServersActivity extends Activity implements OnClickListener
 			  // Если мы не получили представление, заполняем его
 			  if (convertView == null) {
 				  convertView = FavoriteServersActivity.this.getLayoutInflater()
-						  .inflate(R.layout.list_item_server, null);
+						  .inflate(R.layout.item_list_server, null);
 			  }
 		        
 			  // Настройка представления для объекта Crime
@@ -360,8 +360,8 @@ public class FavoriteServersActivity extends Activity implements OnClickListener
 			
 			  TextView titleTextView = (TextView)convertView.findViewById(R.id.srv_name);
 
-			  if (c.srvName != null)
-				  titleTextView.setText(c.srvName);
+			  if (c.getSrvName() != null)
+				  titleTextView.setText(c.getSrvName());
 			  else
 				  titleTextView.setText(getResources().getString(R.string.err_get_server));
 

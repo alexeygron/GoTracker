@@ -1,95 +1,90 @@
 package com.example.monitor.servers;
 
 import android.os.Bundle;
-import android.support.v4.app.LoaderManager;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
-import android.view.View;
+import android.view.MenuItem;
 
-import com.example.monitor.async.ServersLoader;
-import com.example.monitor.db.DBWorker;
-import com.example.monitor.ui.adapter.ListServersAdapter;
+import com.example.monitor.db.ServersDao;
 import com.example.monitor.ui.fragment.CommonListFragment;
+import com.example.monitor.ui.view.AddItemDialog;
 import com.lotr.steammonitor.app.R;
-import com.example.monitor.model.Server;
+import com.wang.avi.AVLoadingIndicatorView;
 
 import java.util.ArrayList;
 
-public class ServersFragment extends CommonListFragment implements LoaderManager.LoaderCallbacks<Server>
-        ,SwipeRefreshLayout.OnRefreshListener{
+public class ServersFragment extends CommonListFragment implements View, SwipeRefreshLayout.OnRefreshListener,
+        android.view.View.OnClickListener, AddItemDialog.DialogCallback {
 
+    private static final String TAG = "server_list_fragment";
 
-    Bundle mArgs = new Bundle();
-    String[] mas;
-
-    public static final int LOADER_ID = 1;
-    private int srvIndex;
+    //private AVLoadingIndicatorView mProgressBar;
+    protected FloatingActionButton mButtonAdd;
+    private FavoriteServersPresenter mPresenter;
+    //PullToRefreshView mPullToRefreshView;
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
+    public void onViewCreated(android.view.View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mSwipeRefreshLayout.setOnRefreshListener(this);
+        //mProgressBar = (AVLoadingIndicatorView) getActivity().findViewById(R.id.avloadingIndicatorView);
+        mButtonAdd = (FloatingActionButton) view.findViewById(R.id.button_add);
+        mButtonAdd.setOnClickListener(this);
+        setHasOptionsMenu(true);
 
-        Server srv = new Server("21.23.45.631:25016");
-        srv.setSrvName("Бойцовский Клуб 18+");
-        srv.setMap("de_dust");
-        srv.setNumPlayers("23");
-
-        mListData = new ArrayList<Server>();
-      /*  for (int i = 0; i < 4; i++){
-            mListData.add(srv);
+        if (mPresenter == null){
+            mPresenter = new FavoriteServersPresenter(getLoaderManager(), getActivity(), this, getFragmentManager());
         }
-       */
-/*
-        DBWorker db = new DBWorker(getActivity(), "favorites");
-        db.insert("46.174.53.216:27015");
-        db.insert("46.174.53.216:27015");
-        db.insert("46.174.53.216:27015");*/
-
-        showList();
-        mAdapter = new ListServersAdapter(mListData);
+        //mPresenter.onTakeView(this);
+        mAdapter = new ListServersAdapter(mPresenter);
         mRecyclerView.setAdapter(mAdapter);
-
     }
 
     @Override
-    public ServersLoader onCreateLoader(int id, Bundle args) {
-
-            return new ServersLoader(getActivity(), args);
-
-    }
-
-    @Override
-    public void onLoadFinished(android.support.v4.content.Loader<Server> loader, Server data) {
-        if (data != null){
-            updateList(data);
-            srvIndex++;
-            Log.i("LOADER_RESULT", data.toString());
-            if (srvIndex < mas.length) {
-                mArgs.putString("ip", mas[srvIndex]);
-                getLoaderManager().restartLoader(LOADER_ID, mArgs, this);
-            }
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.update_button:
+                mPresenter.init();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mPresenter.onDestroy();
+    }
 
-    private void updateList(Server server){
-        mListData.add(server);
+    @Override
+    public void updateList(){
         mAdapter.notifyDataSetChanged();
     }
 
-    private void showList(){
-        DBWorker db = new DBWorker(getActivity(), "favorites");
-        mas = db.read();
-        srvIndex = 0;
-        mListData.clear();
-        mArgs.putString("ip", mas[srvIndex]);
-        getLoaderManager().restartLoader(LOADER_ID, mArgs, this);
+  @Override
+    public void setData(ArrayList<Server> data){
+       mAdapter.setData(data);
     }
 
     @Override
-    public void onLoaderReset(android.support.v4.content.Loader<Server> loader) {
+    public void showSnackBar(String message){
+       Snackbar.make(getView(), message, Snackbar.LENGTH_SHORT).show();
+    }
 
+    @Override
+    public void showProgress() {
+        if (mProgressBar != null) {
+            mProgressBar.setVisibility(android.view.View.VISIBLE);
+        }
+    }
+
+    @Override
+    public void hideProgress() {
+        if (mProgressBar != null)
+            mProgressBar.setVisibility(android.view.View.GONE);
     }
 
     protected int getLayoutId(){
@@ -99,13 +94,28 @@ public class ServersFragment extends CommonListFragment implements LoaderManager
     @Override
     public void onRefresh() {
         mSwipeRefreshLayout.setRefreshing(true);
-
+        mPresenter.onRefresh();
         mSwipeRefreshLayout.postDelayed(new Runnable() {
             @Override
             public void run() {
                 mSwipeRefreshLayout.setRefreshing(false);
-                showList();
             }
-        }, 1000);
+        }, 700);
+    }
+
+    @Override
+    public void onClick(android.view.View v) {
+        switch(v.getId()){
+            case R.id.button_add:
+                AddItemDialog dialogFragment = AddItemDialog.createInstance(this);
+                dialogFragment.show(getFragmentManager(), null);
+                break;
+        }
+    }
+
+    @Override
+    public void onPositiveClick(String item) {
+        Log.i(TAG, item);
+        mPresenter.addNewItem(item);
     }
 }

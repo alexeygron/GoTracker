@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 class DBHelper extends SQLiteOpenHelper {
 
-    String mTable;
+    private String mTable;
 
     public DBHelper(Context context, String table) {
         super(context, table, null, 1);
@@ -32,7 +32,6 @@ class DBHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
     }
-
 }
 
 

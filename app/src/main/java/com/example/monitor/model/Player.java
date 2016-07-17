@@ -11,82 +11,82 @@ public class Player {
     private String mPlayerName, urlAvatar, gameextrainfo, personastate = "", lastlogoff;
     Bitmap avs;
 
-    Player (String id) {
+    public Player (String id) {
 
         plId = id;
     }
 
-    String getPlayerId(){
-
+    public String getPlayerId(){
         return plId;
     }
 
-    void setPlayerId(String id){
+    public void setPlayerId(String id){
 
+        int c;
         plId = id;
     }
 
-    void setPlayerName (String name){
+    public void setPlayerName (String name){
 
         mPlayerName = name;
 
     }
 
-    String getPlayerName(){
+    public String getPlayerName(){
 
         return mPlayerName;
     }
 
-    void setUrlAvatar (String url){
+    public void setUrlAvatar (String url){
 
         urlAvatar = url;
 
     }
 
-    String getUrlAvatar(){
+    public String getUrlAvatar(){
 
         return urlAvatar;
     }
 
-    void setgameextrainfo (String info){
+    public void setgameextrainfo (String info){
 
         gameextrainfo = info;
 
     }
 
-    String getgameextrainfo(){
+    public String getgameextrainfo(){
 
         return gameextrainfo;
     }
 
-    void setBtmAvs(Bitmap btm){
+    public void setBtmAvs(Bitmap btm){
 
         avs = btm;
     }
 
-    Bitmap getBtmAvs(){
+    public Bitmap getBtmAvs(){
 
         return avs;
     }
 
-    void setpersonastate (String state){
+    public void setpersonastate (String state){
 
         personastate = state;
 
     }
 
-    String getpersonastate(){
+    public String getpersonastate(){
 
         return personastate;
     }
 
-    void setlastlogoff (String time){
+    public void setlastlogoff (String time){
 
         lastlogoff = time;
 
     }
 
-    String getlastlogoff(){
+    public String getlastlogoff(){
 
         return lastlogoff;
     }
