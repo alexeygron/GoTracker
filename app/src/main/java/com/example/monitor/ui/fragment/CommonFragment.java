@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import com.lotr.steammonitor.app.R;
 import com.wang.avi.AVLoadingIndicatorView;
 
+import butterknife.ButterKnife;
+
 /**
  * Содержит общую функциональность для всех остальных фрагментов в приложении.
  */

@@ -3,7 +3,7 @@ package com.lotr.steammonitor.app;
 import java.util.HashMap;
 import java.util.concurrent.TimeoutException;
 
-import com.example.monitor.servers.Server;
+import com.example.monitor.servers.ServerModel;
 import com.github.koraktor.steamcondenser.exceptions.SteamCondenserException;
 import com.github.koraktor.steamcondenser.steam.servers.SourceServer;
 import com.github.koraktor.steamcondenser.steam.sockets.SteamSocket;
@@ -51,7 +51,7 @@ public class FavoriteServersActivity extends Activity implements OnClickListener
 	SQLiteDatabase db;
 	ListView lServers;
 	SrvAdapter adapter;
-	Server[] masSrv;
+	ServerModel[] masSrv;
 	AlertDialog dialog;
 
 	FragmentManager fm;
@@ -189,7 +189,7 @@ public class FavoriteServersActivity extends Activity implements OnClickListener
         Log.d("количество столбцов", " " + c.getCount());
         
         // массив объектов в полях которых получается и хранится информация о сервере
-		masSrv = new Server[c.getCount()];
+		masSrv = new ServerModel[c.getCount()];
 		int i = 0;
 		
 		if (c.moveToFirst()) {
@@ -200,7 +200,7 @@ public class FavoriteServersActivity extends Activity implements OnClickListener
 		              Log.d("Добавление в массив", " " + "ip = " + c.getString(ipColIndex));
 		              
 		              // запись в объект ip из базы
-		              masSrv[i] = new Server(c.getString(ipColIndex));
+		              masSrv[i] = new ServerModel(c.getString(ipColIndex));
 		              i = i + 1;
 		             
 		              // переход на следующую строку 
@@ -331,16 +331,16 @@ public class FavoriteServersActivity extends Activity implements OnClickListener
 	}
 	
  	// этот класс переопределяет отображение элементов списка
-	private class ServerAdapter extends ArrayAdapter<Server> {
-		public ServerAdapter(Server[] adapter) {
+	private class ServerAdapter extends ArrayAdapter<ServerModel> {
+		public ServerAdapter(ServerModel[] adapter) {
 		super(FavoriteServersActivity.this, 0, adapter);
 		} 
 	}
 
 	// переопределение адаптера для отображения своего пункта списка
-	public class SrvAdapter extends ArrayAdapter<Server> {
+	public class SrvAdapter extends ArrayAdapter<ServerModel> {
 		
-		  public SrvAdapter(Server[] masSrv) {
+		  public SrvAdapter(ServerModel[] masSrv) {
 		        super(FavoriteServersActivity.this, 0, masSrv);
 		  }
 
@@ -354,7 +354,7 @@ public class FavoriteServersActivity extends Activity implements OnClickListener
 			  }
 		        
 			  // Настройка представления для объекта Crime
-			  Server c = getItem(position);
+			  ServerModel c = getItem(position);
 			  int in = 0;
 			  
 			
@@ -378,7 +378,7 @@ public class FavoriteServersActivity extends Activity implements OnClickListener
 							g.putExtra("game", masSrv[position].getGame());
 							g.putExtra("tags", masSrv[position].getTags());
 							g.putExtra("map", masSrv[position].getMap());
-							g.putExtra("playersf", masSrv[position].getMaxPlayers());
+							g.putExtra("playersf", masSrv[position].getPlayers());
 							g.putExtra("playersc", masSrv[position].getNumPlayers());
 						}
 		        		// и запускаем ее
@@ -393,7 +393,7 @@ public class FavoriteServersActivity extends Activity implements OnClickListener
 		        mapTextView.setText(c.getMap());
 		        
 		        TextView playersTextView = (TextView)convertView.findViewById(R.id.players);
-		        playersTextView.setText(c.getNumPlayers() + "/" + c.getMaxPlayers());
+		        playersTextView.setText(c.getNumPlayers() + "/" + c.getPlayers());
 		        
 		        ImageButton delBut = (ImageButton)convertView.findViewById(R.id.del_item_button);
 		       

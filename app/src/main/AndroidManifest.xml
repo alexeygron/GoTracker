@@ -30,7 +30,7 @@
 
         <activity
             android:name="com.example.monitor.ui.PagerActivity"
-            android:label="@string/app_name" >
+            android:label="@string/fav_srv_text" >
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -43,7 +43,12 @@
 
         <activity
             android:name="com.example.monitor.serverdetails.ServerDetailsActivity"
-            android:label="@string/app_name" />
+            android:label="@string/app_name"
+            android:parentActivityName="com.example.monitor.serverdetails.ServerDetailsActivity">
+                <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="com.example.monitor.serverdetails.ServerDetailsActivity" />
+            </activity>
         
         <activity
             android:name=".FavoriteServersActivity"

@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.monitor.db.ServersDao;
+import com.example.monitor.utils.LogUtils;
 import com.lotr.steammonitor.app.R;
 
 /**
@@ -24,7 +25,7 @@ public class AddItemDialog extends DialogFragment implements DialogInterface.OnS
     private DialogCallback mCallback;
     private AlertDialog dialog;
 
-    private static final String TAG = "add_item_dialog";
+    private static final String TAG = LogUtils.makeLogTag(AddItemDialog.class);
 
     public static AddItemDialog createInstance(DialogCallback callback){
         AddItemDialog dialog = new AddItemDialog();

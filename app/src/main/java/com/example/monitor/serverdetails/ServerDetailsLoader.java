@@ -4,18 +4,25 @@ import android.content.AsyncTaskLoader;
 import android.content.Context;
 import android.util.Log;
 
+import com.example.monitor.servers.ServerModel;
+import com.example.monitor.utils.LogUtils;
 import com.github.koraktor.steamcondenser.exceptions.SteamCondenserException;
+import com.github.koraktor.steamcondenser.steam.SteamPlayer;
 import com.github.koraktor.steamcondenser.steam.servers.SourceServer;
+import com.github.koraktor.steamcondenser.steam.sockets.SteamSocket;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.concurrent.TimeoutException;
 
 /**
  * Загружает из сети в фоновом потоке информацию о сервере.
  */
-public class ServerDetailsLoader extends AsyncTaskLoader<String> {
+public class ServerDetailsLoader extends AsyncTaskLoader<ServerDetailsModel> {
 
-    public final String TAG = "ServersDetailsLoader";
+    public final String TAG = LogUtils.makeLogTag(ServerDetailsLoader.class);
     private String ipAddress;
 
     public ServerDetailsLoader(Context context, String ip) {
@@ -24,26 +31,52 @@ public class ServerDetailsLoader extends AsyncTaskLoader<String> {
     }
 
     @Override
-    public String loadInBackground() {
-
-        HashMap players;
-        HashMap info;
-
+    public ServerDetailsModel loadInBackground() {
+        HashMap<String, Object> data;
+        HashMap<String, SteamPlayer> players = new HashMap<>();
         try {
-
             SourceServer server = new SourceServer(ipAddress);
+            SteamSocket.setTimeout(3000);
             server.initialize();
-            players = server.getPlayers();
-            info = server.getServerInfo();
-
-            Log.i(TAG, players.toString());
-            Log.i(TAG, info.toString());
-
-        } catch (SteamCondenserException | TimeoutException e) {
+            data = server.getServerInfo();
+            players.putAll(server.getPlayers());
+        } catch (SteamCondenserException e) {
             e.printStackTrace();
+            return null;
+        } catch (TimeoutException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return convertToModel(data, players);
+    }
+
+    private ServerDetailsModel convertToModel(HashMap data, HashMap<String, SteamPlayer> players) {
+
+        Log.i(TAG, "Converter " + data.toString());
+        Log.i(TAG, "Converter " + players.toString());
+
+        ServerModel serverData = new ServerModel();
+        serverData.setMap(data.get("mapName").toString());
+        serverData.setNumPlayers(data.get("numberOfPlayers").toString());
+        serverData.setMaxPlayers(data.get("maxPlayers").toString());
+
+        ArrayList<SteamPlayer> playersList = new ArrayList();
+
+        for (HashMap.Entry<String, SteamPlayer> entry : players.entrySet()) {
+            playersList.add(entry.getValue());
         }
 
-        return "";
+        Collections.sort(playersList, new Comparator<SteamPlayer>() {
+            public int compare(SteamPlayer o1, SteamPlayer o2) {
+                Integer value1 = o1.getScore();
+                Integer value2 = o2.getScore();
+
+                return value2.compareTo(value1);
+            }
+        });
+
+        ServerDetailsModel model = new ServerDetailsModel(serverData, playersList);
+        return model;
     }
 
     @Override
@@ -66,7 +99,7 @@ public class ServerDetailsLoader extends AsyncTaskLoader<String> {
     }
 
     @Override
-    public void deliverResult(String data) {
+    public void deliverResult(ServerDetailsModel data) {
         super.deliverResult(data);
         Log.d(TAG, "deliverResult");
     }

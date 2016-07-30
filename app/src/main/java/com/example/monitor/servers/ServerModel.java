@@ -12,8 +12,6 @@ public class ServerModel {
 	protected String srvDbId;
 
 	public ServerModel(){
-		
-		
 	}
 	
 	public ServerModel(String ip){
@@ -62,8 +60,8 @@ public class ServerModel {
 		maxPlayers = max;
 	}
 	
-	public String getMaxPlayers () {
-		return maxPlayers;
+	public String getPlayers () {
+		return numPlayers + "/" + maxPlayers;
 	}
 	
 	public String getNumPlayers () {

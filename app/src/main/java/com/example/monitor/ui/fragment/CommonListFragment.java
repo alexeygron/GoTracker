@@ -1,20 +1,15 @@
 package com.example.monitor.ui.fragment;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-import com.example.monitor.servers.FavoriteServersPresenter;
 import com.example.monitor.servers.ListServersAdapter;
 import com.example.monitor.ui.view.VerticalSpaceItemDecoration;
 import com.lotr.steammonitor.app.R;
-import com.wang.avi.AVLoadingIndicatorView;
-
-import java.util.List;
 
 /**
  *  Содержит общую функциональность для фрагментов отображающих экран списка.
@@ -31,7 +26,7 @@ public abstract class CommonListFragment extends CommonFragment{
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mSwipeRefreshLayout = (SwipeRefreshLayout)view.findViewById(R.id.refresh);
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.list_doctors);
+        mRecyclerView = (RecyclerView) view.findViewById(R.id.list_servers);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);

@@ -252,7 +252,7 @@ public class ServerInfoPage extends Activity implements OnClickListener {
 				  // Если мы не получили представление, заполняем его
 				  if (convertView == null) {
 					  convertView = ServerInfoPage.this.getLayoutInflater()
-							  .inflate(R.layout.players_list, null);
+							  .inflate(R.layout.item_details_list, null);
 				  }
 				 // TextView textRank = (TextView)convertView.findViewById(R.id.text_rank);
 				 // textRank.setText("" + (position + 1));

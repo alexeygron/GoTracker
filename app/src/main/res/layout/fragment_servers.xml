@@ -20,13 +20,11 @@
         android:layout_height="match_parent"> -->
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/list_doctors"
+            android:id="@+id/list_servers"
             android:scrollbars="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            >
-
-            </android.support.v7.widget.RecyclerView>
+            />
 
   <!--  </com.yalantis.phoenix.PullToRefreshView>-->
     </android.support.v4.widget.SwipeRefreshLayout>

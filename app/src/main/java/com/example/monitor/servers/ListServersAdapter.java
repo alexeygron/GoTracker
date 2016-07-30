@@ -1,7 +1,6 @@
 package com.example.monitor.servers;
 
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,9 +18,9 @@ import java.util.List;
 
 public class ListServersAdapter extends RecyclerView.Adapter<ListServersAdapter.Holder> {
 
-    private static final String TAG = "list_servers_adapter";
+    private static final String TAG = "ListServersAdapter";
 
-    private List<Server> mData;
+    private List<ServerModel> mData;
     private FavoriteServersPresenter mPresenter;
 
     public ListServersAdapter(FavoriteServersPresenter presenter){
@@ -29,7 +28,7 @@ public class ListServersAdapter extends RecyclerView.Adapter<ListServersAdapter.
         mPresenter = presenter;
     }
 
-    void setData(List<Server> data){
+    void setData(List<ServerModel> data){
         mData.clear();
         mData.addAll(data);
     }
@@ -43,7 +42,7 @@ public class ListServersAdapter extends RecyclerView.Adapter<ListServersAdapter.
 
     @Override
     public void onBindViewHolder(Holder holder, int position) {
-        Server server = mData.get(position);
+        ServerModel server = mData.get(position);
         holder.bindDoctor(server, position);
     }
 
@@ -76,27 +75,24 @@ public class ListServersAdapter extends RecyclerView.Adapter<ListServersAdapter.
 
         @Override
         public void onClick(View v) {
+            int position = getLayoutPosition();
+
             switch(v.getId()){
                 case R.id.card_view:
-                    mPresenter.onClickListItem();
+                    mPresenter.onClickListItem(position);
                     break;
                 case R.id.del_item_button:
-                    int pos = getLayoutPosition();
-                    Log.i(TAG, "position " + pos);
-                    ListServersAdapter.this.notifyItemRemoved(pos);
-                    mPresenter.onClickDelButton(pos);
-                    //ListServersAdapter.this.notifyDataSetChanged();
-                    //mData.remove(mPosition);
-
+                    ListServersAdapter.this.notifyItemRemoved(position);
+                    mPresenter.onClickDelButton(position);
                     break;
             }
         }
 
-        public void bindDoctor(Server server, int position) {
+        public void bindDoctor(ServerModel server, int position) {
             mPosition = position;
             mServerName.setText(server.getSrvName());
             mServerIp.setText(server.getIpAddr());
-            mPlayersCount.setText(server.getNumPlayers() + "/" + server.getMaxPlayers());
+            mPlayersCount.setText(server.getPlayers());
             mMapName.setText(server.getMap());
         }
     }

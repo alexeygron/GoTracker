@@ -1,7 +1,6 @@
 package com.example.monitor.servers;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.support.v4.content.AsyncTaskLoader;
 import android.util.Log;
 
@@ -13,21 +12,21 @@ import com.lotr.steammonitor.app.R;
 import java.util.HashMap;
 import java.util.concurrent.TimeoutException;
 
-public class ServerDataLoader extends AsyncTaskLoader<Server> {
+public class ServerDataLoader extends AsyncTaskLoader<ServerModel> {
 
     public final String TAG = "ServersLoader";
 
     private Context mContext;
-    private Server mServer;
+    private ServerModel mServer;
 
-    public ServerDataLoader(Context context, Server server) {
+    public ServerDataLoader(Context context, ServerModel server) {
         super(context);
         mContext = context;
         mServer = server;
     }
 
     @Override
-    public Server loadInBackground() {
+    public ServerModel loadInBackground() {
         Log.d(TAG, "loadInBackground");
 
         HashMap<String, Object> response = null;
@@ -44,7 +43,7 @@ public class ServerDataLoader extends AsyncTaskLoader<Server> {
         return convertToModel(response);
     }
 
-    private Server convertToModel(HashMap<String, Object> response){
+    private ServerModel convertToModel(HashMap<String, Object> response){
 
         if (response != null) {
             mServer.setSrvName(response.get("serverName").toString());
@@ -79,7 +78,7 @@ public class ServerDataLoader extends AsyncTaskLoader<Server> {
     }
 
     @Override
-    public void deliverResult(Server data) {
+    public void deliverResult(ServerModel data) {
         super.deliverResult(data);
         Log.d(TAG, "deliverResult");
     }

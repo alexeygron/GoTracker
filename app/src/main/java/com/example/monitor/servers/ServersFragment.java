@@ -7,23 +7,22 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.MenuItem;
 
-import com.example.monitor.db.ServersDao;
 import com.example.monitor.ui.fragment.CommonListFragment;
 import com.example.monitor.ui.view.AddItemDialog;
+import com.example.monitor.utils.LogUtils;
 import com.lotr.steammonitor.app.R;
-import com.wang.avi.AVLoadingIndicatorView;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class ServersFragment extends CommonListFragment implements View, SwipeRefreshLayout.OnRefreshListener,
         android.view.View.OnClickListener, AddItemDialog.DialogCallback {
 
-    private static final String TAG = "server_list_fragment";
+    private static final String TAG = LogUtils.makeLogTag(ServersFragment.class);
 
-    //private AVLoadingIndicatorView mProgressBar;
     protected FloatingActionButton mButtonAdd;
-    private FavoriteServersPresenter mPresenter;
     //PullToRefreshView mPullToRefreshView;
+    //private AVLoadingIndicatorView mProgressBar;
+    private FavoriteServersPresenter mPresenter;
 
     @Override
     public void onViewCreated(android.view.View view, Bundle savedInstanceState) {
@@ -34,9 +33,10 @@ public class ServersFragment extends CommonListFragment implements View, SwipeRe
         mButtonAdd.setOnClickListener(this);
         setHasOptionsMenu(true);
 
-        if (mPresenter == null){
-            mPresenter = new FavoriteServersPresenter(getLoaderManager(), getActivity(), this, getFragmentManager());
+        if (mPresenter == null) {
+            mPresenter = new FavoriteServersPresenter(getLoaderManager(), getActivity(), this);
         }
+
         //mPresenter.onTakeView(this);
         mAdapter = new ListServersAdapter(mPresenter);
         mRecyclerView.setAdapter(mAdapter);
@@ -59,19 +59,17 @@ public class ServersFragment extends CommonListFragment implements View, SwipeRe
         mPresenter.onDestroy();
     }
 
-    @Override
-    public void updateList(){
+    public void updateList() {
         mAdapter.notifyDataSetChanged();
     }
 
-  @Override
-    public void setData(ArrayList<Server> data){
-       mAdapter.setData(data);
+    public void setData(List<ServerModel> data) {
+        mAdapter.setData(data);
     }
 
     @Override
-    public void showSnackBar(String message){
-       Snackbar.make(getView(), message, Snackbar.LENGTH_SHORT).show();
+    public void showSnackBar(String message) {
+        Snackbar.make(getView(), message, Snackbar.LENGTH_SHORT).show();
     }
 
     @Override
@@ -87,14 +85,14 @@ public class ServersFragment extends CommonListFragment implements View, SwipeRe
             mProgressBar.setVisibility(android.view.View.GONE);
     }
 
-    protected int getLayoutId(){
+    protected int getLayoutId() {
         return R.layout.fragment_servers;
     }
 
     @Override
     public void onRefresh() {
-        mSwipeRefreshLayout.setRefreshing(true);
         mPresenter.onRefresh();
+        mSwipeRefreshLayout.setRefreshing(true);
         mSwipeRefreshLayout.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -105,7 +103,7 @@ public class ServersFragment extends CommonListFragment implements View, SwipeRe
 
     @Override
     public void onClick(android.view.View v) {
-        switch(v.getId()){
+        switch (v.getId()) {
             case R.id.button_add:
                 AddItemDialog dialogFragment = AddItemDialog.createInstance(this);
                 dialogFragment.show(getFragmentManager(), null);

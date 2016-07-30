@@ -6,10 +6,11 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.example.monitor.servers.Server;
+import com.example.monitor.servers.ServerModel;
+
+import com.example.monitor.utils.LogUtils;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ServersDao {
 
@@ -17,7 +18,7 @@ public class ServersDao {
     private SQLiteDatabase mBase;
     private DBHelper mHelper;
 
-    private static final String TAG = "db_worker";
+    private static final String TAG = LogUtils.makeLogTag(ServersDao.class);
     private static final String TABLE_MANE = "favorites";
 
     public ServersDao(Context context){
@@ -37,7 +38,7 @@ public class ServersDao {
         mBase.delete(TABLE_MANE, "id=" + id, null);
     }
 
-    public ArrayList<Server> readToList() {
+    public ArrayList<ServerModel> readToList() {
         SQLiteDatabase mBase = new DBHelper(mContext, TABLE_MANE).getWritableDatabase();
 
         ArrayList data = new ArrayList();
@@ -46,7 +47,7 @@ public class ServersDao {
             int ipIndex = cursor.getColumnIndex("ip");
             int idIndex = cursor.getColumnIndex("id");
             do {
-                Server server = new Server();
+                ServerModel server = new ServerModel();
                 Log.d(TAG, " " + "ip = " + cursor.getString(ipIndex));
                 Log.d(TAG, " " + "id = " + cursor.getString(idIndex));
                 server.setIpAddr(cursor.getString(ipIndex));

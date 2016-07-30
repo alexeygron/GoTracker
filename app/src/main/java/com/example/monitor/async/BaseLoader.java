@@ -2,31 +2,34 @@ package com.example.monitor.async;
 
 import android.content.AsyncTaskLoader;
 import android.content.Context;
-import android.database.Cursor;
+import android.util.Log;
 
-import java.io.IOException;
+public abstract class BaseLoader extends AsyncTaskLoader {
 
-public abstract class BaseLoader extends AsyncTaskLoader<Cursor> {
+    private static String TAG;
 
-    public BaseLoader(Context context) {
+    public BaseLoader(Context context, String childTag) {
         super(context);
+        TAG = childTag + "Loader";
+    }
+
+    @Override
+    public void forceLoad() {
+        super.forceLoad();
+        Log.d(TAG, "forceLoad");
     }
 
     @Override
     protected void onStartLoading() {
         super.onStartLoading();
+        Log.d(TAG, "onStartLoading");
         forceLoad();
     }
 
     @Override
-    public Cursor loadInBackground() {
-        try {
-            return apiCall();
-        } catch (IOException e) {
-            return null;
-        }
+    protected void onStopLoading() {
+        super.onStopLoading();
+        Log.d(TAG, "onStopLoading");
     }
 
-
-    protected abstract Cursor apiCall() throws IOException;
 }
