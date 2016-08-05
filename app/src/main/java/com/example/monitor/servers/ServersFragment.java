@@ -14,11 +14,17 @@ import com.lotr.steammonitor.app.R;
 
 import java.util.List;
 
-public class ServersFragment extends CommonListFragment implements View, SwipeRefreshLayout.OnRefreshListener,
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
+public class ServersFragment extends CommonListFragment implements
+        View, SwipeRefreshLayout.OnRefreshListener,
         android.view.View.OnClickListener, AddItemDialog.DialogCallback {
 
     private static final String TAG = LogUtils.makeLogTag(ServersFragment.class);
 
+    @BindView(R.id.button_add)
     protected FloatingActionButton mButtonAdd;
     //PullToRefreshView mPullToRefreshView;
     //private AVLoadingIndicatorView mProgressBar;
@@ -27,9 +33,8 @@ public class ServersFragment extends CommonListFragment implements View, SwipeRe
     @Override
     public void onViewCreated(android.view.View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        ButterKnife.bind(this, view);
         mSwipeRefreshLayout.setOnRefreshListener(this);
-        //mProgressBar = (AVLoadingIndicatorView) getActivity().findViewById(R.id.avloadingIndicatorView);
-        mButtonAdd = (FloatingActionButton) view.findViewById(R.id.button_add);
         mButtonAdd.setOnClickListener(this);
         setHasOptionsMenu(true);
 
@@ -37,6 +42,7 @@ public class ServersFragment extends CommonListFragment implements View, SwipeRe
             mPresenter = new FavoriteServersPresenter(getLoaderManager(), getActivity(), this);
         }
 
+        //mProgressBar = (AVLoadingIndicatorView) getActivity().findViewById(R.id.avloadingIndicatorView);
         //mPresenter.onTakeView(this);
         mAdapter = new ListServersAdapter(mPresenter);
         mRecyclerView.setAdapter(mAdapter);

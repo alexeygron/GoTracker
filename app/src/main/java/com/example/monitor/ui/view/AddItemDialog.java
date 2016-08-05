@@ -15,13 +15,16 @@ import com.example.monitor.db.ServersDao;
 import com.example.monitor.utils.LogUtils;
 import com.lotr.steammonitor.app.R;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Показывает диалог для добавления нового элемента в список серверов или игроков.
  */
 public class AddItemDialog extends DialogFragment implements DialogInterface.OnShowListener{
 
-    private EditText mField;
-    private TextView mErrorMessage;
+    @BindView(R.id.add_item_field) EditText mField;
+    @BindView(R.id.error_message) TextView mErrorMessage;
     private DialogCallback mCallback;
     private AlertDialog dialog;
 
@@ -41,8 +44,7 @@ public class AddItemDialog extends DialogFragment implements DialogInterface.OnS
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_add_item, null);
-        mField = (EditText) view.findViewById(R.id.add_item_field);
-        mErrorMessage = (TextView) view.findViewById(R.id.error_message);
+        ButterKnife.bind(this, view);
 
         dialog = new AlertDialog.Builder(getActivity())
                 .setTitle(R.string.add_server_title).setView(view)
@@ -83,7 +85,6 @@ public class AddItemDialog extends DialogFragment implements DialogInterface.OnS
     }
 
     public interface DialogCallback{
-
         void onPositiveClick(String item);
     }
 }

@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.concurrent.TimeoutException;
 
 /**
@@ -33,17 +34,15 @@ public class ServerDetailsLoader extends AsyncTaskLoader<ServerDetailsModel> {
     @Override
     public ServerDetailsModel loadInBackground() {
         HashMap<String, Object> data;
-        HashMap<String, SteamPlayer> players = new HashMap<>();
+        HashMap<String, SteamPlayer> players;
+
         try {
             SourceServer server = new SourceServer(ipAddress);
             SteamSocket.setTimeout(3000);
             server.initialize();
             data = server.getServerInfo();
-            players.putAll(server.getPlayers());
-        } catch (SteamCondenserException e) {
-            e.printStackTrace();
-            return null;
-        } catch (TimeoutException e) {
+            players = server.getPlayers();
+        } catch (SteamCondenserException | TimeoutException e) {
             e.printStackTrace();
             return null;
         }
@@ -60,7 +59,7 @@ public class ServerDetailsLoader extends AsyncTaskLoader<ServerDetailsModel> {
         serverData.setNumPlayers(data.get("numberOfPlayers").toString());
         serverData.setMaxPlayers(data.get("maxPlayers").toString());
 
-        ArrayList<SteamPlayer> playersList = new ArrayList();
+        ArrayList<SteamPlayer> playersList = new ArrayList<>();
 
         for (HashMap.Entry<String, SteamPlayer> entry : players.entrySet()) {
             playersList.add(entry.getValue());

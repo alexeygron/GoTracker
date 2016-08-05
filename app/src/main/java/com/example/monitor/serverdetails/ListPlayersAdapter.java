@@ -61,15 +61,16 @@ public class ListPlayersAdapter extends RecyclerView.Adapter<ListPlayersAdapter.
 
     class Holder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        private TextView mPlayerName;
-        private TextView mPlayerScore;
-        private TextView mPlayerTime;
+        @BindView(R.id.player_name) TextView mPlayerName;
+        @BindView(R.id.player_score) TextView mPlayerScore;
+        @BindView(R.id.player_rate) TextView mPlayerTime;
 
         public Holder(View itemView) {
             super(itemView);
-            mPlayerName = (TextView) itemView.findViewById(R.id.player_name);
+            ButterKnife.bind(this, itemView);
+            /*mPlayerName = (TextView) itemView.findViewById(R.id.player_name);
             mPlayerScore = (TextView) itemView.findViewById(R.id.player_score);
-            mPlayerTime = (TextView) itemView.findViewById(R.id.player_rate);
+            mPlayerTime = (TextView) itemView.findViewById(R.id.player_rate);*/
             itemView.setOnClickListener(this);
         }
 

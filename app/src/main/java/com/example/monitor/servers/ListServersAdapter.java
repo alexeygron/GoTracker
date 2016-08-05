@@ -12,19 +12,20 @@ import com.lotr.steammonitor.app.R;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Адаптер для списка серверов.
  */
 
 public class ListServersAdapter extends RecyclerView.Adapter<ListServersAdapter.Holder> {
 
-    private static final String TAG = "ListServersAdapter";
-
     private List<ServerModel> mData;
     private FavoriteServersPresenter mPresenter;
 
     public ListServersAdapter(FavoriteServersPresenter presenter){
-        mData = new ArrayList();
+        mData = new ArrayList<>();
         mPresenter = presenter;
     }
 
@@ -53,22 +54,21 @@ public class ListServersAdapter extends RecyclerView.Adapter<ListServersAdapter.
 
     class Holder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
+        @BindView(R.id.srv_name) TextView mServerName;
+        @BindView(R.id.srv_ip) TextView mServerIp;
+        @BindView(R.id.players) TextView mPlayersCount;
+        @BindView(R.id.map_name) TextView mMapName;
+        @BindView(R.id.del_item_button) ImageView mButtonDel;
         private int mPosition;
-
-        private TextView mServerName;
-        private TextView mServerIp;
-        private TextView mPlayersCount;
-        private TextView mMapName;
-        private ImageView mButtonDel;
-
 
         public Holder(View itemView) {
             super(itemView);
-            mServerName = (TextView)itemView.findViewById(R.id.srv_name);
+            ButterKnife.bind(this, itemView);
+            /*mServerName = (TextView)itemView.findViewById(R.id.srv_name);
             mServerIp = (TextView)itemView.findViewById(R.id.srv_ip);
             mPlayersCount = (TextView)itemView.findViewById(R.id.players);
             mMapName = (TextView)itemView.findViewById(R.id.map_name);
-            mButtonDel = (ImageView)itemView.findViewById(R.id.del_item_button);
+            mButtonDel = (ImageView)itemView.findViewById(R.id.del_item_button);*/
             mButtonDel.setOnClickListener(this);
             itemView.setOnClickListener(this);
         }

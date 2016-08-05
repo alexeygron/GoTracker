@@ -1,6 +1,5 @@
 package com.example.monitor.servers;
 
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by lotr on 06.07.2016.
+ * Презентер из пттерна MVP для
  */
 public class FavoriteServersPresenter implements LoaderManager.LoaderCallbacks<ServerModel> {
 
@@ -47,7 +46,6 @@ public class FavoriteServersPresenter implements LoaderManager.LoaderCallbacks<S
     }
 
     private void showList() {
-        mView.showProgress();
         mListData.clear();
         mListData.addAll(mDB.readToList());
         loaderTaskIndex = 0;
@@ -90,16 +88,16 @@ public class FavoriteServersPresenter implements LoaderManager.LoaderCallbacks<S
 
     @Override
     public Loader<ServerModel> onCreateLoader(int id, Bundle args) {
-        if (LOADER_ID == id) {
-            if (mListData.size() > 0)
+            if (mListData.size() > 0) {
+                mView.showProgress();
                 return new ServerDataLoader(mContext, mListData.get(loaderTaskIndex));
-        }
+            }
         return null;
     }
 
     @Override
-    public void onLoadFinished(Loader<ServerModel> loader, ServerModel data) {
-        if (data != null) {
+    public void onLoadFinished(Loader<ServerModel> loader, ServerModel data){
+        if (data != null){
             updateList(data);
             loaderTaskIndex++;
             Log.i(TAG, "loader result " + data.toString());
