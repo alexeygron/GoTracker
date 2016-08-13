@@ -10,6 +10,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 class DBHelper extends SQLiteOpenHelper {
 
     private String mTable;
+    private static final String CREATE_FAVORITES_TABLE = "create table favorites (" +
+            "id integer primary key autoincrement," + "ip text," + "pos integer" + ");";
+    private static final String CREATE_PLAYERS_TABLE = "create table players (" + "id text" + ");";
 
     public DBHelper(Context context, String table) {
         super(context, table, null, 1);
@@ -18,13 +21,10 @@ class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        if (mTable == "favorites"){
-            db.execSQL("create table favorites ("
-                    + "id integer primary key autoincrement,"
-                    + "ip text,"
-                    + "pos integer" + ");");
-        } else {
-            db.execSQL("create table players (" + "id text" + ");");
+        if (mTable.equals("favorites")){
+            db.execSQL(CREATE_FAVORITES_TABLE);
+        } else if (mTable.equals("players")) {
+            db.execSQL(CREATE_PLAYERS_TABLE);
         }
     }
 

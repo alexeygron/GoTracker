@@ -8,14 +8,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.widget.TextView;
 
-import com.example.monitor.servers.ListServersAdapter;
-import com.example.monitor.servers.ServerModel;
-import com.example.monitor.ui.view.VerticalSpaceItemDecoration;
 import com.example.monitor.utils.LogUtils;
 import com.github.koraktor.steamcondenser.steam.SteamPlayer;
 import com.lotr.steammonitor.app.R;
@@ -26,7 +21,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class ServerDetailsActivity extends AppCompatActivity implements
-        View, SwipeRefreshLayout.OnRefreshListener {
+        IView, SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.game_name) TextView mGameName;
     @BindView(R.id.ip_address) TextView mIpAddress;

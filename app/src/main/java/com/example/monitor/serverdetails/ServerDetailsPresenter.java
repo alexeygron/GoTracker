@@ -15,14 +15,14 @@ import java.util.ArrayList;
 public class ServerDetailsPresenter implements LoaderManager.LoaderCallbacks<ServerDetailsModel>{
 
     private Context mContext;
-    private View mView;
+    private IView mView;
     private LoaderManager mLoaderManager;
     private String mIpAddress;
 
     private static final String TAG = LogUtils.makeLogTag(ServerDetailsPresenter.class);
     private static final int LOADER_ID = 1;
 
-    public ServerDetailsPresenter(Context context, String ip, LoaderManager loaderManager, View view){
+    public ServerDetailsPresenter(Context context, String ip, LoaderManager loaderManager, IView view){
         mContext = context;
         mIpAddress = ip;
         mLoaderManager = loaderManager;

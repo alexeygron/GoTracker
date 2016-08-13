@@ -16,11 +16,10 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class ServersFragment extends CommonListFragment implements
-        View, SwipeRefreshLayout.OnRefreshListener,
-        android.view.View.OnClickListener, AddItemDialog.DialogCallback {
+        IView, SwipeRefreshLayout.OnRefreshListener,
+        android.view.View.OnClickListener, AddItemDialog.Callback {
 
     private static final String TAG = LogUtils.makeLogTag(ServersFragment.class);
 

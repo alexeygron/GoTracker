@@ -11,7 +11,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.monitor.db.ServersDao;
 import com.example.monitor.utils.LogUtils;
 import com.lotr.steammonitor.app.R;
 
@@ -25,18 +24,18 @@ public class AddItemDialog extends DialogFragment implements DialogInterface.OnS
 
     @BindView(R.id.add_item_field) EditText mField;
     @BindView(R.id.error_message) TextView mErrorMessage;
-    private DialogCallback mCallback;
+    private Callback mCallback;
     private AlertDialog dialog;
 
     private static final String TAG = LogUtils.makeLogTag(AddItemDialog.class);
 
-    public static AddItemDialog createInstance(DialogCallback callback){
+    public static AddItemDialog createInstance(Callback callback){
         AddItemDialog dialog = new AddItemDialog();
         dialog.setCallback(callback);
         return dialog;
     }
 
-    public void setCallback(DialogCallback callback){
+    public void setCallback(Callback callback){
         mCallback = callback;
     }
 
@@ -60,7 +59,8 @@ public class AddItemDialog extends DialogFragment implements DialogInterface.OnS
     }
 
     private boolean isFormat(String value){
-       return value.contains(":");
+       //return value.contains(":");
+        return true;
     }
 
     private void showError(){
@@ -84,7 +84,7 @@ public class AddItemDialog extends DialogFragment implements DialogInterface.OnS
         });
     }
 
-    public interface DialogCallback{
+    public interface Callback {
         void onPositiveClick(String item);
     }
 }

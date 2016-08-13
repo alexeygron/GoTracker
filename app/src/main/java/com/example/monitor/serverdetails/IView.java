@@ -8,7 +8,7 @@ import java.util.ArrayList;
 /**
  * Created by lotr on 20.07.2016.
  */
-public interface View {
+public interface IView {
 
     void updateFields(String mapName, String numPlayers);
 

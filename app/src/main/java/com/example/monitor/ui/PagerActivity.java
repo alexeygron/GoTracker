@@ -31,6 +31,7 @@ public class PagerActivity extends AppCompatActivity implements ViewPager.OnPage
 
         if (mViewPager != null){
             mViewPager.addOnPageChangeListener(this);
+            mViewPager.setOffscreenPageLimit(1);
             mViewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager(), this));
         }
 

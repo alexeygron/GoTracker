@@ -19,7 +19,7 @@ import java.util.List;
  */
 public class FavoriteServersPresenter implements LoaderManager.LoaderCallbacks<ServerModel> {
 
-    private View mView;
+    private IView mView;
     private Context mContext;
     private LoaderManager mLoaderManager;
     private ServersDao mDB;
@@ -30,7 +30,7 @@ public class FavoriteServersPresenter implements LoaderManager.LoaderCallbacks<S
 
     public static final int LOADER_ID = 1;
 
-    public FavoriteServersPresenter(LoaderManager lm, Context context, View view) {
+    public FavoriteServersPresenter(LoaderManager lm, Context context, IView view) {
         mView = view;
         mContext = context;
         mLoaderManager = lm;
@@ -82,7 +82,7 @@ public class FavoriteServersPresenter implements LoaderManager.LoaderCallbacks<S
         mContext.startActivity(i);
     }
 
-    public void onTakeView(View view) {
+    public void onTakeView(IView view) {
         this.mView = view;
     }
 
