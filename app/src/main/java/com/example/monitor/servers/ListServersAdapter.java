@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -58,7 +59,7 @@ public class ListServersAdapter extends RecyclerView.Adapter<ListServersAdapter.
         @BindView(R.id.srv_ip) TextView mServerIp;
         @BindView(R.id.players) TextView mPlayersCount;
         @BindView(R.id.map_name) TextView mMapName;
-        @BindView(R.id.del_item_button) ImageView mButtonDel;
+        @BindView(R.id.delete_frame) FrameLayout mDeleteFrame;
         private int mPosition;
 
         public Holder(View itemView) {
@@ -69,7 +70,7 @@ public class ListServersAdapter extends RecyclerView.Adapter<ListServersAdapter.
             mPlayersCount = (TextView)itemView.findViewById(R.id.players);
             mMapName = (TextView)itemView.findViewById(R.id.map_name);
             mButtonDel = (ImageView)itemView.findViewById(R.id.del_item_button);*/
-            mButtonDel.setOnClickListener(this);
+            mDeleteFrame.setOnClickListener(this);
             itemView.setOnClickListener(this);
         }
 
@@ -81,7 +82,7 @@ public class ListServersAdapter extends RecyclerView.Adapter<ListServersAdapter.
                 case R.id.card_view:
                     mPresenter.onClickListItem(position);
                     break;
-                case R.id.del_item_button:
+                case R.id.delete_frame:
                     ListServersAdapter.this.notifyItemRemoved(position);
                     mPresenter.onClickDelButton(position);
                     break;
@@ -90,7 +91,7 @@ public class ListServersAdapter extends RecyclerView.Adapter<ListServersAdapter.
 
         public void bindDoctor(ServerModel server, int position) {
             mPosition = position;
-            mServerName.setText(server.getSrvName());
+            mServerName.setText(server.getmName());
             mServerIp.setText(server.getIpAddr());
             mPlayersCount.setText(server.getPlayers());
             mMapName.setText(server.getMap());

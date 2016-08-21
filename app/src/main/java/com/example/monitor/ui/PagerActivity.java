@@ -4,22 +4,30 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 
 import com.example.monitor.ui.adapter.ViewPagerAdapter;
+import com.example.monitor.utils.NetworkReceiver;
 import com.lotr.steammonitor.app.R;
-import com.wang.avi.AVLoadingIndicatorView;
+import com.mikepenz.materialdrawer.Drawer;
+import com.mikepenz.materialdrawer.DrawerBuilder;
+import com.mikepenz.materialdrawer.model.DividerDrawerItem;
+import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
+import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
+import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class PagerActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener{
+public class PagerActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
 
-    @BindView(R.id.my_toolbar) Toolbar mToolbar;
+    @BindView(R.id.my_toolbar)
+    Toolbar mToolbar;
+    private NetworkReceiver mReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,15 +37,40 @@ public class PagerActivity extends AppCompatActivity implements ViewPager.OnPage
         setSupportActionBar(mToolbar);
         ViewPager mViewPager = (ViewPager) findViewById(R.id.viewpager);
 
-        if (mViewPager != null){
+        if (mViewPager != null) {
             mViewPager.addOnPageChangeListener(this);
-            mViewPager.setOffscreenPageLimit(1);
-            mViewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager(), this));
+            mViewPager.setOffscreenPageLimit(3);
+            ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager(), this);
+            mViewPager.setAdapter(adapter);
         }
 
         TabLayout mTabLayout = (TabLayout) findViewById(R.id.tab_layout);
         assert mTabLayout != null;
         mTabLayout.setupWithViewPager(mViewPager);
+        initNawDriver();
+    }
+
+    private void initNawDriver() {
+        //if you want to update the items at a later time it is recommended to keep it in a variable
+        PrimaryDrawerItem item1 = new PrimaryDrawerItem().withIdentifier(1).withName("Home");
+
+//create the drawer and remember the `Drawer` result object
+        Drawer result = new DrawerBuilder()
+                .withActivity(this)
+                .withToolbar(mToolbar)
+                .addDrawerItems(
+                        item1,
+                        new DividerDrawerItem(),
+                        new SecondaryDrawerItem().withName("Settings")
+                )
+                .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+                    @Override
+                    public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+                        // do something with the clicked item :D
+                        return true;
+                    }
+                })
+                .build();
     }
 
     @Override
@@ -47,6 +80,11 @@ public class PagerActivity extends AppCompatActivity implements ViewPager.OnPage
         return true;
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
 
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -54,7 +92,7 @@ public class PagerActivity extends AppCompatActivity implements ViewPager.OnPage
 
     @Override
     public void onPageSelected(int position) {
-        switch(position){
+        switch (position) {
             case 0:
                 mToolbar.setTitle(R.string.fav_srv_text);
                 break;
@@ -71,4 +109,5 @@ public class PagerActivity extends AppCompatActivity implements ViewPager.OnPage
     public void onPageScrollStateChanged(int state) {
 
     }
+
 }

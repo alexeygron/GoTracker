@@ -35,4 +35,12 @@ public abstract class CommonListFragment extends CommonFragment{
         mRecyclerView.addItemDecoration(new VerticalSpaceItemDecoration(10));
         mRecyclerView.setItemAnimator(mitemAnimator);
     }
+
+    public void showProgress() {
+        mProgressBar.setVisibility(android.view.View.VISIBLE);
+    }
+
+    public void hideProgress() {
+        mProgressBar.setVisibility(android.view.View.GONE);
+    }
 }

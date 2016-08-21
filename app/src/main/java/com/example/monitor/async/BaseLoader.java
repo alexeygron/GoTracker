@@ -4,11 +4,11 @@ import android.content.AsyncTaskLoader;
 import android.content.Context;
 import android.util.Log;
 
-import com.example.monitor.utils.LogUtils;
+import com.example.monitor.utils.Helpers;
 
 public abstract class BaseLoader extends AsyncTaskLoader {
 
-    private static String TAG = LogUtils.makeLogTag(BaseLoader.class);
+    private static String TAG = Helpers.makeLogTag(BaseLoader.class);
 
     public BaseLoader(Context context, String childTag) {
         super(context);

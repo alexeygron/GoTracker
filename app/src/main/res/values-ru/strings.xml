@@ -7,6 +7,7 @@
     <string name="fav_srv_text">Избранные сервера</string>
     <string name="add_player_title">Добавить игрока:</string>
     <string name="add_server_title">Добавить сервер:</string>
+    <string name="player_non_found">Игрок не найден</string>
     <string name="toast_update_server_list">Список серверов обновлен</string>
     <string name="toast_update_players_list">Список игроков обновлен</string>
     <string name="toast_update_game_info">Информация обновлена</string>

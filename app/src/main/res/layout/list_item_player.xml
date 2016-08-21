@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/item_list"
     android:layout_marginBottom="1dp"
     android:layout_marginEnd="111dp"
     android:layout_marginLeft="3dp"
     android:layout_marginRight="3dp"
     android:layout_marginTop="3dp"
+    android:background="@drawable/item_list"
+    android:orientation="horizontal"
     android:paddingBottom="2dp"
     android:paddingLeft="4dp"
     android:paddingRight="2dp"
     android:paddingTop="2dp">
 
     <ImageView
+        android:id="@+id/avatar"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:id="@+id/avatar"
+        android:layout_gravity="center"
         android:layout_marginLeft="4dp"
-        android:scaleType="centerCrop"
-        android:layout_gravity="center" />
+        android:scaleType="centerCrop" />
 
     <TableLayout
         android:layout_width="match_parent"
@@ -36,13 +36,13 @@
 
             <TextView
                 android:id="@+id/srv_name"
+                style="@style/TextViewBold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="player_name"
-                android:layout_weight="9"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="4dp"
-                style="@style/TextViewBold"
+                android:layout_weight="9"
+                android:text="player_name"
                 android:textSize="19sp" />
 
         </TableRow>
@@ -55,25 +55,25 @@
 
             <TextView
                 android:id="@+id/status_text"
+                style="@style/TextViewSmall"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="loading"
-                android:textColor="#444d59"
-                android:textSize="15sp"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="18dp"
-                style="@style/TextViewSmall" />
+                android:text="loading"
+                android:textColor="#444d59"
+                android:textSize="15sp" />
 
         </TableRow>
-</TableLayout>
+    </TableLayout>
 
     <ImageButton
         android:id="@+id/del_item_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/multiplication_symbol_32"
         android:layout_marginRight="15dp"
         android:layout_marginTop="25dp"
+        android:background="@drawable/multiplication_symbol_32"
         android:scaleType="matrix" />
 
 </LinearLayout>

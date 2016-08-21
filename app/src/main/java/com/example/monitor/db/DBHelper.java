@@ -12,7 +12,8 @@ class DBHelper extends SQLiteOpenHelper {
     private String mTable;
     private static final String CREATE_FAVORITES_TABLE = "create table favorites (" +
             "id integer primary key autoincrement," + "ip text," + "pos integer" + ");";
-    private static final String CREATE_PLAYERS_TABLE = "create table players (" + "id text" + ");";
+    private static final String CREATE_PLAYERS_TABLE = "create table players (" +
+            "label integer primary key autoincrement," + "id text" + ");";
 
     public DBHelper(Context context, String table) {
         super(context, table, null, 1);

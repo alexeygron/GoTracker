@@ -2,172 +2,207 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\lotr\.gradle\caches\modules-2\files-2.1\com.nineoldandroids\library\2.4.0\e9b63380f3a242dbdbf103a2355ad7e43bad17cb\library-2.4.0.jar"
+        jar="E:\Android\Projects\Monitor\app\build\intermediates\exploded-aar\com.mikepenz\materialize\0.9.0\jars\classes.jar"
         jumboMode="false"
-        revision="22.0.1"
-        sha1="e9b63380f3a242dbdbf103a2355ad7e43bad17cb">
-        <dex dex="E:\Android\Projects\Monitor\app\build\intermediates\pre-dexed\debug\library-2.4.0-39cedd7e9cf163cef8a1018d67239c8762ab91b8.jar" />
+        revision="23.0.3"
+        sha1="0fe984aa10a4992e6762658da3fc87195c2330ca">
+        <dex dex="E:\Android\Projects\Monitor\app\build\intermediates\pre-dexed\debug\com.mikepenz-materialize-0.9.0_29c1cf9e9da751e64de87f865397bc7081386acf.jar" />
     </item>
     <item
-        jar="E:\Android\Projects\Monitor\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.4.0\jars\classes.jar"
+        jar="E:\Android\Projects\Monitor\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-ads\9.4.0\jars\classes.jar"
         jumboMode="false"
-        revision="22.0.1"
-        sha1="ec75036c3c52e451d0cde50a5aedaf5fd32354a0">
-        <dex dex="E:\Android\Projects\Monitor\app\build\intermediates\pre-dexed\debug\classes-72ed4d33a5c210775fadf9f0ce46f84713fe08b5.jar" />
-    </item>
-    <item
-        jar="E:\Android\Projects\Monitor\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.4.0\jars\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="c2c594cace5d83a3227b2b6e658ecbfd586d3ed9">
-        <dex dex="E:\Android\Projects\Monitor\app\build\intermediates\pre-dexed\debug\classes-da2910404d6f275e683aa4f66775abc6e9c939ea.jar" />
-    </item>
-    <item
-        jar="E:\Android\Projects\Monitor\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-ads-lite\9.0.2\jars\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="b8e0372ca6dc89ac4fe22b76eeea4f68ece435b8">
-        <dex dex="E:\Android\Projects\Monitor\app\build\intermediates\pre-dexed\debug\classes-5d07ff7fa31a45808c018101d6497858cd7ef91d.jar" />
-    </item>
-    <item
-        jar="E:\Android\Projects\Monitor\app\build\intermediates\exploded-aar\com.jakewharton\butterknife\8.2.1\jars\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="ca5e58104f56f918f0fb3a5b1b371ab599ae56b2">
-        <dex dex="E:\Android\Projects\Monitor\app\build\intermediates\pre-dexed\debug\classes-74193fb86829811e0396246f3222aa3a017ef401.jar" />
-    </item>
-    <item
-        jar="E:\Android\Projects\Monitor\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.4.0\jars\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="67bd36ee9340ec7c254108936ad16b24bed160cc">
-        <dex dex="E:\Android\Projects\Monitor\app\build\intermediates\pre-dexed\debug\classes-d508ec5a1f0e19ce13dd467d082dd8c9a7228599.jar" />
-    </item>
-    <item
-        jar="E:\Android\Projects\Monitor\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\9.0.2\jars\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="4022261eeea0d92eb2997a68d2c1f084a16abad9">
-        <dex dex="E:\Android\Projects\Monitor\app\build\intermediates\pre-dexed\debug\classes-79a93854b8a5d16adf6b309e1d97aa80ba065695.jar" />
-    </item>
-    <item
-        jar="C:\Users\lotr\.gradle\caches\modules-2\files-2.1\com.android.support\support-annotations\24.0.0\2943c74db6d4346ab8c6531adac91fa05c137c40\support-annotations-24.0.0.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="2943c74db6d4346ab8c6531adac91fa05c137c40">
-        <dex dex="E:\Android\Projects\Monitor\app\build\intermediates\pre-dexed\debug\support-annotations-24.0.0-34edf24eb90977e00d25abdbe729faf9e81da09c.jar" />
-    </item>
-    <item
-        jar="E:\Android\Projects\Monitor\app\build\intermediates\exploded-aar\com.android.support\design\23.4.0\jars\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="5326d9a850d491714fef8cbfaa9ea3416f0bf0d2">
-        <dex dex="E:\Android\Projects\Monitor\app\build\intermediates\pre-dexed\debug\classes-fbd278b1dec00e145434ebcc52b64488ebe2d070.jar" />
-    </item>
-    <item
-        jar="E:\Android\Projects\Monitor\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\9.0.2\jars\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="94d9cedd04b124aed044ac71c451a292856d854c">
-        <dex dex="E:\Android\Projects\Monitor\app\build\intermediates\pre-dexed\debug\classes-335dc9ab47a63714c62f7cbff35340c9dc65ab83.jar" />
-    </item>
-    <item
-        jar="E:\Android\Projects\Monitor\app\libs\steam-condenser-1.3.9-sources.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="dcc24806b4efabe04dcca0d99bc948e6e43739e4">
-        <dex dex="E:\Android\Projects\Monitor\app\build\intermediates\pre-dexed\debug\steam-condenser-1.3.9-sources-934f4c0784e6a1946be70e8634526187bff5c37b.jar" />
-    </item>
-    <item
-        jar="E:\Android\Projects\Monitor\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\23.4.0\jars\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="de4db3785756bfb0915a9f59a9b3f2fea7407be4">
-        <dex dex="E:\Android\Projects\Monitor\app\build\intermediates\pre-dexed\debug\classes-7908c877355f496d1027354a2d9be48e3d1336af.jar" />
-    </item>
-    <item
-        jar="E:\Android\Projects\Monitor\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.4.0\jars\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="548f06de403a9409f00554b3ee12a9fdea0e236c">
-        <dex dex="E:\Android\Projects\Monitor\app\build\intermediates\pre-dexed\debug\classes-1db1e867272e83dd8d0ad4100c757121063ca698.jar" />
-    </item>
-    <item
-        jar="E:\Android\Projects\Monitor\app\build\intermediates\exploded-aar\com.google.firebase\firebase-common\9.0.2\jars\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="9919563cffd8e3732e944d3c437d4b9575a08448">
-        <dex dex="E:\Android\Projects\Monitor\app\build\intermediates\pre-dexed\debug\classes-576e960699e616bd82338120d4f4205546ecf669.jar" />
-    </item>
-    <item
-        jar="E:\Android\Projects\Monitor\app\libs\steam-condenser-1.3.9.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="fc60f352db1e7137b142589c50678452a24fe26b">
-        <dex dex="E:\Android\Projects\Monitor\app\build\intermediates\pre-dexed\debug\steam-condenser-1.3.9-4ab57e1b5275365a50bb3eebc83744687bd5471e.jar" />
-    </item>
-    <item
-        jar="E:\Android\Projects\Monitor\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-ads\9.0.2\jars\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="f4fb6981392ca7680d02fd57d26d6124c141d9d9">
-        <dex dex="E:\Android\Projects\Monitor\app\build\intermediates\pre-dexed\debug\classes-3a1289811096186cd8521023b4e4e4ded8549a50.jar" />
-    </item>
-    <item
-        jar="E:\Android\Projects\Monitor\app\build\intermediates\exploded-aar\com.android.support\cardview-v7\23.4.0\jars\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="d9ecde39b460470e655de6e47c05573d2d5a8bfb">
-        <dex dex="E:\Android\Projects\Monitor\app\build\intermediates\pre-dexed\debug\classes-1aca8f0f29de7bb299d0b0a14c0478c97dc34e58.jar" />
-    </item>
-    <item
-        jar="E:\Android\Projects\Monitor\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.4.0\jars\libs\internal_impl-23.4.0.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="ea3c07504d2c8f4b13aa17c45c1b68ed9c1c3674">
-        <dex dex="E:\Android\Projects\Monitor\app\build\intermediates\pre-dexed\debug\internal_impl-23.4.0-67a1291708bbbd116e6282ef8131a2403c0e1c34.jar" />
-    </item>
-    <item
-        jar="E:\Android\Projects\Monitor\app\build\intermediates\exploded-aar\com.wang.avi\library\1.0.5\jars\classes.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="5035aaf60d244038bb143ffad4fbb7cba92ecdc7">
-        <dex dex="E:\Android\Projects\Monitor\app\build\intermediates\pre-dexed\debug\classes-30c5b6d6a646853c7a326fe7826ffa80a221f197.jar" />
-    </item>
-    <item
-        jar="E:\Android\Projects\Monitor\app\libs\commons-compress-1.9.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="cc18955ff1e36d5abd39a14bfe82b19154330a34">
-        <dex dex="E:\Android\Projects\Monitor\app\build\intermediates\pre-dexed\debug\commons-compress-1.9-6faac49cd2415e4d65c127b4333b77ba232e4a6d.jar" />
-    </item>
-    <item
-        jar="E:\Android\Projects\Monitor\app\libs\commons-lang3-3.4.jar"
-        jumboMode="false"
-        revision="22.0.1"
-        sha1="5fe28b9518e58819180a43a850fbc0dd24b7c050">
-        <dex dex="E:\Android\Projects\Monitor\app\build\intermediates\pre-dexed\debug\commons-lang3-3.4-37065192ad630c24a7d95ffee6d799bf6e6b088a.jar" />
+        revision="23.0.3"
+        sha1="d463d8eec1e6c1feef2cec6675ccb47e37c12ee1">
+        <dex dex="E:\Android\Projects\Monitor\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-ads-9.4.0_9753851303dbd95a3a5b6be058f4e0e767b82ddf.jar" />
     </item>
     <item
         jar="E:\Android\Projects\Monitor\app\build\intermediates\exploded-aar\com.yalantis\phoenix\1.2.3\jars\classes.jar"
         jumboMode="false"
-        revision="22.0.1"
+        revision="23.0.3"
         sha1="4dfe2dd3f402072c5268f341830cdc5263187074">
-        <dex dex="E:\Android\Projects\Monitor\app\build\intermediates\pre-dexed\debug\classes-9939a169234ce62356781e6a86a66353852faaff.jar" />
+        <dex dex="E:\Android\Projects\Monitor\app\build\intermediates\pre-dexed\debug\com.yalantis-phoenix-1.2.3_9939a169234ce62356781e6a86a66353852faaff.jar" />
+    </item>
+    <item
+        jar="E:\Android\Projects\Monitor\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\24.1.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="c936c1bd42f0c018c18920c7bec619ef056b24f8">
+        <dex dex="E:\Android\Projects\Monitor\app\build\intermediates\pre-dexed\debug\com.android.support-animated-vector-drawable-24.1.1_e85cb980c51efe115e1d071e13c5cae5add86111.jar" />
+    </item>
+    <item
+        jar="E:\Android\Projects\Monitor\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\24.1.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="f62e763609f65e47dc6c498760a4accf02776788">
+        <dex dex="E:\Android\Projects\Monitor\app\build\intermediates\pre-dexed\debug\com.android.support-support-vector-drawable-24.1.1_3da26270b4fd390a75232b7f6027a4b8fdafb046.jar" />
+    </item>
+    <item
+        jar="E:\Android\Projects\Monitor\app\build\intermediates\exploded-aar\com.mikepenz\materialdrawer\5.4.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="898336415b7ef86a2804882f221d14cc8c7b3651">
+        <dex dex="E:\Android\Projects\Monitor\app\build\intermediates\pre-dexed\debug\com.mikepenz-materialdrawer-5.4.0_797d5c4625d26a3b875ea3328f73caec936b0392.jar" />
+    </item>
+    <item
+        jar="E:\Android\Projects\Monitor\app\libs\steam-condenser-1.3.9.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="fc60f352db1e7137b142589c50678452a24fe26b">
+        <dex dex="E:\Android\Projects\Monitor\app\build\intermediates\pre-dexed\debug\steam-condenser-1.3.9_4ab57e1b5275365a50bb3eebc83744687bd5471e.jar" />
+    </item>
+    <item
+        jar="C:\Users\lotr\.gradle\caches\modules-2\files-2.1\com.nineoldandroids\library\2.4.0\e9b63380f3a242dbdbf103a2355ad7e43bad17cb\library-2.4.0.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="e9b63380f3a242dbdbf103a2355ad7e43bad17cb">
+        <dex dex="E:\Android\Projects\Monitor\app\build\intermediates\pre-dexed\debug\library-2.4.0_39cedd7e9cf163cef8a1018d67239c8762ab91b8.jar" />
+    </item>
+    <item
+        jar="E:\Android\Projects\Monitor\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\24.1.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="1256c10604bb098490eab070d76754ac5ceab35c">
+        <dex dex="E:\Android\Projects\Monitor\app\build\intermediates\pre-dexed\debug\com.android.support-appcompat-v7-24.1.1_1acd2359e3c55fc6ac38b6d5de3ef6090966b195.jar" />
+    </item>
+    <item
+        jar="E:\Android\Projects\Monitor\app\build\intermediates\exploded-aar\com.mikepenz\fastadapter\1.6.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="d0ef67584a98e0fe4ce8b9c33bcb20fc8b3a4c80">
+        <dex dex="E:\Android\Projects\Monitor\app\build\intermediates\pre-dexed\debug\com.mikepenz-fastadapter-1.6.1_8bb8408348c6819eb6e2966f006505df3577c523.jar" />
+    </item>
+    <item
+        jar="C:\Users\lotr\.gradle\caches\modules-2\files-2.1\com.android.support\support-annotations\24.1.1\3af19f153122737b372622fa6c81dd11a1c6b999\support-annotations-24.1.1.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="3af19f153122737b372622fa6c81dd11a1c6b999">
+        <dex dex="E:\Android\Projects\Monitor\app\build\intermediates\pre-dexed\debug\support-annotations-24.1.1_42c5d05139164abc9445025f15137c75be15e784.jar" />
+    </item>
+    <item
+        jar="E:\Android\Projects\Monitor\app\libs\commons-compress-1.9.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="cc18955ff1e36d5abd39a14bfe82b19154330a34">
+        <dex dex="E:\Android\Projects\Monitor\app\build\intermediates\pre-dexed\debug\commons-compress-1.9_6faac49cd2415e4d65c127b4333b77ba232e4a6d.jar" />
+    </item>
+    <item
+        jar="E:\Android\Projects\Monitor\app\libs\commons-lang3-3.4.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="5fe28b9518e58819180a43a850fbc0dd24b7c050">
+        <dex dex="E:\Android\Projects\Monitor\app\build\intermediates\pre-dexed\debug\commons-lang3-3.4_37065192ad630c24a7d95ffee6d799bf6e6b088a.jar" />
+    </item>
+    <item
+        jar="E:\Android\Projects\Monitor\app\build\intermediates\exploded-aar\com.android.support\design\24.1.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="e195bd694d5389acfba27ff4fdfa64c4c65b2c05">
+        <dex dex="E:\Android\Projects\Monitor\app\build\intermediates\pre-dexed\debug\com.android.support-design-24.1.1_f795dcccb5959ca38fde54283ce7fb4ad6d15085.jar" />
+    </item>
+    <item
+        jar="E:\Android\Projects\Monitor\app\build\intermediates\exploded-aar\com.mikepenz\iconics-core\2.7.2\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="ba944d83e8d2f700fb8f7ec5669e57b6df75ba18">
+        <dex dex="E:\Android\Projects\Monitor\app\build\intermediates\pre-dexed\debug\com.mikepenz-iconics-core-2.7.2_9b58d97a73744dda77f2b32633ff5ab4241eb09e.jar" />
+    </item>
+    <item
+        jar="E:\Android\Projects\Monitor\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-tasks\9.4.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="8a36d229011e75f0caef408e1adf0d3fd4d94e02">
+        <dex dex="E:\Android\Projects\Monitor\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-tasks-9.4.0_de68767af47cb85ee8cc2c3c821c84e0169fd418.jar" />
+    </item>
+    <item
+        jar="E:\Android\Projects\Monitor\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\9.4.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="3dee4ce5844d39d843d503fb8fe04e51e5bfffac">
+        <dex dex="E:\Android\Projects\Monitor\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-base-9.4.0_bb0032e0e301223182b9aafa3a3afe58a23bcdee.jar" />
+    </item>
+    <item
+        jar="E:\Android\Projects\Monitor\app\build\intermediates\exploded-aar\com.android.support\cardview-v7\23.2.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="bc599eb9531da9d18bc58ec4eb0b1a1d895f6839">
+        <dex dex="E:\Android\Projects\Monitor\app\build\intermediates\pre-dexed\debug\com.android.support-cardview-v7-23.2.0_5d63c85d07b7b64ce4f2904ae0bdb4e6f5257402.jar" />
+    </item>
+    <item
+        jar="E:\Android\Projects\Monitor\app\build\intermediates\exploded-aar\com.android.support\support-v4\24.1.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="6d7d803871e3203465f71a163e7af104f807b446">
+        <dex dex="E:\Android\Projects\Monitor\app\build\intermediates\pre-dexed\debug\com.android.support-support-v4-24.1.1_0b033d4ccacc2d4229c0b710863ffbbd750f5fdb.jar" />
+    </item>
+    <item
+        jar="E:\Android\Projects\Monitor\app\build\intermediates\exploded-aar\com.jakewharton\butterknife\8.2.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="ca5e58104f56f918f0fb3a5b1b371ab599ae56b2">
+        <dex dex="E:\Android\Projects\Monitor\app\build\intermediates\pre-dexed\debug\com.jakewharton-butterknife-8.2.1_74193fb86829811e0396246f3222aa3a017ef401.jar" />
     </item>
     <item
         jar="C:\Users\lotr\.gradle\caches\modules-2\files-2.1\com.jakewharton\butterknife-annotations\8.2.1\d6f54d76edfbe779a50a8636b10fd3f555d8f780\butterknife-annotations-8.2.1.jar"
         jumboMode="false"
-        revision="22.0.1"
+        revision="23.0.3"
         sha1="d6f54d76edfbe779a50a8636b10fd3f555d8f780">
-        <dex dex="E:\Android\Projects\Monitor\app\build\intermediates\pre-dexed\debug\butterknife-annotations-8.2.1-e179e417e0e30de7e162e36a96d40ab27c53cf9d.jar" />
+        <dex dex="E:\Android\Projects\Monitor\app\build\intermediates\pre-dexed\debug\butterknife-annotations-8.2.1_e179e417e0e30de7e162e36a96d40ab27c53cf9d.jar" />
     </item>
     <item
-        jar="E:\Android\Projects\Monitor\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-tasks\9.0.2\jars\classes.jar"
+        jar="E:\Android\Projects\Monitor\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-ads-lite\9.4.0\jars\classes.jar"
         jumboMode="false"
-        revision="22.0.1"
-        sha1="aec1bc54964a85d851c2c1b1cb7f90f7dbd755ab">
-        <dex dex="E:\Android\Projects\Monitor\app\build\intermediates\pre-dexed\debug\classes-51a3952fd03417cada371632d8e872124fa78c4f.jar" />
+        revision="23.0.3"
+        sha1="147edbec6bcea71fd675ecc63cae3319637ec2b4">
+        <dex dex="E:\Android\Projects\Monitor\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-ads-lite-9.4.0_d90b39e250696656cc3c2da8736cdc8034042932.jar" />
+    </item>
+    <item
+        jar="E:\Android\Projects\Monitor\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\24.1.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="787871951412550519b0222aba3c9df4cea49875">
+        <dex dex="E:\Android\Projects\Monitor\app\build\intermediates\pre-dexed\debug\com.android.support-recyclerview-v7-24.1.1_bdda8100d28620dc2bcd8ff11e0fde422054662d.jar" />
+    </item>
+    <item
+        jar="E:\Android\Projects\Monitor\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-gass\9.4.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="b15f898c9047f9d612a63000126b485dd024eaac">
+        <dex dex="E:\Android\Projects\Monitor\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-gass-9.4.0_99ea2234d7d8e2d4f7549f475feef06f885af2b1.jar" />
+    </item>
+    <item
+        jar="E:\Android\Projects\Monitor\app\build\intermediates\exploded-aar\com.wang.avi\library\1.0.5\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="5035aaf60d244038bb143ffad4fbb7cba92ecdc7">
+        <dex dex="E:\Android\Projects\Monitor\app\build\intermediates\pre-dexed\debug\com.wang.avi-library-1.0.5_30c5b6d6a646853c7a326fe7826ffa80a221f197.jar" />
+    </item>
+    <item
+        jar="E:\Android\Projects\Monitor\app\build\intermediates\exploded-aar\com.android.support\support-v4\24.1.1\jars\libs\internal_impl-24.1.1.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="f78c2f395cb096f9dc1dc07e729922b8fcd3c4f5">
+        <dex dex="E:\Android\Projects\Monitor\app\build\intermediates\pre-dexed\debug\internal_impl-24.1.1_f56212389b89828bd270a54a500f26236c99093b.jar" />
+    </item>
+    <item
+        jar="E:\Android\Projects\Monitor\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\9.4.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="618485fef3ebe12127f7622abbc9b5b39057b5c2">
+        <dex dex="E:\Android\Projects\Monitor\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-basement-9.4.0_1e924423a0d04544ac00e334ceeb6b9bb30a00ff.jar" />
+    </item>
+    <item
+        jar="E:\Android\Projects\Monitor\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-clearcut\9.4.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="dd763e0269f2854f5828ae62dd968b80bff6a0db">
+        <dex dex="E:\Android\Projects\Monitor\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-clearcut-9.4.0_1114e52b5c9fd5bc90ceb95f478e63e5bd03a8ac.jar" />
+    </item>
+    <item
+        jar="C:\Users\lotr\.gradle\caches\modules-2\files-2.1\com.github.bumptech.glide\glide\3.7.0\9e9eeaf9948ee4d6c3ab354e8dc14368f16994a4\glide-3.7.0.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="9e9eeaf9948ee4d6c3ab354e8dc14368f16994a4">
+        <dex dex="E:\Android\Projects\Monitor\app\build\intermediates\pre-dexed\debug\glide-3.7.0_6c40cb8c9c06af9c0037487022cb49734ce4f6b5.jar" />
     </item>
 
 </items>

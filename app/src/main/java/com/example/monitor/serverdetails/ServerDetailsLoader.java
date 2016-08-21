@@ -5,7 +5,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.example.monitor.servers.ServerModel;
-import com.example.monitor.utils.LogUtils;
+import com.example.monitor.utils.Helpers;
 import com.github.koraktor.steamcondenser.exceptions.SteamCondenserException;
 import com.github.koraktor.steamcondenser.steam.SteamPlayer;
 import com.github.koraktor.steamcondenser.steam.servers.SourceServer;
@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.List;
 import java.util.concurrent.TimeoutException;
 
 /**
@@ -23,7 +22,7 @@ import java.util.concurrent.TimeoutException;
  */
 public class ServerDetailsLoader extends AsyncTaskLoader<ServerDetailsModel> {
 
-    public final String TAG = LogUtils.makeLogTag(ServerDetailsLoader.class);
+    public final String TAG = Helpers.makeLogTag(ServerDetailsLoader.class);
     private String ipAddress;
 
     public ServerDetailsLoader(Context context, String ip) {
@@ -58,6 +57,9 @@ public class ServerDetailsLoader extends AsyncTaskLoader<ServerDetailsModel> {
         serverData.setMap(data.get("mapName").toString());
         serverData.setNumPlayers(data.get("numberOfPlayers").toString());
         serverData.setMaxPlayers(data.get("maxPlayers").toString());
+        serverData.setName(data.get("serverName").toString());
+        serverData.setGame(data.get("gameDescription").toString());
+        serverData.setTags(data.get("serverTags").toString());
 
         ArrayList<SteamPlayer> playersList = new ArrayList<>();
 

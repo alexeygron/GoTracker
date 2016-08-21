@@ -11,7 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import com.example.monitor.utils.LogUtils;
+import com.example.monitor.utils.Helpers;
 import com.github.koraktor.steamcondenser.steam.SteamPlayer;
 import com.lotr.steammonitor.app.R;
 
@@ -34,7 +34,7 @@ public class ServerDetailsActivity extends AppCompatActivity implements
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private ServerDetailsPresenter mPresenter;
 
-    private static final String TAG = LogUtils.makeLogTag(ServerDetailsActivity.class);
+    private static final String TAG = Helpers.makeLogTag(ServerDetailsActivity.class);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,9 +69,12 @@ public class ServerDetailsActivity extends AppCompatActivity implements
         mPlayers.setText(i.getStringExtra("players"));
     }
 
-    public void updateFields(String mapName, String players){
-        mMap.setText(mapName);
+    public void updateFields(String map, String players, String name, String game, String tags){
+        setTitle(name);
+        mMap.setText(map);
         mPlayers.setText(players);
+        mGameName.setText(game);
+        mTags.setText(tags);
     }
 
     public void setAdapterData(ArrayList<SteamPlayer> data){

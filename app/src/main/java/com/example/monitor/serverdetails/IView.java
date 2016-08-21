@@ -10,7 +10,7 @@ import java.util.ArrayList;
  */
 public interface IView {
 
-    void updateFields(String mapName, String numPlayers);
+    void updateFields(String map, String numPlayers, String name, String game,  String tags);
 
     void setAdapterData(ArrayList<SteamPlayer> data);
 }

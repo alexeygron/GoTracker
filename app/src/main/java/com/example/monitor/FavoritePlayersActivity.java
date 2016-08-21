@@ -1,4 +1,3 @@
-/* Активность на которой будет выводиться список игроков из бд */
 
 package com.lotr.steammonitor.app;
 
@@ -33,7 +32,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.monitor.model.Player;
+import com.example.monitor.Player;
 import com.github.koraktor.steamcondenser.exceptions.SteamCondenserException;
 import com.github.koraktor.steamcondenser.exceptions.WebApiException;
 import com.github.koraktor.steamcondenser.steam.community.SteamId;
@@ -59,8 +58,8 @@ import java.util.concurrent.ExecutionException;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 
-public class FavoritePlayersActivity extends Activity implements OnClickListener {
-
+public class FavoritePlayersActivity extends Activity{
+/*
     DBHelper dbHelper;
     TextView  errText, mTitle;
     Button  mNavHome, mNavFavorite, mNavServers;
@@ -105,12 +104,12 @@ public class FavoritePlayersActivity extends Activity implements OnClickListener
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
-        /*AdRequest adRequest = new com.google.android.gms.ads.AdRequest.Builder()
+        *//*AdRequest adRequest = new com.google.android.gms.ads.AdRequest.Builder()
                 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
                 .addTestDevice("0A596F7E158C70A3174EF291FCDEF0AC").build();
-        mAdView.loadAd(adRequest);*/
+        mAdView.loadAd(adRequest);*//*
 
-       // mAvatar = (ImageView) findViewById(R.id.avatar);
+        // mAvatar = (ImageView) findViewById(R.id.avatar);
 
         test = (ImageView) findViewById(R.id.imageView1);
         // создаем объект для создания и управления версиями БД
@@ -130,7 +129,7 @@ public class FavoritePlayersActivity extends Activity implements OnClickListener
             }
 
             if (masPlr.length == 0) {
-                check = new CheckFragmentPlayer();
+                check = new com.lotr.steammonitor.app.CheckFragmentPlayer();
                 fm.beginTransaction().add(R.id.fragmentContainer2, check).commit();
 
             }
@@ -141,7 +140,7 @@ public class FavoritePlayersActivity extends Activity implements OnClickListener
             // транзакция добавляющая фрагмент в менаджер
             // дословно читается как: Создать новую транзакцию фрагмента, включить в нее одну операцию add , а затем закрепить
             if (fragment == null) {
-                fragment = new MessageFragment();
+                fragment = new CheckInetFragment();
                 fm.beginTransaction().add(R.id.fragmentContainer, fragment).commit();
             }
         }
@@ -156,7 +155,7 @@ public class FavoritePlayersActivity extends Activity implements OnClickListener
         switch(v.getId()) {
 
             case R.id.nav_favorite_but:
-                g = new Intent(FavoritePlayersActivity.this, FavoriteServersActivity.class);
+                g = new Intent(FavoritePlayersActivity.this, com.lotr.steammonitor.app.FavoriteServersActivity.class);
                 startActivity(g);
                 break;
 
@@ -188,7 +187,7 @@ public class FavoritePlayersActivity extends Activity implements OnClickListener
                     // транзакция добавляющая фрагмент в менаджер
                     // дословно читается как: Создать новую транзакцию фрагмента, включить в нее одну операцию add , а затем закрепить
                     if (fragment == null) {
-                        fragment = new MessageFragment();
+                        fragment = new CheckInetFragment();
                         fm.beginTransaction().add(R.id.fragmentContainer, fragment).commit();
                     } else {
                         fm.beginTransaction().show(fragment).commit();
@@ -253,11 +252,11 @@ public class FavoritePlayersActivity extends Activity implements OnClickListener
     // этот метод обновляет поля в объектов созданного выше массива
     void updateServerList(){
 
-       adapter = new PlrAdapter(masPlr);
-       // for (int i = 0; i < masPlr.length; i++){
-            PlayersTask nt = new PlayersTask();
-            nt.execute();
-       // }
+        adapter = new PlrAdapter(masPlr);
+        // for (int i = 0; i < masPlr.length; i++){
+        PlayersTask nt = new PlayersTask();
+        nt.execute();
+        // }
 
     }
 
@@ -269,7 +268,7 @@ public class FavoritePlayersActivity extends Activity implements OnClickListener
         if (ni == null) {
             return false;
         } else
-        return true;
+            return true;
     }
 
     // метод конвертирующий время из unix time  в обычный формат
@@ -339,32 +338,32 @@ public class FavoritePlayersActivity extends Activity implements OnClickListener
                     // закрываем подключение к БД
                     dbHelper.close();
                     Toast.makeText(FavoritePlayersActivity.this, R.string.text_add_id, Toast.LENGTH_SHORT).show();
-                 } else {
+                } else {
                     // если нет, то выводим сообщение об этом
                     Toast.makeText(FavoritePlayersActivity.this, R.string.toast_non_found, Toast.LENGTH_SHORT).show();
                 }
 
-                    // проверка наличия интернет соединения выполняется через метод isNetworkConnected()
-                    if (isNetworkConnected() == true) {
-                        createServersList();
-                        updateServerList();
+                // проверка наличия интернет соединения выполняется через метод isNetworkConnected()
+                if (isNetworkConnected() == true) {
+                    createServersList();
+                    updateServerList();
 
-                        if (fragment != null) {
-                            fm.beginTransaction().hide(fragment).commit();
-                        }
-
-                        if (check != null) {
-                            fm.beginTransaction().remove(check).commit();
-                        }
-                    } else {
-                        createServersList();
-                        // транзакция добавляющая фрагмент в менаджер
-                        // дословно читается как: Создать новую транзакцию фрагмента, включить в нее одну операцию add , а затем закрепить
-                        if (fragment == null) {
-                            fragment = new MessageFragment();
-                            fm.beginTransaction().add(R.id.fragmentContainer, fragment).commit();
-                        }
+                    if (fragment != null) {
+                        fm.beginTransaction().hide(fragment).commit();
                     }
+
+                    if (check != null) {
+                        fm.beginTransaction().remove(check).commit();
+                    }
+                } else {
+                    createServersList();
+                    // транзакция добавляющая фрагмент в менаджер
+                    // дословно читается как: Создать новую транзакцию фрагмента, включить в нее одну операцию add , а затем закрепить
+                    if (fragment == null) {
+                        fragment = new CheckInetFragment();
+                        fm.beginTransaction().add(R.id.fragmentContainer, fragment).commit();
+                    }
+                }
                 Toast.makeText(FavoritePlayersActivity.this, R.string.text_del_id, Toast.LENGTH_SHORT).show();
             }
         });
@@ -450,7 +449,7 @@ public class FavoritePlayersActivity extends Activity implements OnClickListener
                 }
             }
 
-            /* convertView.setOnClickListener(new View.OnClickListener() {
+            *//* convertView.setOnClickListener(new View.OnClickListener() {
 
                 final Intent g = new Intent(FavoritePlayersActivity.this, PlayerInfoPage.class);
 
@@ -463,7 +462,7 @@ public class FavoritePlayersActivity extends Activity implements OnClickListener
                     startActivity(g);
                 }
             });
-            */
+            *//*
             ImageView mAvatar = (ImageView) convertView.findViewById(R.id.avatar);
             mAvatar.setImageBitmap(masPlr[position].getBtmAvs());
 
@@ -505,16 +504,16 @@ public class FavoritePlayersActivity extends Activity implements OnClickListener
         @Override
         protected String doInBackground(Integer... params) {
 
-           // indObj = params[0];
+            // indObj = params[0];
 
             try {
                 WebApi.setApiKey("20AA3876A3B48CB80B88033C77056A1F");
                 Map<String, Object> map = new HashMap<String, Object>();
 
                 for (int i = 0; i < masPlr.length; i++){
-                     puts = puts + masPlr[i].getPlayerId() + ",";
+                    puts = puts + masPlr[i].getPlayerId() + ",";
                 }
-               // Log.d ("Puts", puts);
+                // Log.d ("Puts", puts);
                 map.put("steamids", puts);
                 //Log.d ("HashMap", map.toString());
 
@@ -575,7 +574,7 @@ public class FavoritePlayersActivity extends Activity implements OnClickListener
         @Override
         protected Void doInBackground(Integer... id) {
 
-           for (int i = 0; i < masPlr.length; i++)
+            for (int i = 0; i < masPlr.length; i++)
                 masPlr[i].setBtmAvs(getBitmapFromURL(masPlr[i].getUrlAvatar()));
 
             return null;
@@ -591,83 +590,83 @@ public class FavoritePlayersActivity extends Activity implements OnClickListener
         }
     }
 
-        class IdTask extends AsyncTask<String, String, String> {
+    class IdTask extends AsyncTask<String, String, String> {
 
-            @Override
-            protected String doInBackground(String... id) {
+        @Override
+        protected String doInBackground(String... id) {
 
-                String id2 = id.toString();
+            String id2 = id.toString();
 
-                String js = null;
-                String nid = null;
-                Long nidl = null;
-                JSONArray players2 = null;
+            String js = null;
+            String nid = null;
+            Long nidl = null;
+            JSONArray players2 = null;
 
-                // пытаемся конвертировать id в 64бит формат
-                for (String s : id) {
-                    Log.d("string..", s);
-                    try {
-                        nidl = SteamId.resolveVanityUrl(s);
-                    } catch (WebApiException e) {
-                        e.printStackTrace();
+            // пытаемся конвертировать id в 64бит формат
+            for (String s : id) {
+                Log.d("string..", s);
+                try {
+                    nidl = SteamId.resolveVanityUrl(s);
+                } catch (WebApiException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            // если получается, возращаем его в диалог
+            if (nidl != null) {
+                nid = nidl.toString();
+                return nid;
+
+            } else {
+                // если нет, проверяем евляется ли он уже реальным 64битным адресом
+                try {
+                    WebApi.setApiKey("20AA3876A3B48CB80B88033C77056A1F");
+                    Map<String, Object> map2 = new HashMap<String, Object>();
+
+                    for (String i : id) {
+
+                        id2 = i;
                     }
+
+                    map2.put("steamids", id2);
+
+                    js = WebApi.getJSON("ISteamUser", "GetPlayerSummaries", 2, map2);
+
+                    Log.d ("MAP", map2.toString());
+
+                    JSONObject  jobj2 = new JSONObject(js);
+
+                    JSONObject response2 = jobj2.getJSONObject("response");
+
+                    players2 = response2.getJSONArray("players");
+
+
+                    Log.d("JS Otver", js);
+                } catch (WebApiException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
 
-                // если получается, возращаем его в диалог
-                if (nidl != null) {
-                    nid = nidl.toString();
-                    return nid;
-
+                // если полученные масив из json не пустой, значит является, возвращаем id в диалог
+                if (players2.length() != 0) {
+                    return id2;
+                    // в противном случае возвращаем null
                 } else {
-                    // если нет, проверяем евляется ли он уже реальным 64битным адресом
-                    try {
-                        WebApi.setApiKey("20AA3876A3B48CB80B88033C77056A1F");
-                        Map<String, Object> map2 = new HashMap<String, Object>();
-
-                        for (String i : id) {
-
-                            id2 = i;
-                        }
-
-                        map2.put("steamids", id2);
-
-                        js = WebApi.getJSON("ISteamUser", "GetPlayerSummaries", 2, map2);
-
-                        Log.d ("MAP", map2.toString());
-
-                        JSONObject  jobj2 = new JSONObject(js);
-
-                        JSONObject response2 = jobj2.getJSONObject("response");
-
-                        players2 = response2.getJSONArray("players");
-
-
-                        Log.d("JS Otver", js);
-                    } catch (WebApiException e) {
-                        e.printStackTrace();
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-                    // если полученные масив из json не пустой, значит является, возвращаем id в диалог
-                    if (players2.length() != 0) {
-                        return id2;
-                        // в противном случае возвращаем null
-                    } else {
-                        return null;
-                    }
+                    return null;
                 }
-                //Log.d("VanityUrl", "" + testl);
             }
+            //Log.d("VanityUrl", "" + testl);
+        }
 
-            @Override
-            protected void onPostExecute(String result) {
-                // super.onPostExecute(result);
+        @Override
+        protected void onPostExecute(String result) {
+            // super.onPostExecute(result);
 
-                //test.setImageBitmap(masPlr[0].getBtmAvs());
+            //test.setImageBitmap(masPlr[0].getBtmAvs());
 
-               // adapter = new PlrAdapter(masPlr);
-                pServers.setAdapter(adapter);
-            }
+            // mAdapter = new PlrAdapter(masPlr);
+            pServers.setAdapter(adapter);
+        }
 
-    }}
+    }*/}

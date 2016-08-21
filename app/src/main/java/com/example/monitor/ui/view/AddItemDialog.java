@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.example.monitor.utils.LogUtils;
+import com.example.monitor.utils.Helpers;
 import com.lotr.steammonitor.app.R;
 
 import butterknife.BindView;
@@ -27,7 +27,7 @@ public class AddItemDialog extends DialogFragment implements DialogInterface.OnS
     private Callback mCallback;
     private AlertDialog dialog;
 
-    private static final String TAG = LogUtils.makeLogTag(AddItemDialog.class);
+    private static final String TAG = Helpers.makeLogTag(AddItemDialog.class);
 
     public static AddItemDialog createInstance(Callback callback){
         AddItemDialog dialog = new AddItemDialog();

@@ -4,51 +4,73 @@ import android.content.Context;
 import android.support.v4.content.AsyncTaskLoader;
 import android.util.Log;
 
-import com.example.monitor.servers.ServerModel;
 import com.example.monitor.utils.Config;
-import com.example.monitor.utils.LogUtils;
+import com.example.monitor.utils.Helpers;
 import com.github.koraktor.steamcondenser.exceptions.SteamCondenserException;
 import com.github.koraktor.steamcondenser.steam.community.WebApi;
-import com.github.koraktor.steamcondenser.steam.servers.SourceServer;
-import com.github.koraktor.steamcondenser.steam.sockets.SteamSocket;
-import com.lotr.steammonitor.app.R;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.TimeoutException;
 
-public class PlayersDataLoader extends AsyncTaskLoader<String> {
+public class PlayersDataLoader extends AsyncTaskLoader<PlayerModel> {
 
-    public final String TAG = LogUtils.makeLogTag(PlayersDataLoader.class);
+    public final String TAG = Helpers.makeLogTag(PlayersDataLoader.class);
 
     private Context mContext;
-    private ServerModel mServer;
+    private PlayerModel mPlayer;
 
-    public PlayersDataLoader(Context context) {
+    public PlayersDataLoader(Context context, PlayerModel player) {
         super(context);
         mContext = context;
+        mPlayer = player;
     }
 
     @Override
-    public String loadInBackground() {
+    public PlayerModel loadInBackground() {
         Log.d(TAG, "loadInBackground");
-
+        String responce;
         try {
             WebApi.setApiKey(Config.WEB_API_KEY);
             Map<String, Object> params = new HashMap<>();
-
-            String ids = "76561198158747054,76561198307741380,";
-            params.put("steamids", ids);
-
-            String json = WebApi.getJSON("ISteamUser", "GetPlayerSummaries", 2, params);
-
-            Log.i (TAG, "responce: " + json.toString());
+            params.put("steamids", mPlayer.getSteamID());
+            responce = WebApi.getJSON("ISteamUser", "GetPlayerSummaries", 2, params);
+            return convertToModel(responce);
         } catch (SteamCondenserException e) {
             e.printStackTrace();
+            mPlayer.setPersonName(mPlayer.getSteamID());
+            return mPlayer;
         }
+    }
 
+    private PlayerModel convertToModel(String json) {
+        Log.i(TAG, "json " + json);
+        try {
+            JSONObject steamUser = new JSONObject(json).
+                    getJSONObject("response").
+                    getJSONArray("players").
+                    getJSONObject(0);
+            // Инициируем основные поля класса
+            mPlayer.setSteamID(steamUser.getString("steamid"));
+            mPlayer.setPersonaState(Integer.parseInt(steamUser.getString("personastate")));
+            mPlayer.setPersonName(steamUser.getString("personaname"));
+            mPlayer.setLastLogoff(Long.parseLong(steamUser.getString("lastlogoff")));
+            mPlayer.setProfileUrl(steamUser.getString("profileurl"));
+            mPlayer.setAvatarUrl(steamUser.getString("avatarfull"));
 
-        return "";
+            // Поле gameextrainfo в json присутствует не всегда
+            // А только тогда, когда игрок находится в игре
+            // Проверяем есть ли оно, если да, то инициируем его в объекте тоже
+            if (!steamUser.isNull("gameextrainfo")) {
+                mPlayer.setmGameExtraInfo(steamUser.getString("gameextrainfo"));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+            mPlayer.setPersonName(mPlayer.getSteamID());
+        }
+        return mPlayer;
     }
 
     @Override
@@ -71,7 +93,7 @@ public class PlayersDataLoader extends AsyncTaskLoader<String> {
     }
 
     @Override
-    public void deliverResult(String data) {
+    public void deliverResult(PlayerModel data) {
         super.deliverResult(data);
         Log.d(TAG, "deliverResult");
     }

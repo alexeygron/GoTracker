@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.example.monitor.servers.ServerModel;
-import com.example.monitor.utils.LogUtils;
+import com.example.monitor.utils.Helpers;
 import com.github.koraktor.steamcondenser.steam.SteamPlayer;
 
 import java.util.ArrayList;
@@ -19,7 +19,7 @@ public class ServerDetailsPresenter implements LoaderManager.LoaderCallbacks<Ser
     private LoaderManager mLoaderManager;
     private String mIpAddress;
 
-    private static final String TAG = LogUtils.makeLogTag(ServerDetailsPresenter.class);
+    private static final String TAG = Helpers.makeLogTag(ServerDetailsPresenter.class);
     private static final int LOADER_ID = 1;
 
     public ServerDetailsPresenter(Context context, String ip, LoaderManager loaderManager, IView view){
@@ -50,7 +50,13 @@ public class ServerDetailsPresenter implements LoaderManager.LoaderCallbacks<Ser
     public void onLoadFinished(Loader<ServerDetailsModel> loader, ServerDetailsModel data) {
         if(data != null){
             ServerModel server = data.getServer();
-            mView.updateFields(server.getMap(), server.getPlayers());
+            mView.updateFields(
+                    server.getMap(),
+                    server.getPlayers(),
+                    server.getmName(),
+                    server.getGame(),
+                    server.getTags()
+            );
 
             ArrayList<SteamPlayer> playersList = data.getPlayersList();
             mView.setAdapterData(playersList);

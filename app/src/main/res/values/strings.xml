@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!-- This is comment for XML language -->
     <string name="app_name">CSGO Servers and Players</string>
     <string name="text_servers">SERVERS</string>
     <string name="text_players">PLAYERS</string>
@@ -7,6 +9,7 @@
     <string name="fav_srv_text">Favorites servers</string>
     <string name="add_player_title">Add player:</string>
     <string name="add_server_title">Add server:</string>
+    <string name="player_non_found">Player non found</string>
     <string name="toast_update_server_list">List of servers updated</string>
     <string name="toast_update_players_list">List of players updated</string>
     <string name="toast_update_game_info">Updated</string>

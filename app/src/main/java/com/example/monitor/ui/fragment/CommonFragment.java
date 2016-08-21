@@ -22,6 +22,7 @@ public abstract class CommonFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View rootView = inflater.inflate(getLayoutId(), container, false);
         mProgressBar = (AVLoadingIndicatorView)getActivity().findViewById(R.id.avloadingIndicatorView);
+        mProgressBar.setVisibility(View.GONE);
         return rootView;
     }
 

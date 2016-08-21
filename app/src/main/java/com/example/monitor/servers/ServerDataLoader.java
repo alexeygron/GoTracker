@@ -4,7 +4,7 @@ import android.content.Context;
 import android.support.v4.content.AsyncTaskLoader;
 import android.util.Log;
 
-import com.example.monitor.utils.LogUtils;
+import com.example.monitor.utils.Helpers;
 import com.github.koraktor.steamcondenser.exceptions.SteamCondenserException;
 import com.github.koraktor.steamcondenser.steam.servers.SourceServer;
 import com.github.koraktor.steamcondenser.steam.sockets.SteamSocket;
@@ -15,7 +15,7 @@ import java.util.concurrent.TimeoutException;
 
 public class ServerDataLoader extends AsyncTaskLoader<ServerModel> {
 
-    public final String TAG = LogUtils.makeLogTag(ServerDataLoader.class);
+    public final String TAG = Helpers.makeLogTag(ServerDataLoader.class);
 
     private Context mContext;
     private ServerModel mServer;
@@ -32,21 +32,20 @@ public class ServerDataLoader extends AsyncTaskLoader<ServerModel> {
         HashMap<String, Object> response;
         SteamSocket.setTimeout(3000);
         SourceServer sourceServer;
-
         try {
             sourceServer = new SourceServer(mServer.getIpAddr());
             sourceServer.initialize();
             response = sourceServer.getServerInfo();
+            return convertToModel(response);
         } catch (SteamCondenserException | TimeoutException e) {
             e.printStackTrace();
-            mServer.setSrvName(mContext.getResources().getString(R.string.err_get_server));
+            mServer.setName(mContext.getResources().getString(R.string.err_get_server));
             return mServer;
         }
-        return convertToModel(response);
     }
 
     private ServerModel convertToModel(HashMap<String, Object> response){
-        mServer.setSrvName(response.get("serverName").toString());
+        mServer.setName(response.get("serverName").toString());
         mServer.setMap(response.get("mapName").toString());
         mServer.setNumPlayers(response.get("numberOfPlayers").toString());
         mServer.setMaxPlayers(response.get("maxPlayers").toString());

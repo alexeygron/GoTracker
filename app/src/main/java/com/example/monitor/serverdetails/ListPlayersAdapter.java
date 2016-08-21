@@ -5,19 +5,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.monitor.servers.FavoriteServersPresenter;
-import com.example.monitor.servers.ServerModel;
 import com.example.monitor.utils.ConvertUtils;
-import com.example.monitor.utils.LogUtils;
+import com.example.monitor.utils.Helpers;
 import com.github.koraktor.steamcondenser.steam.SteamPlayer;
 import com.lotr.steammonitor.app.R;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -28,7 +24,7 @@ import butterknife.ButterKnife;
 
 public class ListPlayersAdapter extends RecyclerView.Adapter<ListPlayersAdapter.Holder> {
 
-    private static final String TAG = LogUtils.makeLogTag(ListPlayersAdapter.class);
+    private static final String TAG = Helpers.makeLogTag(ListPlayersAdapter.class);
 
     private List<SteamPlayer> mData;
 

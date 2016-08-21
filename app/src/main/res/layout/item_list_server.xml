@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -11,8 +11,7 @@
         android:layout_height="wrap_content"
         android:paddingBottom="9dp"
         android:paddingLeft="4dp"
-        android:paddingRight="2dp"
-        android:paddingTop="4dp"
+        android:paddingTop="5dp"
         android:scrollbars="vertical" >
 
         <TextView
@@ -60,14 +59,27 @@
             android:layout_marginTop="15dp"
             style="@style/TextViewSmall" />
 
-        <ImageButton
-            android:id="@+id/del_item_button"
+        <!-- Отдельный layout для увеличения кикабельной области кнопки -->
+        <FrameLayout
+            android:id="@+id/delete_frame"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="14dp"
-            android:background="@drawable/multiplication_symbol_32" />
+            android:layout_gravity="center"
+            android:padding="10dp"
+            android:layout_marginRight="5dp">
+
+            <ImageButton
+                android:id="@+id/del_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/multiplication_symbol_32"
+                android:scaleType="matrix"
+                android:clickable="false"/>
+
+        </FrameLayout>
 
     </RelativeLayout>
 

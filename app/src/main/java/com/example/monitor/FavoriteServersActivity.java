@@ -360,8 +360,8 @@ public class FavoriteServersActivity extends Activity implements OnClickListener
 			
 			  TextView titleTextView = (TextView)convertView.findViewById(R.id.srv_name);
 
-			  if (c.getSrvName() != null)
-				  titleTextView.setText(c.getSrvName());
+			  if (c.getmName() != null)
+				  titleTextView.setText(c.getmName());
 			  else
 				  titleTextView.setText(getResources().getString(R.string.err_get_server));
 
@@ -374,7 +374,7 @@ public class FavoriteServersActivity extends Activity implements OnClickListener
 		        		// передаем в дополнении к интенту адрес выбранного сервера для новой активности
 						g.putExtra("ipAddr", masSrv[position].getIpAddr());
 						if (masSrv[position].getGame() != null) {
-							g.putExtra("name", masSrv[position].getSrvName());
+							g.putExtra("name", masSrv[position].getmName());
 							g.putExtra("game", masSrv[position].getGame());
 							g.putExtra("tags", masSrv[position].getTags());
 							g.putExtra("map", masSrv[position].getMap());
@@ -446,7 +446,7 @@ public class FavoriteServersActivity extends Activity implements OnClickListener
 			if (hm != null){
 			Log.d("Пост экзекут", "" + hm);
 	
-				masSrv[indObj].setSrvName(hm.get("serverName").toString());
+				masSrv[indObj].setName(hm.get("serverName").toString());
 				masSrv[indObj].setNumPlayers(hm.get("numberOfPlayers").toString());	
 				masSrv[indObj].setMaxPlayers(hm.get("maxPlayers").toString());	
 				masSrv[indObj].setMap(hm.get("mapName").toString());	

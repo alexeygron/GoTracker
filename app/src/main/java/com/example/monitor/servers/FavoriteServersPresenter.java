@@ -2,6 +2,7 @@ package com.example.monitor.servers;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
@@ -9,7 +10,8 @@ import android.util.Log;
 
 import com.example.monitor.db.ServersDao;
 import com.example.monitor.serverdetails.ServerDetailsActivity;
-import com.example.monitor.utils.LogUtils;
+import com.example.monitor.utils.Helpers;
+import com.example.monitor.utils.NetworkReceiver;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +19,7 @@ import java.util.List;
 /**
  * Презентер из пттерна MVP для
  */
-public class FavoriteServersPresenter implements LoaderManager.LoaderCallbacks<ServerModel> {
+public class FavoriteServersPresenter implements LoaderManager.LoaderCallbacks<ServerModel>, NetworkReceiver.NetChangeListener {
 
     private IView mView;
     private Context mContext;
@@ -25,10 +27,11 @@ public class FavoriteServersPresenter implements LoaderManager.LoaderCallbacks<S
     private ServersDao mDB;
     private List<ServerModel> mListData;
     private int loaderTaskIndex;
-
-    private static final String TAG = LogUtils.makeLogTag(FavoriteServersPresenter.class);
+    private NetworkReceiver mReceiver;
 
     public static final int LOADER_ID = 1;
+
+    private static final String TAG = Helpers.makeLogTag(FavoriteServersPresenter.class);
 
     public FavoriteServersPresenter(LoaderManager lm, Context context, IView view) {
         mView = view;
@@ -36,7 +39,7 @@ public class FavoriteServersPresenter implements LoaderManager.LoaderCallbacks<S
         mLoaderManager = lm;
         mDB = new ServersDao(context);
         mListData = new ArrayList<>();
-        showList();
+        //registerReceiver();
     }
 
     private void updateList(ServerModel server) {
@@ -47,10 +50,25 @@ public class FavoriteServersPresenter implements LoaderManager.LoaderCallbacks<S
 
     private void showList() {
         mListData.clear();
-        mListData.addAll(mDB.readToList());
+        mListData.addAll(mDB.get());
         loaderTaskIndex = 0;
-        mLoaderManager.restartLoader(LOADER_ID, null, this);
+        if(mLoaderManager.getLoader(LOADER_ID) != null) {
+            mLoaderManager.restartLoader(LOADER_ID, null, this);
+        } else {
+            mLoaderManager.initLoader(LOADER_ID, null, this);
+        }
         Log.i(TAG, "list size " + mListData.size());
+    }
+
+    public void networkEnabled() {
+        Log.i(TAG, "networkEnabled");
+        showList();
+        mView.showList();
+    }
+
+    public void networkDiasbled() {
+        Log.i(TAG, "networkDiasbled");
+        mView.hideList();
     }
 
     void onClickDelButton(int position) {
@@ -62,8 +80,13 @@ public class FavoriteServersPresenter implements LoaderManager.LoaderCallbacks<S
         Log.i(TAG, "del button click! " + position);
     }
 
-    void addNewItem(String value) {
-        mDB.insert(value);
+    void addServer(String ip) {
+        mDB.insert(ip);
+        onRefresh();
+    }
+
+    public void onRefresh() {
+        mLoaderManager.destroyLoader(LOADER_ID);
         showList();
     }
 
@@ -73,7 +96,7 @@ public class FavoriteServersPresenter implements LoaderManager.LoaderCallbacks<S
         //mFragmentManager.beginTransaction().add(R.id.main_container, fragment, "DETAILS").addToBackStack(null).commit();
         Intent i = new Intent(mContext, ServerDetailsActivity.class);
         ServerModel server = mListData.get(position);
-        i.putExtra("name", server.getSrvName());
+        i.putExtra("name", server.getmName());
         i.putExtra("game", server.getGame());
         i.putExtra("ip", server.getIpAddr());
         i.putExtra("tags", server.getTags());
@@ -88,25 +111,22 @@ public class FavoriteServersPresenter implements LoaderManager.LoaderCallbacks<S
 
     @Override
     public Loader<ServerModel> onCreateLoader(int id, Bundle args) {
-            if (mListData.size() > 0) {
-                mView.showProgress();
-                return new ServerDataLoader(mContext, mListData.get(loaderTaskIndex));
-            }
+        if (mListData.size() > 0 & loaderTaskIndex < mListData.size()) {
+            mView.showProgress();
+            return new ServerDataLoader(mContext, mListData.get(loaderTaskIndex));
+        } else {
+            mView.hideProgress();
+        }
         return null;
     }
 
     @Override
-    public void onLoadFinished(Loader<ServerModel> loader, ServerModel data){
-        if (data != null){
+    public void onLoadFinished(Loader<ServerModel> loader, ServerModel data) {
+        if (data != null) {
             updateList(data);
             loaderTaskIndex++;
             Log.i(TAG, "loader result " + data.toString());
-
-            if (loaderTaskIndex < mListData.size()) {
-                mLoaderManager.restartLoader(LOADER_ID, null, this);
-            } else {
-                mView.hideProgress();
-            }
+            mLoaderManager.restartLoader(LOADER_ID, null, this);
         }
     }
 
@@ -114,15 +134,19 @@ public class FavoriteServersPresenter implements LoaderManager.LoaderCallbacks<S
     public void onLoaderReset(Loader<ServerModel> loader) {
     }
 
-    public void onRefresh() {
-        mLoaderManager.destroyLoader(LOADER_ID);
-        showList();
+   /* private void registerReceiver(){
+        IntentFilter filter = new IntentFilter("android.net.conn.CONNECTIVITY_CHANGE");
+        mReceiver = new NetworkReceiver();
+        mReceiver.addListener(this);
+        mContext.registerReceiver(mReceiver, filter);
     }
+    */
 
     void onDestroy() {
-        mDB.close();
         mView = null;
+        mLoaderManager.destroyLoader(LOADER_ID);
     }
+
 
     void init() {
         mDB.insert("37.187.205.242:27015");

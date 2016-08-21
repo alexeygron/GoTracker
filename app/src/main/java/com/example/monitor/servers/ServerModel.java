@@ -3,13 +3,13 @@ package com.example.monitor.servers;
 public class ServerModel {
 	
 	protected String ipAddr;
-	protected String srvName;
+	protected String mName;
 	protected String numPlayers;
 	protected String maxPlayers;
-	protected String srvMap;
-	protected String srvGame;
-	protected String srvTags;
-	protected String srvDbId;
+	protected String mMap;
+	protected String mGame;
+	protected String mTags;
+	protected String mDbLabel;
 
 	public ServerModel(){
 	}
@@ -26,29 +26,29 @@ public class ServerModel {
 		ipAddr = ip;
 	}
 	
-	public void setSrvName (String name) {
-		srvName = name;
+	public void setName(String name) {
+		mName = name;
 	}
 	
-	public String getSrvName () {
-		return srvName;
+	public String getmName() {
+		return mName;
 	}
 	
 	public String getGame () {
-		return srvGame;
+		return mGame;
 	}
 	
 	public String getTags () {
 
-		return srvTags;
+		return mTags;
 	}
 	
 	public void setTags (String tags) {
-		srvTags = tags;
+		mTags = tags;
 	}
 	
 	public void setGame (String game) {
-		srvGame = game;
+		mGame = game;
 	}
 	
 	
@@ -69,19 +69,19 @@ public class ServerModel {
 	}
 	
 	public void setMap (String mapN) {
-		srvMap = mapN;
+		mMap = mapN;
 	}
 	
 	public String getMap () {
-		return srvMap;
+		return mMap;
 	}
 
 	public void setDbId (String id) {
-		srvDbId = id;
+		mDbLabel = id;
 	}
 
 	public String getDbId () {
-		return srvDbId;
+		return mDbLabel;
 	}
 
 	@Override
