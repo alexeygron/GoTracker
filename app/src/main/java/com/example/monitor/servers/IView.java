@@ -14,4 +14,8 @@ public interface IView {
     void showProgress();
 
     void hideProgress();
+
+    void showList();
+
+    void hideList();
 }
