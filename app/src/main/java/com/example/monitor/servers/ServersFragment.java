@@ -2,12 +2,15 @@ package com.example.monitor.servers;
 
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.example.monitor.ui.fragment.CommonListFragment;
 import com.example.monitor.ui.view.AddItemDialog;
@@ -25,8 +28,9 @@ public class ServersFragment extends CommonListFragment implements
 
     private static final String TAG = Helpers.makeLogTag(ServersFragment.class);
 
-    @BindView(R.id.button_add)
-    protected FloatingActionButton mButtonAdd;
+    @BindView(R.id.button_add) FloatingActionButton mButtonAdd;
+    @BindView(R.id.content) FrameLayout mContentFrame;
+    @BindView(R.id.message) TextView mMessageError;
     //PullToRefreshView mPullToRefreshView;
     //private AVLoadingIndicatorView mProgressBar;
     private FavoriteServersPresenter mPresenter;
@@ -49,6 +53,11 @@ public class ServersFragment extends CommonListFragment implements
         mAdapter = new ListServersAdapter(mPresenter);
         mRecyclerView.setAdapter(mAdapter);
         registerReceiver();
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
     }
 
     @Override
@@ -77,6 +86,7 @@ public class ServersFragment extends CommonListFragment implements
         super.onDestroy();
         mPresenter.onDestroy();
         getActivity().getApplicationContext().unregisterReceiver(mReceiver);
+        Log.i(TAG, "OnDestroy");
     }
 
     public void updateList() {
@@ -88,11 +98,13 @@ public class ServersFragment extends CommonListFragment implements
     }
 
     public void showList() {
-        mRecyclerView.setVisibility(View.VISIBLE);
+        mContentFrame.setVisibility(View.VISIBLE);
+        mMessageError.setVisibility(View.GONE);
     }
 
     public void hideList() {
-        mRecyclerView.setVisibility(View.GONE);
+        mContentFrame.setVisibility(View.GONE);
+        mMessageError.setVisibility(View.VISIBLE);
     }
 
     @Override

@@ -149,12 +149,13 @@ public class FavoriteServersPresenter implements LoaderManager.LoaderCallbacks<S
 
 
     void init() {
-        mDB.insert("37.187.205.242:27015");
         mDB.insert("86.104.11.123:27015");
         mDB.insert("46.174.53.181:27015");
         mDB.insert("192.95.29.182:27017");
         mDB.insert("185.113.141.19:27103");
         mDB.insert("46.174.50.142:55555");
+        mDB.insert("51.255.232.67:27015");
+        mDB.insert("195.88.208.182:27015");
         // showList();
     }
 }

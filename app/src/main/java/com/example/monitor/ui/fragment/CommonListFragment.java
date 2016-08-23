@@ -19,7 +19,6 @@ import butterknife.ButterKnife;
  */
 public abstract class CommonListFragment extends CommonFragment{
 
-    @BindView(R.id.refresh) protected SwipeRefreshLayout mSwipeRefreshLayout;
     @BindView(R.id.list_servers) protected RecyclerView mRecyclerView;
     protected ListServersAdapter mAdapter;
     protected LinearLayoutManager mLayoutManager;

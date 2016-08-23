@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.example.monitor.ui.fragment.CommonListFragment;
 import com.example.monitor.ui.view.AddItemDialog;
@@ -20,8 +22,9 @@ import butterknife.ButterKnife;
 public class PlayersFragment extends CommonListFragment implements
         IView, SwipeRefreshLayout.OnRefreshListener, View.OnClickListener, AddItemDialog.Callback {
 
-    @BindView(R.id.button_add)
-    protected FloatingActionButton mButtonAdd;
+    @BindView(R.id.button_add) FloatingActionButton mButtonAdd;
+    @BindView(R.id.message) TextView mMessageError;
+    @BindView(R.id.content) FrameLayout mContentFrame;
     private FavoritePlayersPresenter mPresenter;
     private ListPlayersAdapter mAdapter;
     private NetworkReceiver mReceiver;
@@ -45,11 +48,13 @@ public class PlayersFragment extends CommonListFragment implements
     }
 
     public void showList() {
-        mRecyclerView.setVisibility(View.VISIBLE);
+        mContentFrame.setVisibility(View.VISIBLE);
+        mMessageError.setVisibility(View.GONE);
     }
 
     public void hideList() {
-        mRecyclerView.setVisibility(View.GONE);
+        mContentFrame.setVisibility(View.GONE);
+        mMessageError.setVisibility(View.VISIBLE);
     }
 
     public void updateList() {

@@ -7,8 +7,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.example.monitor.players.PlayersFragment;
 import com.example.monitor.servers.ServersFragment;
-import com.example.monitor.ui.fragment.GameInfoFragment;
-import com.example.monitor.utils.NetworkReceiver;
+import com.example.monitor.GameInfo.GameInfoFragment;
 
 /**
  * Created by lotr on 05.07.2016.
