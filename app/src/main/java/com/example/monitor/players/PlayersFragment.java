@@ -1,5 +1,6 @@
 package com.example.monitor.players;
 
+import android.content.Context;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -55,6 +56,12 @@ public class PlayersFragment extends CommonListFragment implements
     public void hideList() {
         mContentFrame.setVisibility(View.GONE);
         mMessageError.setVisibility(View.VISIBLE);
+    }
+
+    private void showDialog(AddItemDialog.Callback callback,int title, int hint){
+        AddItemDialog dialogFragment = AddItemDialog.createInstance(
+                callback, title, hint);
+        dialogFragment.show(getFragmentManager(), null);
     }
 
     public void updateList() {
@@ -114,8 +121,7 @@ public class PlayersFragment extends CommonListFragment implements
     public void onClick(android.view.View v) {
         switch (v.getId()) {
             case R.id.button_add:
-                AddItemDialog dialogFragment = AddItemDialog.createInstance(this);
-                dialogFragment.show(getFragmentManager(), null);
+                showDialog(this, R.string.add_player_title, R.string.dialog_id_text);
                 break;
         }
     }

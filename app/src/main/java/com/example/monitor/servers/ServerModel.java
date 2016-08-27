@@ -1,91 +1,134 @@
 package com.example.monitor.servers;
 
-public class ServerModel {
-	
-	protected String ipAddr;
-	protected String mName;
-	protected String numPlayers;
-	protected String maxPlayers;
-	protected String mMap;
-	protected String mGame;
-	protected String mTags;
-	protected String mDbLabel;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-	public ServerModel(){
-	}
-	
-	public ServerModel(String ip){
-		ipAddr = ip;
-	}
-	
-	public String getIpAddr () {
-		return ipAddr;
-	}
+public class ServerModel implements Parcelable {
 
-	public void setIpAddr (String ip) {
-		ipAddr = ip;
-	}
-	
-	public void setName(String name) {
-		mName = name;
-	}
-	
-	public String getmName() {
-		return mName;
-	}
-	
-	public String getGame () {
-		return mGame;
-	}
-	
-	public String getTags () {
+    protected String ipAddr;
+    protected String mName;
+    protected String numPlayers;
+    protected String maxPlayers;
+    protected String mMap;
+    protected String mGame;
+    protected String mTags;
+    protected String mDbLabel;
 
-		return mTags;
-	}
-	
-	public void setTags (String tags) {
-		mTags = tags;
-	}
-	
-	public void setGame (String game) {
-		mGame = game;
-	}
-	
-	
-	public void setNumPlayers (String num) {
-		numPlayers = num;
-	}
-	
-	public void setMaxPlayers (String max) {
-		maxPlayers = max;
-	}
-	
-	public String getPlayers () {
-		return numPlayers + "/" + maxPlayers;
-	}
-	
-	public String getNumPlayers () {
-		return numPlayers;
-	}
-	
-	public void setMap (String mapN) {
-		mMap = mapN;
-	}
-	
-	public String getMap () {
-		return mMap;
-	}
+    public ServerModel() {
+    }
 
-	public void setDbId (String id) {
-		mDbLabel = id;
-	}
+    public ServerModel(String ip) {
+        ipAddr = ip;
+    }
 
-	public String getDbId () {
-		return mDbLabel;
-	}
+    protected ServerModel(Parcel in) {
+        ipAddr = in.readString();
+        mName = in.readString();
+        numPlayers = in.readString();
+        maxPlayers = in.readString();
+        mMap = in.readString();
+        mGame = in.readString();
+        mTags = in.readString();
+        mDbLabel = in.readString();
+    }
 
-	@Override
-	public String toString(){
-		return "IpAddr " + ipAddr;
-	}
+    public static final Creator<ServerModel> CREATOR = new Creator<ServerModel>() {
+        @Override
+        public ServerModel createFromParcel(Parcel in) {
+            return new ServerModel(in);
+        }
+
+        @Override
+        public ServerModel[] newArray(int size) {
+            return new ServerModel[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(ipAddr);
+        dest.writeString(mName);
+        dest.writeString(numPlayers);
+        dest.writeString(maxPlayers);
+        dest.writeString(mMap);
+        dest.writeString(mGame);
+        dest.writeString(mTags);
+        dest.writeString(mDbLabel);
+
+    }
+
+    public String getIpAddr() {
+        return ipAddr;
+    }
+
+    public void setIpAddr(String ip) {
+        ipAddr = ip;
+    }
+
+    public void setName(String name) {
+        mName = name;
+    }
+
+    public String getmName() {
+        return mName;
+    }
+
+    public String getGame() {
+        return mGame;
+    }
+
+    public void setGame(String game) {
+        mGame = game;
+    }
+
+    public String getTags() {
+
+        return mTags;
+    }
+
+    public void setTags(String tags) {
+        mTags = tags;
+    }
+
+    public void setMaxPlayers(String max) {
+        maxPlayers = max;
+    }
+
+    public String getPlayers() {
+        return numPlayers + "/" + maxPlayers;
+    }
+
+    public String getNumPlayers() {
+        return numPlayers;
+    }
+
+    public void setNumPlayers(String num) {
+        numPlayers = num;
+    }
+
+    public String getMap() {
+        return mMap;
+    }
+
+    public void setMap(String mapN) {
+        mMap = mapN;
+    }
+
+    public String getDbId() {
+        return mDbLabel;
+    }
+
+    public void setDbId(String id) {
+        mDbLabel = id;
+    }
+
+    @Override
+    public String toString() {
+        return "IpAddr " + ipAddr;
+    }
 }

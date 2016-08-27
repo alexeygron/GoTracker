@@ -26,6 +26,7 @@ public class GameInfoFragment extends CommonFragment implements IView, SwipeRefr
 
     private GameInfoPresenter mPresenter;
     private NetworkReceiver mReceiver;
+
     @BindView(R.id.refresh) android.support.v4.widget.SwipeRefreshLayout mRefresh;
     @BindView(R.id.message) TextView mMessageError;
     @BindView(R.id.players) TextView mPlayers;

@@ -37,19 +37,16 @@ public class ServersFragment extends CommonListFragment implements
     private NetworkReceiver mReceiver;
 
     @Override
-    public void onViewCreated(android.view.View view, Bundle savedInstanceState) {
+    public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mButtonAdd.setOnClickListener(this);
+        //setRetainInstance(true);
         setHasOptionsMenu(true);
-
         if (mPresenter == null) {
             mPresenter = new FavoriteServersPresenter(getLoaderManager(), getContext(), this);
         }
-
-        //mProgressBar = (AVLoadingIndicatorView) getActivity().findViewById(R.id.avloadingIndicatorView);
-        //mPresenter.onTakeView(this);
         mAdapter = new ListServersAdapter(mPresenter);
         mRecyclerView.setAdapter(mAdapter);
         registerReceiver();
@@ -107,6 +104,13 @@ public class ServersFragment extends CommonListFragment implements
         mMessageError.setVisibility(View.VISIBLE);
     }
 
+
+    private void showDialog(AddItemDialog.Callback callback,int title, int hint){
+        AddItemDialog dialogFragment = AddItemDialog.createInstance(
+                callback, title, hint);
+        dialogFragment.show(getFragmentManager(), null);
+    }
+
     @Override
     public void showSnackBar(String message) {
         Snackbar.make(getView(), message, Snackbar.LENGTH_SHORT).show();
@@ -142,8 +146,7 @@ public class ServersFragment extends CommonListFragment implements
     public void onClick(android.view.View v) {
         switch (v.getId()) {
             case R.id.button_add:
-                AddItemDialog dialogFragment = AddItemDialog.createInstance(this);
-                dialogFragment.show(getFragmentManager(), null);
+                showDialog(this, R.string.add_server_title, R.string.dialog_ip_text);
                 break;
         }
     }

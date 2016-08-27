@@ -10,6 +10,26 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize">
 
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:paddingRight="3dp">
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="#fff"
+            android:textStyle="bold"
+            android:lines="1"
+            android:scrollHorizontally="true" />
+
+        </HorizontalScrollView>
+
             <com.wang.avi.AVLoadingIndicatorView
                 android:id="@+id/avloadingIndicatorView"
                 android:layout_width="wrap_content"
@@ -21,7 +41,7 @@
 
         </android.support.v7.widget.Toolbar>
 
-        <android.support.design.widget.CoordinatorLayout
+    <android.support.design.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="?attr/actionBarSize"
@@ -107,33 +127,9 @@
                             </TableRow>
 
                             <TableRow
-                                android:id="@+id/tableRow6"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                >
-
-                                <TextView
-                                    android:id="@+id/textView8"
-                                    style="@style/TextField"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/map_name"
-                                    android:textColor="#fff" />
-
-                                <TextView
-                                    android:id="@+id/map"
-                                    style="@style/TextField"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="6dp"
-                                    android:textColor="#fff" />
-                            </TableRow>
-
-                            <TableRow
                                 android:id="@+id/tableRow5"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="5dp">
+                                android:layout_height="wrap_content">
 
                                 <TextView
                                     android:id="@+id/textView7"
@@ -160,12 +156,33 @@
                                 </HorizontalScrollView>
                             </TableRow>
 
+                            <TableRow
+                                android:id="@+id/tableRow6"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                >
+
+                                <TextView
+                                    android:id="@+id/textView8"
+                                    style="@style/TextField"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/map_name"
+                                    android:textColor="#fff" />
+
+                                <TextView
+                                    android:id="@+id/map"
+                                    style="@style/TextField"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="6dp"
+                                    android:textColor="#fff" />
+                            </TableRow>
 
                             <TableRow
                                 android:id="@+id/tableRow7"
                                 android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="7dp">
+                                android:layout_height="wrap_content">
 
                                 <TextView
                                     android:id="@+id/textView10"

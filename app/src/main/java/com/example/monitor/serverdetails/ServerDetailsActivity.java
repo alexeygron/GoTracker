@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.method.ScrollingMovementMethod;
 import android.view.MenuItem;
 import android.widget.TextView;
 
@@ -23,6 +24,7 @@ import butterknife.ButterKnife;
 public class ServerDetailsActivity extends AppCompatActivity implements
         IView, SwipeRefreshLayout.OnRefreshListener {
 
+    @BindView(R.id.title) TextView mTitle;
     @BindView(R.id.game_name) TextView mGameName;
     @BindView(R.id.ip_address) TextView mIpAddress;
     @BindView(R.id.tags) TextView mTags;
@@ -61,7 +63,8 @@ public class ServerDetailsActivity extends AppCompatActivity implements
     }
 
     private void initFields(Intent i){
-        setTitle(i.getStringExtra("name"));
+        setTitle("");
+        mTitle.setText(i.getStringExtra("name"));
         mGameName.setText(i.getStringExtra("game"));
         mIpAddress.setText(i.getStringExtra("ip"));
         mTags.setText(i.getStringExtra("tags"));
@@ -70,7 +73,7 @@ public class ServerDetailsActivity extends AppCompatActivity implements
     }
 
     public void updateFields(String map, String players, String name, String game, String tags){
-        setTitle(name);
+        mTitle.setText(name);
         mMap.setText(map);
         mPlayers.setText(players);
         mGameName.setText(game);

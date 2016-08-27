@@ -61,5 +61,8 @@
     <string name="players">Игроки:  </string>
     <string name="text_server">О сервере</string>
     <string name="playing">Играет в</string>
+    <string name="dialog_add_button">Добавить</string>
+    <string name="dialog_cansel_button">Отмена</string>
+    <string name="input_error">Поле не заполнено</string>
     <string name="banner_id">ca-app-pub-7733009523980326/4356022897</string>
 </resources>

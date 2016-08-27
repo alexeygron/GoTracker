@@ -25,7 +25,7 @@ public class FavoriteServersPresenter implements LoaderManager.LoaderCallbacks<S
     private Context mContext;
     private LoaderManager mLoaderManager;
     private ServersDao mDB;
-    private List<ServerModel> mListData;
+    private ArrayList<ServerModel> mListData;
     private int loaderTaskIndex;
     private NetworkReceiver mReceiver;
 
@@ -58,6 +58,14 @@ public class FavoriteServersPresenter implements LoaderManager.LoaderCallbacks<S
             mLoaderManager.initLoader(LOADER_ID, null, this);
         }
         Log.i(TAG, "list size " + mListData.size());
+    }
+
+    public ArrayList<ServerModel> getData(){
+        return mListData;
+    }
+
+    public void setData(ArrayList<ServerModel> data){
+        mListData.addAll(data);
     }
 
     public void networkEnabled() {
@@ -141,6 +149,15 @@ public class FavoriteServersPresenter implements LoaderManager.LoaderCallbacks<S
         mContext.registerReceiver(mReceiver, filter);
     }
     */
+
+    void onResume() {
+        Log.i(TAG, "data " + mListData.size());
+        if(mListData.size() != 0){
+            mView.setData(mListData);
+            mView.updateList();
+        }
+    }
+
 
     void onDestroy() {
         mView = null;

@@ -4,7 +4,9 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.DialogFragment;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -20,23 +22,23 @@ import butterknife.ButterKnife;
 /**
  * Показывает диалог для добавления нового элемента в список серверов или игроков.
  */
-public class AddItemDialog extends DialogFragment implements DialogInterface.OnShowListener{
-
-    @BindView(R.id.add_item_field) EditText mField;
-    @BindView(R.id.error_message) TextView mErrorMessage;
-    private Callback mCallback;
-    private AlertDialog dialog;
+public class AddItemDialog extends DialogFragment implements AlertDialog.OnShowListener{
 
     private static final String TAG = Helpers.makeLogTag(AddItemDialog.class);
+    @BindView(R.id.add_item_field) EditText mField;
+    @BindView(R.id.helper_hint) TextView mHintMessage;
+    @BindView(R.id.phone_input) TextInputLayout mInputLayout;
+    private Callback mCallback;
+    private AlertDialog dialog;
+    private int mTitle;
+    private int mHint;
 
-    public static AddItemDialog createInstance(Callback callback){
+    public static AddItemDialog createInstance(Callback callback, int title, int hint) {
         AddItemDialog dialog = new AddItemDialog();
         dialog.setCallback(callback);
+        dialog.setTitle(title);
+        dialog.setHint(hint);
         return dialog;
-    }
-
-    public void setCallback(Callback callback){
-        mCallback = callback;
     }
 
     @Override
@@ -44,44 +46,52 @@ public class AddItemDialog extends DialogFragment implements DialogInterface.OnS
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_add_item, null);
         ButterKnife.bind(this, view);
-
+        mHintMessage.setText(mHint);
         dialog = new AlertDialog.Builder(getActivity())
-                .setTitle(R.string.add_server_title).setView(view)
-                .setPositiveButton("Добавить", null)
-                .setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        AddItemDialog.this.getDialog().cancel();
-                    }
-                }).create();
-
+                .setView(view)
+                .setTitle(mTitle)
+                .setPositiveButton(R.string.dialog_add_button, null)
+                .setNegativeButton(getResources().getString(R.string.dialog_cansel_button),
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.dismiss();
+                            }
+                        }).create();
         dialog.setOnShowListener(this);
         return dialog;
     }
 
-    private boolean isFormat(String value){
-       //return value.contains(":");
-        return true;
-    }
-
-    private void showError(){
-        mErrorMessage.setVisibility(View.VISIBLE);
-    }
-
+    /*
+     * Переопределяется onShow чтобы показывать ошибку, а не закрывать диалог, если поле пустое.
+     */
     @Override
     public void onShow(DialogInterface iDialog) {
         Button button = dialog.getButton(AlertDialog.BUTTON_POSITIVE);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String item = mField.getText().toString();
-                if(isFormat(item)){
+                String text = mField.getText().toString();
+
+                if (!TextUtils.isEmpty(text)) {
                     mCallback.onPositiveClick(mField.getText().toString());
                     dialog.dismiss();
                 } else {
-                    showError();
+                    mInputLayout.setError(getResources().getString(R.string.input_error));
                 }
             }
         });
+    }
+
+    public void setCallback(Callback callback) {
+        mCallback = callback;
+    }
+
+    public void setTitle(int title) {
+        mTitle = title;
+    }
+
+    public void setHint(int hint) {
+        mHint = hint;
     }
 
     public interface Callback {

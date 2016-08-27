@@ -4,8 +4,9 @@
     <color name="colorPrimary">#444d59</color>
     <color name="colorPrimaryDark">#3b424c</color>
     <color name="color_assent">#aea28e</color>
-    <color name="error_text">#e22a36</color>
     <color name="colorControlNormal">#ffffff</color>
+
+    <color name="error_text">#df4f58</color>
 
     <!-- Цвета статуса игрока в steam community -->
     <color name="status_offline">#c8c8c8</color>

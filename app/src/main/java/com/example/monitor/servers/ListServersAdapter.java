@@ -22,7 +22,7 @@ import butterknife.ButterKnife;
 
 public class ListServersAdapter extends RecyclerView.Adapter<ListServersAdapter.Holder> {
 
-    private List<ServerModel> mData;
+    private ArrayList<ServerModel> mData;
     private FavoriteServersPresenter mPresenter;
 
     public ListServersAdapter(FavoriteServersPresenter presenter){
