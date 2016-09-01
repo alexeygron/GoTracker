@@ -29,5 +29,13 @@ public abstract class CommonFragment extends Fragment {
         return rootView;
     }
 
+    public void showProgress() {
+        mProgressBar.setVisibility(android.view.View.VISIBLE);
+    }
+
+    public void hideProgress() {
+        mProgressBar.setVisibility(android.view.View.GONE);
+    }
+
     protected abstract int getLayoutId();
 }

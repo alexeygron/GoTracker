@@ -15,8 +15,10 @@
 
     <style name="CardViewStyle" parent="CardView">
         <item name="cardCornerRadius">1dp</item>
-        <item name="cardElevation">4dp</item>
+        <item name="cardElevation">3dp</item>
         <item name="cardBackgroundColor">#515861</item>
+        <item name="cardPreventCornerOverlap">false</item>
+        <item name="cardUseCompatPadding">false</item>
     </style>
 
     <style name="CustomToolbar" parent="ThemeOverlay.AppCompat.ActionBar">
@@ -45,9 +47,8 @@
     </style>
 
     <style name="TextField">
-
         <item name="android:textColor">#fff</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">15sp</item>
         <item name="android:textAppearance">?android:attr/textAppearanceMedium </item>
 
     </style>

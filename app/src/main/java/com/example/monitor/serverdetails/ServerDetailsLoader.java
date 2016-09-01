@@ -34,7 +34,6 @@ public class ServerDetailsLoader extends AsyncTaskLoader<ServerDetailsModel> {
     public ServerDetailsModel loadInBackground() {
         HashMap<String, Object> data;
         HashMap<String, SteamPlayer> players;
-
         try {
             SourceServer server = new SourceServer(ipAddress);
             SteamSocket.setTimeout(3000);
@@ -49,10 +48,6 @@ public class ServerDetailsLoader extends AsyncTaskLoader<ServerDetailsModel> {
     }
 
     private ServerDetailsModel convertToModel(HashMap data, HashMap<String, SteamPlayer> players) {
-
-        Log.i(TAG, "Converter " + data.toString());
-        Log.i(TAG, "Converter " + players.toString());
-
         ServerModel serverData = new ServerModel();
         serverData.setMap(data.get("mapName").toString());
         serverData.setNumPlayers(data.get("numberOfPlayers").toString());
@@ -62,20 +57,19 @@ public class ServerDetailsLoader extends AsyncTaskLoader<ServerDetailsModel> {
         serverData.setTags(data.get("serverTags").toString());
 
         ArrayList<SteamPlayer> playersList = new ArrayList<>();
-
-        for (HashMap.Entry<String, SteamPlayer> entry : players.entrySet()) {
-            playersList.add(entry.getValue());
-        }
-
-        Collections.sort(playersList, new Comparator<SteamPlayer>() {
-            public int compare(SteamPlayer o1, SteamPlayer o2) {
-                Integer value1 = o1.getScore();
-                Integer value2 = o2.getScore();
-
-                return value2.compareTo(value1);
+        if (players != null) {
+            for (HashMap.Entry<String, SteamPlayer> player : players.entrySet()) {
+                playersList.add(player.getValue());
             }
-        });
+            Collections.sort(playersList, new Comparator<SteamPlayer>() {
+                public int compare(SteamPlayer o1, SteamPlayer o2) {
+                    Integer value1 = o1.getScore();
+                    Integer value2 = o2.getScore();
 
+                    return value2.compareTo(value1);
+                }
+            });
+        }
         ServerDetailsModel model = new ServerDetailsModel(serverData, playersList);
         return model;
     }

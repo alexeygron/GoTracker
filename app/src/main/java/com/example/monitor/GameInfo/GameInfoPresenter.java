@@ -1,4 +1,4 @@
-package com.example.monitor.GameInfo;
+package com.example.monitor.gameinfo;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -80,6 +80,7 @@ public class GameInfoPresenter implements LoaderManager.LoaderCallbacks<String>,
 
     @Override
     public Loader<String> onCreateLoader(int id, Bundle args) {
+        mView.showProgress();
         return new GameInfoLoader(mContext);
     }
 
@@ -91,6 +92,7 @@ public class GameInfoPresenter implements LoaderManager.LoaderCallbacks<String>,
         } else {
             Log.i(TAG, "loading result is NULL");
         }
+        mView.hideProgress();
     }
 
     @Override

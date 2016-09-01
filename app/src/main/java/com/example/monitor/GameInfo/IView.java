@@ -1,4 +1,4 @@
-package com.example.monitor.GameInfo;
+package com.example.monitor.gameinfo;
 
 import com.example.monitor.servers.ServerModel;
 

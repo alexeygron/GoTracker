@@ -1,4 +1,4 @@
-package com.example.monitor.GameInfo;
+package com.example.monitor.gameinfo;
 
 import android.content.IntentFilter;
 import android.support.v4.app.Fragment;
@@ -102,12 +102,12 @@ public class GameInfoFragment extends CommonFragment implements IView, SwipeRefr
 
     @Override
     public void showProgress() {
-
+        super.showProgress();
     }
 
     @Override
     public void hideProgress() {
-
+        super.hideProgress();
     }
 
     @Override

@@ -50,7 +50,7 @@ public class ServerDetailsActivity extends AppCompatActivity implements
         mAdapter = new ListPlayersAdapter();
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setAdapter(mAdapter);
-
+        setTitle(null);
         Toolbar mToolbar = (Toolbar) findViewById(R.id.main_toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -63,7 +63,6 @@ public class ServerDetailsActivity extends AppCompatActivity implements
     }
 
     private void initFields(Intent i){
-        setTitle("");
         mTitle.setText(i.getStringExtra("name"));
         mGameName.setText(i.getStringExtra("game"));
         mIpAddress.setText(i.getStringExtra("ip"));

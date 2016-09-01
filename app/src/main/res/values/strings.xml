@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Массив содержащий названия табов -->
+    <string-array name="tabs_name">
+        <item>Servers</item>
+        <item>Players</item>
+        <item>Game</item>
+    </string-array>
 
-    <!-- This is comment for XML language -->
     <string name="app_name">CSGO Servers and Players</string>
     <string name="text_servers">SERVERS</string>
     <string name="text_players">PLAYERS</string>
@@ -63,5 +68,15 @@
     <string name="players">Players:  </string>
     <string name="text_server">About server</string>
     <string name="playing">Playing</string>
+
+    <string name="drawer_navigation">Navigation</string>
+    <string name="drawer_links">Links</string>
+    <string name="drawer_setting">Setting</string>
+    <string name="drawer_help">How to</string>
+    <string name="drawer_rating">Rating</string>
+
+    <string name="dialog_add_button">Add</string>
+    <string name="dialog_cansel_button">Cansel</string>
+    <string name="input_error">Field free</string>
     <string name="banner_id">ca-app-pub-7733009523980326/4356022897</string>
 </resources>

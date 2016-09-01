@@ -100,7 +100,11 @@ public class ServerModel implements Parcelable {
     }
 
     public String getPlayers() {
-        return numPlayers + "/" + maxPlayers;
+        if (numPlayers != null) {
+            return numPlayers + "/" + maxPlayers;
+        } else {
+            return "";
+        }
     }
 
     public String getNumPlayers() {

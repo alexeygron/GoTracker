@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Массив содержащий названия табов. -->
+    <string-array name="tabs_name">
+        <item>Сервера</item>
+        <item>Игроки</item>
+        <item>Об игре</item>
+    </string-array>
+
     <string name="app_name">CSGO Servers and Players</string>
     <string name="text_servers">СЕРВЕРА</string>
     <string name="text_players">ИГРОКИ</string>
@@ -61,6 +68,13 @@
     <string name="players">Игроки:  </string>
     <string name="text_server">О сервере</string>
     <string name="playing">Играет в</string>
+
+    <string name="drawer_navigation">Навигация</string>
+    <string name="drawer_links">Ссылки</string>
+    <string name="drawer_setting">Настройки</string>
+    <string name="drawer_help">О приложении</string>
+    <string name="drawer_rating">Оставить отзыв</string>
+
     <string name="dialog_add_button">Добавить</string>
     <string name="dialog_cansel_button">Отмена</string>
     <string name="input_error">Поле не заполнено</string>

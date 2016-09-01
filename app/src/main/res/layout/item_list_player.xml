@@ -24,7 +24,8 @@
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1.4">
+            android:layout_weight="1.4"
+            android:paddingLeft="10dp">
 
             <TableRow
                 android:id="@+id/tableRow2"
@@ -37,7 +38,6 @@
                     style="@style/TextViewBold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
                     android:ellipsize="end"
                     android:lines="1"
                     android:layout_weight="9"
@@ -57,7 +57,6 @@
                     style="@style/TextViewSmall"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
                     android:layout_marginTop="10dp"
                     android:textColor="@color/status_offline"
                     android:textSize="15sp" />

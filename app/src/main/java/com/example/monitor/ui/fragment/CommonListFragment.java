@@ -1,5 +1,6 @@
 package com.example.monitor.ui.fragment;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -31,15 +32,12 @@ public abstract class CommonListFragment extends CommonFragment{
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.addItemDecoration(new VerticalSpaceItemDecoration(10));
+
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            mRecyclerView.addItemDecoration(new VerticalSpaceItemDecoration(10));
+        }
+
+        //mRecyclerView.addItemDecoration(new VerticalSpaceItemDecoration(5));
         mRecyclerView.setItemAnimator(mitemAnimator);
-    }
-
-    public void showProgress() {
-        mProgressBar.setVisibility(android.view.View.VISIBLE);
-    }
-
-    public void hideProgress() {
-        mProgressBar.setVisibility(android.view.View.GONE);
     }
 }

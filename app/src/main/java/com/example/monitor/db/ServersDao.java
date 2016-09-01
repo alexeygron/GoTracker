@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.example.monitor.servers.ServerModel;
 
 import com.example.monitor.utils.Helpers;
+import com.lotr.steammonitor.app.R;
 
 import java.util.ArrayList;
 
@@ -54,6 +55,14 @@ public class ServersDao {
         cursor.close();
         db.close();
         return data;
+    }
+
+    static public void insertSet(SQLiteDatabase db, String[] array){
+        ContentValues cv = new ContentValues();
+        for(String ip: array){
+            cv.put("ip", ip);
+            db.insert(TABLE_MANE, null, cv);
+        }
     }
 
     public void clear(){

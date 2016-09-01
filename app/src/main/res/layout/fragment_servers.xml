@@ -15,9 +15,9 @@
         android:id="@+id/refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:visibility="visible">
+        android:layout_marginRight="4dp"
+        android:visibility="visible"
+        android:layout_marginLeft="4dp">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/list_servers"

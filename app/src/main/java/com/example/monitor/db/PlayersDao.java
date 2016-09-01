@@ -16,7 +16,7 @@ public class PlayersDao {
     private Context mContext;
 
     private static final String TAG = Helpers.makeLogTag(PlayersDao.class);
-    private static final String TABLE_MANE = "players";
+    public static final String TABLE_MANE = "players";
 
     public PlayersDao(Context context){
         mContext = context;
@@ -28,6 +28,14 @@ public class PlayersDao {
         cv.put("id", value);
         db.insert(TABLE_MANE, null, cv);
         db.close();
+    }
+
+    static public void insertSet(SQLiteDatabase db, String[] array) {
+        ContentValues cv = new ContentValues();
+        for (String id : array) {
+            cv.put("id", id);
+            db.insert(TABLE_MANE, null, cv);
+        }
     }
 
     public void delete (String label){

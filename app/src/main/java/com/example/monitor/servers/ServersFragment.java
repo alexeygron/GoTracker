@@ -43,7 +43,7 @@ public class ServersFragment extends CommonListFragment implements
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mButtonAdd.setOnClickListener(this);
         //setRetainInstance(true);
-        setHasOptionsMenu(true);
+        //setHasOptionsMenu(true);
         if (mPresenter == null) {
             mPresenter = new FavoriteServersPresenter(getLoaderManager(), getContext(), this);
         }
@@ -57,6 +57,7 @@ public class ServersFragment extends CommonListFragment implements
         super.onCreate(savedInstanceState);
     }
 
+/*
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -67,6 +68,7 @@ public class ServersFragment extends CommonListFragment implements
                 return super.onOptionsItemSelected(item);
         }
     }
+*/
 
     /**
      * Регистрирует broadcast receiver для прослушивания изменения соединения с интернетом
@@ -111,9 +113,8 @@ public class ServersFragment extends CommonListFragment implements
         dialogFragment.show(getFragmentManager(), null);
     }
 
-    @Override
     public void showSnackBar(String message) {
-        Snackbar.make(getView(), message, Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(getView(), message, Snackbar.LENGTH_LONG).show();
     }
 
     @Override
