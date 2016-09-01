@@ -43,7 +43,6 @@ public class ServersFragment extends CommonListFragment implements
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mButtonAdd.setOnClickListener(this);
         //setRetainInstance(true);
-        //setHasOptionsMenu(true);
         if (mPresenter == null) {
             mPresenter = new FavoriteServersPresenter(getLoaderManager(), getContext(), this);
         }
@@ -56,19 +55,6 @@ public class ServersFragment extends CommonListFragment implements
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
-
-/*
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.update_button:
-                mPresenter.init();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-*/
 
     /**
      * Регистрирует broadcast receiver для прослушивания изменения соединения с интернетом

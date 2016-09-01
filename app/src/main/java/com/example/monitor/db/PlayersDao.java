@@ -16,17 +16,17 @@ public class PlayersDao {
     private Context mContext;
 
     private static final String TAG = Helpers.makeLogTag(PlayersDao.class);
-    public static final String TABLE_MANE = "players";
+    public static final String TABLE_NAME = "players";
 
     public PlayersDao(Context context){
         mContext = context;
     }
 
     public void insert (String value){
-        SQLiteDatabase db = new DBHelper(mContext, TABLE_MANE).getWritableDatabase();
+        SQLiteDatabase db = new DBHelper(mContext, TABLE_NAME).getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put("id", value);
-        db.insert(TABLE_MANE, null, cv);
+        db.insert(TABLE_NAME, null, cv);
         db.close();
     }
 
@@ -34,20 +34,20 @@ public class PlayersDao {
         ContentValues cv = new ContentValues();
         for (String id : array) {
             cv.put("id", id);
-            db.insert(TABLE_MANE, null, cv);
+            db.insert(TABLE_NAME, null, cv);
         }
     }
 
     public void delete (String label){
-        SQLiteDatabase db = new DBHelper(mContext, TABLE_MANE).getWritableDatabase();
-        db.delete(TABLE_MANE, "label=" + label, null);
+        SQLiteDatabase db = new DBHelper(mContext, TABLE_NAME).getWritableDatabase();
+        db.delete(TABLE_NAME, "label=" + label, null);
         db.close();
     }
 
     public ArrayList<PlayerModel> get() {
-        SQLiteDatabase db = new DBHelper(mContext, TABLE_MANE).getWritableDatabase();
+        SQLiteDatabase db = new DBHelper(mContext, TABLE_NAME).getWritableDatabase();
         ArrayList<PlayerModel> data = new ArrayList();
-        Cursor cursor = db.query(TABLE_MANE, null, null, null, null, null, null);
+        Cursor cursor = db.query(TABLE_NAME, null, null, null, null, null, null);
         if (cursor.moveToFirst()) {
             int id = cursor.getColumnIndex("id");
             int label = cursor.getColumnIndex("label");
@@ -66,8 +66,8 @@ public class PlayersDao {
     }
 
     public void clear(){
-        SQLiteDatabase db = new DBHelper(mContext, TABLE_MANE).getWritableDatabase();
-        db.delete(TABLE_MANE, null, null);
+        SQLiteDatabase db = new DBHelper(mContext, TABLE_NAME).getWritableDatabase();
+        db.delete(TABLE_NAME, null, null);
         db.close();
     }
 }

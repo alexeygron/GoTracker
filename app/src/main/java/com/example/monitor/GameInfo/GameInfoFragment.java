@@ -48,6 +48,7 @@ public class GameInfoFragment extends CommonFragment implements IView, SwipeRefr
     public void onViewCreated(android.view.View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
+        //setRetainInstance(true);
         mSwipeRefreshLayout.setOnRefreshListener(this);
         if (mPresenter == null) {
             mPresenter = new GameInfoPresenter(getContext(), getLoaderManager(), this);

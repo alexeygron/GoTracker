@@ -6,7 +6,6 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 
 import com.example.monitor.ui.adapter.ViewPagerAdapter;
@@ -38,7 +37,7 @@ public class PagerActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_pager);
+        setContentView(R.layout.activity_mail);
         ButterKnife.bind(this);
         setSupportActionBar(mToolbar);
         if (mViewPager != null) {

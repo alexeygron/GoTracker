@@ -38,8 +38,7 @@ public class PlayersFragment extends CommonListFragment implements
         ButterKnife.bind(this, view);
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mButtonAdd.setOnClickListener(this);
-        setHasOptionsMenu(true);
-
+        //setRetainInstance(true);
         if (mPresenter == null) {
             mPresenter = new FavoritePlayersPresenter(getContext(), getLoaderManager(), this);
         }

@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.example.monitor.players.PlayerModel;
 import com.example.monitor.utils.Helpers;
 import com.lotr.steammonitor.app.R;
 
@@ -21,11 +20,12 @@ class DBHelper extends SQLiteOpenHelper {
     private static final String CREATE_PLAYERS_TABLE = "create table players (" +
             "label integer primary key autoincrement," + "id text" + ");";
     private static final String TAG = Helpers.makeLogTag(DBHelper.class);
+    private static final int DB_VERSION = 3;
     private String mTable;
     private Context mContext;
 
     public DBHelper(Context context, String table) {
-        super(context, table, null, 2);
+        super(context, table, null, DB_VERSION);
         mTable = table;
         mContext = context;
     }
@@ -44,24 +44,22 @@ class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        Log.i(TAG, "onUpgrade " + oldVersion + " to " + newVersion);
-        if (newVersion == 2) {
+        if (newVersion == 3) {
             upgradePlayersTable(db);
         }
     }
 
     private void upgradePlayersTable(SQLiteDatabase db) {
-        String upgradeQuery = "ALTER TABLE " + PlayersDao.TABLE_MANE
-                + " ADD COLUMN " + "label" + " integer primary key autoincrement";
-        Cursor cursor = db.query(PlayersDao.TABLE_MANE, null, null, null, null, null, null);
-        db.delete(PlayersDao.TABLE_MANE, null, null);
-        db.execSQL(upgradeQuery);
+        Cursor cursor = db.query(PlayersDao.TABLE_NAME, null, null, null, null, null, null);
+        db.execSQL("DROP TABLE IF EXISTS " + PlayersDao.TABLE_NAME);
+        db.execSQL(CREATE_PLAYERS_TABLE);
+
         ContentValues cv = new ContentValues();
         if (cursor.moveToFirst()) {
             int id = cursor.getColumnIndex("id");
             do {
                 cv.put("id", cursor.getString(id));
-                db.insert(PlayersDao.TABLE_MANE, null, cv);
+                db.insert(PlayersDao.TABLE_NAME, null, cv);
             } while (cursor.moveToNext());
         }
         cursor.close();

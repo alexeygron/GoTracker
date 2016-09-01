@@ -53,31 +53,6 @@
 
     </style>
 
-    <style name="TabTrue">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:layout_weight">2</item>
-        <item name="android:backgroundTint">#fff</item>
-        <item name="android:backgroundTintMode">screen</item>
-        <item name="android:textColor">#FFFFFF</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:background">@drawable/clip</item>
-    </style>
-
-
-    <style name="TabFalse">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">match_parent</item>
-        <item name="android:layout_weight">2</item>
-        <item name="android:backgroundTint">#fff</item>
-        <item name="android:backgroundTintMode">screen</item>
-        <item name="android:textColor">#FFFFFF</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:textStyle">bold</item>
-        <item name="android:background">@android:color/transparent</item>
-    </style>
-
     <style name="TextTitle">
         <item name="android:textColor">#ffffff</item>
         <item name="android:textSize">14sp</item>
