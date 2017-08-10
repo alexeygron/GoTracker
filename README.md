@@ -1,3 +1,5 @@
-Android app for tracking game servers & fiends in Counter Strike: Global Offensive
+Android app for tracking favorite game servers & fiends in Counter Strike: Global Offensive
 
-![Alt text](https://github.com/alexeygron/GoTracker/blob/master/screenshots/players.png?raw=true "Optional Title")
+<div align="center">
+    <img align="left" margin-left="20" src="./screenshots/servers.png?raw=true">...<img align="right" src="./screenshots/players.png?raw=true">
+</div>
