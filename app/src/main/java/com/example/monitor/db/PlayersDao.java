@@ -4,12 +4,11 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
-import com.example.monitor.players.PlayerModel;
-import com.example.monitor.utils.Helpers;
+import com.example.monitor.players.Player;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static com.example.monitor.utils.Helpers.makeLogTag;
 
@@ -18,13 +17,13 @@ public class PlayersDao {
     private Context mContext;
 
     private static final String TAG = makeLogTag(PlayersDao.class);
-    public static final String TABLE_NAME = "players";
+    static final String TABLE_NAME = "players";
 
-    public PlayersDao(Context context){
+    public PlayersDao(Context context) {
         mContext = context;
     }
 
-    public void insert (String value){
+    public void insert(String value) {
         SQLiteDatabase db = new DBHelper(mContext, TABLE_NAME).getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put("id", value);
@@ -40,21 +39,21 @@ public class PlayersDao {
         }
     }
 
-    public void delete (String label){
+    public void delete(String label) {
         SQLiteDatabase db = new DBHelper(mContext, TABLE_NAME).getWritableDatabase();
         db.delete(TABLE_NAME, "label=" + label, null);
         db.close();
     }
 
-    public ArrayList<PlayerModel> get() {
+    public List<Player> get() {
         SQLiteDatabase db = new DBHelper(mContext, TABLE_NAME).getWritableDatabase();
-        ArrayList<PlayerModel> data = new ArrayList();
+        List<Player> data = new ArrayList();
         Cursor cursor = db.query(TABLE_NAME, null, null, null, null, null, null);
         if (cursor.moveToFirst()) {
             int id = cursor.getColumnIndex("id");
             int label = cursor.getColumnIndex("label");
             do {
-                PlayerModel player = new PlayerModel();
+                Player player = new Player();
                 player.setSteamID(cursor.getString(id));
                 player.setDbLabel(cursor.getString(label));
                 data.add(player);
@@ -65,7 +64,7 @@ public class PlayersDao {
         return data;
     }
 
-    public void clear(){
+    public void clear() {
         SQLiteDatabase db = new DBHelper(mContext, TABLE_NAME).getWritableDatabase();
         db.delete(TABLE_NAME, null, null);
         db.close();

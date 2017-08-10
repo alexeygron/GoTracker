@@ -19,12 +19,14 @@ import com.lotr.steammonitor.app.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.example.monitor.utils.Helpers.makeLogTag;
+
 /**
  * Показывает диалог для добавления нового элемента в список серверов или игроков.
  */
 public class AddItemDialog extends DialogFragment implements AlertDialog.OnShowListener{
 
-    private static final String TAG = Helpers.makeLogTag(AddItemDialog.class);
+    private static final String TAG = makeLogTag(AddItemDialog.class);
     @BindView(R.id.add_item_field) EditText mField;
     @BindView(R.id.helper_hint) TextView mHintMessage;
     @BindView(R.id.phone_input) TextInputLayout mInputLayout;
@@ -61,9 +63,6 @@ public class AddItemDialog extends DialogFragment implements AlertDialog.OnShowL
         return dialog;
     }
 
-    /*
-     * Переопределяется onShow чтобы показывать ошибку, а не закрывать диалог, если поле пустое.
-     */
     @Override
     public void onShow(DialogInterface iDialog) {
         Button button = dialog.getButton(AlertDialog.BUTTON_POSITIVE);

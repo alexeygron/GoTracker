@@ -12,18 +12,16 @@ import com.lotr.steammonitor.app.R;
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
-    private Context mContext;
     private String mTabTitles[];
 
     public ViewPagerAdapter(FragmentManager fm, Context context) {
         super(fm);
-        this.mContext = context;
-        mTabTitles = mContext.getResources().getStringArray(R.array.tabs_name);
+        mTabTitles = context.getResources().getStringArray(R.array.tabs_name);
     }
 
     @Override
     public int getCount() {
-        return 3;
+        return mTabTitles.length;
     }
 
     @Override

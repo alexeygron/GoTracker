@@ -9,7 +9,7 @@ import com.github.koraktor.steamcondenser.steam.community.SteamId;
 import com.github.koraktor.steamcondenser.steam.community.WebApi;
 import com.lotr.steammonitor.app.R;
 
-public class PlayerModel {
+public class Player {
 
     private String mSteamID;
     private int mPersonaState;
@@ -21,12 +21,12 @@ public class PlayerModel {
     private String mDbLabel;
     private long mLastLogoff;
 
-    public PlayerModel() {
+    public Player() {
         mPersonaState = 7;
     }
 
-    public PlayerModel(String steamID, int personaState, String personName,
-                       long lastLogoff, String profileUrl, String avatar, String realName) {
+    public Player(String steamID, int personaState, String personName,
+                  long lastLogoff, String profileUrl, String avatar, String realName) {
         this.mAvatarUrl = avatar;
         this.mPersonaState = personaState;
         this.mPersonName = personName;
@@ -39,7 +39,7 @@ public class PlayerModel {
     /**
      * Проверяет является ли URL 64bit SteamID, если нет, то конвертирует в него
      */
-    public static String checkSteamId(String sourceId) {
+    static String convertSteamIdToCommunityId(String sourceId) {
         Long convertedId = null;
         try {
             WebApi.setApiKey(Config.STEAM_API_KEY);

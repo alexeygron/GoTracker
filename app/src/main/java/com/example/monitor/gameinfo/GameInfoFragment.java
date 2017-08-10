@@ -3,12 +3,10 @@ package com.example.monitor.gameinfo;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
 import com.example.monitor.ui.fragment.CommonFragment;
-import com.example.monitor.utils.Helpers;
 import com.example.monitor.utils.NetworkReceiver;
 import com.lotr.steammonitor.app.R;
 

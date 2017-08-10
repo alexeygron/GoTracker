@@ -5,10 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.example.monitor.servers.ServerModel;
-
-import com.example.monitor.utils.Helpers;
-import com.lotr.steammonitor.app.R;
+import com.example.monitor.servers.Server;
 
 import java.util.ArrayList;
 
@@ -38,7 +35,7 @@ public class ServersDao {
         db.close();
     }
 
-    public ArrayList<ServerModel> get() {
+    public ArrayList<Server> get() {
         SQLiteDatabase db = new DBHelper(mContext, TABLE_MANE).getWritableDatabase();
         ArrayList data = new ArrayList();
         Cursor cursor = db.query(TABLE_MANE, null, null, null, null, null, null);
@@ -46,7 +43,7 @@ public class ServersDao {
             int ipIndex = cursor.getColumnIndex("ip");
             int idIndex = cursor.getColumnIndex("id");
             do {
-                ServerModel server = new ServerModel();
+                Server server = new Server();
                 server.setIpAddr(cursor.getString(ipIndex));
                 server.setDbId(cursor.getString(idIndex));
                 data.add(server);

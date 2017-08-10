@@ -3,7 +3,7 @@ package com.example.monitor.servers;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class ServerModel implements Parcelable {
+public class Server implements Parcelable {
 
     private String ipAddr;
     private String mName;
@@ -14,15 +14,15 @@ public class ServerModel implements Parcelable {
     private String mTags;
     private String mDbLabel;
 
-    public ServerModel() {
+    public Server() {
 
     }
 
-    public ServerModel(String ip) {
+    public Server(String ip) {
         ipAddr = ip;
     }
 
-    protected ServerModel(Parcel in) {
+    protected Server(Parcel in) {
         ipAddr = in.readString();
         mName = in.readString();
         numPlayers = in.readString();
@@ -33,15 +33,15 @@ public class ServerModel implements Parcelable {
         mDbLabel = in.readString();
     }
 
-    public static final Creator<ServerModel> CREATOR = new Creator<ServerModel>() {
+    public static final Creator<Server> CREATOR = new Creator<Server>() {
         @Override
-        public ServerModel createFromParcel(Parcel in) {
-            return new ServerModel(in);
+        public Server createFromParcel(Parcel in) {
+            return new Server(in);
         }
 
         @Override
-        public ServerModel[] newArray(int size) {
-            return new ServerModel[size];
+        public Server[] newArray(int size) {
+            return new Server[size];
         }
     };
 
@@ -133,7 +133,7 @@ public class ServerModel implements Parcelable {
 
     @Override
     public String toString() {
-        return "ServerModel{" +
+        return "Server{" +
                 "ipAddr='" + ipAddr + '\'' +
                 ", mName='" + mName + '\'' +
                 ", numPlayers='" + numPlayers + '\'' +

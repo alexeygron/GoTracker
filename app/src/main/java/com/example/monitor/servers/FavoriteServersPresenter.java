@@ -16,13 +16,13 @@ import java.util.ArrayList;
 
 import static com.example.monitor.utils.Helpers.makeLogTag;
 
-class FavoriteServersPresenter implements LoaderManager.LoaderCallbacks<ServerModel>, NetworkReceiver.NetChangeListener {
+class FavoriteServersPresenter implements LoaderManager.LoaderCallbacks<Server>, NetworkReceiver.NetChangeListener {
 
     private IView mView;
     private Context mContext;
     private LoaderManager mLoaderManager;
     private ServersDao mDB;
-    private ArrayList<ServerModel> mListData;
+    private ArrayList<Server> mListData;
     private int loaderTaskIndex;
 
     private static final int LOADER_ID = 1;
@@ -37,7 +37,7 @@ class FavoriteServersPresenter implements LoaderManager.LoaderCallbacks<ServerMo
         mListData = new ArrayList<>();
     }
 
-    private void updateList(ServerModel server) {
+    private void updateList(Server server) {
         mListData.set(loaderTaskIndex, server);
         mView.setData(mListData);
         mView.updateList();
@@ -54,11 +54,11 @@ class FavoriteServersPresenter implements LoaderManager.LoaderCallbacks<ServerMo
         }
     }
 
-    public ArrayList<ServerModel> getData() {
+    public ArrayList<Server> getData() {
         return mListData;
     }
 
-    public void setData(ArrayList<ServerModel> data) {
+    public void setData(ArrayList<Server> data) {
         mListData.addAll(data);
     }
 
@@ -92,7 +92,7 @@ class FavoriteServersPresenter implements LoaderManager.LoaderCallbacks<ServerMo
 
     void onClickListItem(int position) {
         Intent i = new Intent(mContext, ServerDetailsActivity.class);
-        ServerModel server = mListData.get(position);
+        Server server = mListData.get(position);
         i.putExtra("name", server.getmName());
         i.putExtra("game", server.getGame());
         i.putExtra("ip", server.getIpAddr());
@@ -107,7 +107,7 @@ class FavoriteServersPresenter implements LoaderManager.LoaderCallbacks<ServerMo
     }
 
     @Override
-    public Loader<ServerModel> onCreateLoader(int id, Bundle args) {
+    public Loader<Server> onCreateLoader(int id, Bundle args) {
         if (mListData.size() > 0 & loaderTaskIndex < mListData.size()) {
             mView.showProgress(true);
             return new ListServersLoader(mContext, mListData.get(loaderTaskIndex));
@@ -118,7 +118,7 @@ class FavoriteServersPresenter implements LoaderManager.LoaderCallbacks<ServerMo
     }
 
     @Override
-    public void onLoadFinished(Loader<ServerModel> loader, ServerModel data) {
+    public void onLoadFinished(Loader<Server> loader, Server data) {
         if (data != null) {
             updateList(data);
             loaderTaskIndex++;
@@ -127,7 +127,7 @@ class FavoriteServersPresenter implements LoaderManager.LoaderCallbacks<ServerMo
     }
 
     @Override
-    public void onLoaderReset(Loader<ServerModel> loader) {
+    public void onLoaderReset(Loader<Server> loader) {
     }
 
     void onResume() {

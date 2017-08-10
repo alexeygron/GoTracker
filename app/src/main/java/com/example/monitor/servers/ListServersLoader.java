@@ -16,21 +16,21 @@ import static com.example.monitor.utils.Helpers.makeLogTag;
 /**
  * Receives game servers list from network in background thread
  */
-class ListServersLoader extends AsyncTaskLoader<ServerModel> {
+class ListServersLoader extends AsyncTaskLoader<Server> {
 
     public final String TAG = makeLogTag(ListServersLoader.class);
 
     private Context mContext;
-    private ServerModel mServer;
+    private Server mServer;
 
-    ListServersLoader(Context context, ServerModel server) {
+    ListServersLoader(Context context, Server server) {
         super(context);
         mContext = context;
         mServer = server;
     }
 
     @Override
-    public ServerModel loadInBackground() {
+    public Server loadInBackground() {
         HashMap<String, Object> response;
         SteamSocket.setTimeout(3000);
         SourceServer sourceServer;
@@ -48,7 +48,7 @@ class ListServersLoader extends AsyncTaskLoader<ServerModel> {
         }
     }
 
-    private ServerModel convertToModel(HashMap<String, Object> response) {
+    private Server convertToModel(HashMap<String, Object> response) {
         mServer.setName(response.get("serverName").toString());
         mServer.setMap(response.get("mapName").toString());
         mServer.setNumPlayers(response.get("numberOfPlayers").toString());

@@ -23,7 +23,7 @@ import static com.example.monitor.utils.Helpers.makeLogTag;
 
 public class ListPlayersAdapter extends RecyclerView.Adapter<ListPlayersAdapter.Holder> {
 
-    private List<PlayerModel> mData;
+    private List<Player> mData;
     private FavoritePlayersPresenter mPresenter;
 
     private static final String TAG = makeLogTag(ListPlayersAdapter.class);
@@ -33,7 +33,7 @@ public class ListPlayersAdapter extends RecyclerView.Adapter<ListPlayersAdapter.
         mPresenter = presenter;
     }
 
-    void setData(List<PlayerModel> data){
+    void setData(List<Player> data){
         mData.clear();
         mData.addAll(data);
     }
@@ -47,7 +47,7 @@ public class ListPlayersAdapter extends RecyclerView.Adapter<ListPlayersAdapter.
 
     @Override
     public void onBindViewHolder(Holder holder, int position) {
-        PlayerModel player = mData.get(position);
+        Player player = mData.get(position);
         holder.bindDoctor(player, position, holder.itemView.getContext());
     }
 
@@ -84,7 +84,7 @@ public class ListPlayersAdapter extends RecyclerView.Adapter<ListPlayersAdapter.
             }
         }
 
-        void bindDoctor(PlayerModel player, int position, Context context) {
+        void bindDoctor(Player player, int position, Context context) {
             mPlayerName.setText(player.getPersonName());
 
             Resources res = context.getResources();

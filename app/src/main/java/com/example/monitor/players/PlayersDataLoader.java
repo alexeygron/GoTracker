@@ -2,10 +2,8 @@ package com.example.monitor.players;
 
 import android.content.Context;
 import android.support.v4.content.AsyncTaskLoader;
-import android.util.Log;
 
 import com.example.monitor.Config;
-import com.example.monitor.utils.Helpers;
 import com.github.koraktor.steamcondenser.exceptions.SteamCondenserException;
 import com.github.koraktor.steamcondenser.steam.community.WebApi;
 
@@ -15,22 +13,21 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PlayersDataLoader extends AsyncTaskLoader<PlayerModel> {
+import static com.example.monitor.utils.Helpers.makeLogTag;
 
-    public final String TAG = Helpers.makeLogTag(PlayersDataLoader.class);
+class PlayersDataLoader extends AsyncTaskLoader<Player> {
 
-    private Context mContext;
-    private PlayerModel mPlayer;
+    public final String TAG = makeLogTag(PlayersDataLoader.class);
 
-    public PlayersDataLoader(Context context, PlayerModel player) {
+    private Player mPlayer;
+
+    PlayersDataLoader(Context context, Player player) {
         super(context);
-        mContext = context;
         mPlayer = player;
     }
 
     @Override
-    public PlayerModel loadInBackground() {
-        Log.d(TAG, "loadInBackground");
+    public Player loadInBackground() {
         String responce;
         try {
             WebApi.setApiKey(Config.STEAM_API_KEY);
@@ -45,8 +42,7 @@ public class PlayersDataLoader extends AsyncTaskLoader<PlayerModel> {
         }
     }
 
-    private PlayerModel convertToModel(String json) {
-        Log.i(TAG, "json " + json);
+    private Player convertToModel(String json) {
         try {
             JSONObject steamUser = new JSONObject(json).
                     getJSONObject("response").
@@ -76,25 +72,11 @@ public class PlayersDataLoader extends AsyncTaskLoader<PlayerModel> {
     @Override
     public void forceLoad() {
         super.forceLoad();
-        Log.d(TAG, "forceLoad");
     }
 
     @Override
     protected void onStartLoading() {
         super.onStartLoading();
-        Log.d(TAG, "onStartLoading");
         forceLoad();
-    }
-
-    @Override
-    protected void onStopLoading() {
-        super.onStopLoading();
-        Log.d(TAG, "onStopLoading");
-    }
-
-    @Override
-    public void deliverResult(PlayerModel data) {
-        super.deliverResult(data);
-        Log.d(TAG, "deliverResult");
     }
 }

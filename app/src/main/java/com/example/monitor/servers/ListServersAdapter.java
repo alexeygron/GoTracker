@@ -17,7 +17,7 @@ import butterknife.ButterKnife;
 
 public class ListServersAdapter extends RecyclerView.Adapter<ListServersAdapter.Holder> {
 
-    private ArrayList<ServerModel> mData;
+    private ArrayList<Server> mData;
     private FavoriteServersPresenter mPresenter;
 
     public ListServersAdapter(FavoriteServersPresenter presenter) {
@@ -25,7 +25,7 @@ public class ListServersAdapter extends RecyclerView.Adapter<ListServersAdapter.
         mPresenter = presenter;
     }
 
-    void setData(List<ServerModel> data) {
+    void setData(List<Server> data) {
         mData.clear();
         mData.addAll(data);
     }
@@ -39,7 +39,7 @@ public class ListServersAdapter extends RecyclerView.Adapter<ListServersAdapter.
 
     @Override
     public void onBindViewHolder(Holder holder, int position) {
-        ServerModel server = mData.get(position);
+        Server server = mData.get(position);
         holder.bindDoctor(server, position);
     }
 
@@ -78,7 +78,7 @@ public class ListServersAdapter extends RecyclerView.Adapter<ListServersAdapter.
             }
         }
 
-        public void bindDoctor(ServerModel server, int position) {
+        public void bindDoctor(Server server, int position) {
             mServerName.setText(server.getmName());
             mServerIp.setText(server.getIpAddr());
             mPlayersCount.setText(server.getPlayers());

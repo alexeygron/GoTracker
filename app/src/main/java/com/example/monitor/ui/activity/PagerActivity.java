@@ -27,7 +27,6 @@ public class PagerActivity extends AppCompatActivity implements
     @BindView(R.id.my_toolbar) Toolbar mToolbar;
     @BindView(R.id.tab_layout) TabLayout mTabLayout;
     @BindView(R.id.viewpager) ViewPager mViewPager;
-    private NetworkReceiver mReceiver;
     private Drawer mDrawer;
 
     private static final int TAG_SETTING = 1;
@@ -121,6 +120,10 @@ public class PagerActivity extends AppCompatActivity implements
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
     }
 
+    /**
+     * Set toolbar title for each selected tab
+     * @param position a tab position
+     */
     @Override
     public void onPageSelected(int position) {
         switch (position) {

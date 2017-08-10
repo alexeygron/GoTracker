@@ -14,13 +14,13 @@ import java.util.List;
 
 import static com.example.monitor.utils.Helpers.makeLogTag;
 
-class FavoritePlayersPresenter implements LoaderManager.LoaderCallbacks<PlayerModel>, NetworkReceiver.NetChangeListener {
+class FavoritePlayersPresenter implements LoaderManager.LoaderCallbacks<Player>, NetworkReceiver.NetChangeListener {
 
     private Context mContext;
     private IView mView;
     private LoaderManager mLoaderManager;
     private PlayersDao dao;
-    private List<PlayerModel> mListData;
+    private List<Player> mListData;
     private int loaderTaskIndex;
 
     private static final int LOADER_ID = 1;
@@ -54,7 +54,7 @@ class FavoritePlayersPresenter implements LoaderManager.LoaderCallbacks<PlayerMo
         }
     }
 
-    private void updateList(PlayerModel player) {
+    private void updateList(Player player) {
         mListData.set(loaderTaskIndex, player);
         mView.setData(mListData);
         mView.updateList();
@@ -78,31 +78,27 @@ class FavoritePlayersPresenter implements LoaderManager.LoaderCallbacks<PlayerMo
     }
 
     /**
-     * Вызывается при добавлении нового игрока в список. Проверяет корректность ID в AsyncTask
-     * и записывает его в DB
-     *
-     * @param steamId ID идентификатор игрока в Steam
+     * Validate and save new player ID in DB
      */
     void addPlayer(String steamId) {
-        // Делает сетевой запрос для проверки корректности введенного ID
-        // И конвертирует его, если это нужно
         new AsyncTask<String, Void, String>() {
             @Override
-            protected String doInBackground(String... idArr) {
-                return PlayerModel.checkSteamId(idArr[0]);
+            protected String doInBackground(String... params) {
+                String id = Player.convertSteamIdToCommunityId(params[0]);
+                dao.insert(id);
+                return null;
             }
 
             @Override
             protected void onPostExecute(String id) {
                 super.onPostExecute(id);
-                dao.insert(id);
                 onRefresh();
             }
         }.execute(steamId);
     }
 
     @Override
-    public Loader<PlayerModel> onCreateLoader(int id, Bundle args) {
+    public Loader<Player> onCreateLoader(int id, Bundle args) {
         if (mListData.size() > 0 & loaderTaskIndex < mListData.size()) {
             mView.showProgress(true);
             return new PlayersDataLoader(mContext, mListData.get(loaderTaskIndex));
@@ -113,14 +109,14 @@ class FavoritePlayersPresenter implements LoaderManager.LoaderCallbacks<PlayerMo
     }
 
     @Override
-    public void onLoadFinished(Loader<PlayerModel> loader, PlayerModel data) {
+    public void onLoadFinished(Loader<Player> loader, Player data) {
         updateList(data);
         loaderTaskIndex++;
         mLoaderManager.restartLoader(1, null, this);
     }
 
     @Override
-    public void onLoaderReset(Loader<PlayerModel> loader) {
+    public void onLoaderReset(Loader<Player> loader) {
 
     }
 }

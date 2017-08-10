@@ -10,5 +10,5 @@ public interface IView {
 
     void showList(boolean state);
 
-    void setData(List<PlayerModel> data);
+    void setData(List<Player> data);
 }

@@ -7,37 +7,39 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 
 /**
- * Содержит вспомогательные методы.
+ * Containg different auxiliary methods
  */
 public class Helpers {
 
     private static final String PREFIX = "_";
 
-    public static String makeLogTag(Class className){
+    public static String makeLogTag(Class className) {
         return PREFIX + className.getSimpleName();
     }
 
     /**
-     *  Проверяет наличие соединения с интернетом.
+     * Check the network avaibled
+     *
+     * @return state
      */
     public static boolean isNetworkConnected(Context context) {
-        ConnectivityManager cm = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo ni = cm.getActiveNetworkInfo();
-        if (ni == null) {
-            return false;
-        } else {
-            return true;
-        }
+        return ni != null;
     }
 
-    public static void openPlayStorePage(Context context){
+    /**
+     * Calls the application page in Google Play
+     */
+    public static void openPlayStorePage(Context context) {
         final String CLIENT_URL = "market://details?id=";
         final String BROWSER_URL = "https://play.google.com/store/apps/details?id=";
 
+        // In Google Play or system default browser
         try {
             context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(CLIENT_URL + context.getPackageName())));
         } catch (android.content.ActivityNotFoundException anfe) {
-            context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(BROWSER_URL  + context.getPackageName())));
+            context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(BROWSER_URL + context.getPackageName())));
         }
     }
 }

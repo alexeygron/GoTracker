@@ -6,7 +6,7 @@ public interface IView {
 
     void updateList();
 
-    void setData(List<ServerModel> data);
+    void setData(List<Server> data);
 
     void showProgress(boolean state);
 

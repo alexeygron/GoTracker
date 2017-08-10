@@ -3,7 +3,7 @@ package com.example.monitor.serverdetails;
 import android.content.AsyncTaskLoader;
 import android.content.Context;
 
-import com.example.monitor.servers.ServerModel;
+import com.example.monitor.servers.Server;
 import com.github.koraktor.steamcondenser.exceptions.SteamCondenserException;
 import com.github.koraktor.steamcondenser.steam.SteamPlayer;
 import com.github.koraktor.steamcondenser.steam.servers.SourceServer;
@@ -20,7 +20,7 @@ import static com.example.monitor.utils.Helpers.makeLogTag;
 /**
  * Receives details about this game server and players list from network in background thread
  */
-class ServerDetailsLoader extends AsyncTaskLoader<ServerDetailsModel> {
+class ServerDetailsLoader extends AsyncTaskLoader<ServerDetails> {
 
     public final String TAG = makeLogTag(ServerDetailsLoader.class);
     private String ip;
@@ -31,7 +31,7 @@ class ServerDetailsLoader extends AsyncTaskLoader<ServerDetailsModel> {
     }
 
     @Override
-    public ServerDetailsModel loadInBackground() {
+    public ServerDetails loadInBackground() {
         HashMap<String, Object> data;
         HashMap<String, SteamPlayer> players;
         try {
@@ -47,8 +47,8 @@ class ServerDetailsLoader extends AsyncTaskLoader<ServerDetailsModel> {
         return convertToModel(data, players);
     }
 
-    private ServerDetailsModel convertToModel(HashMap data, HashMap<String, SteamPlayer> players) {
-        ServerModel serverData = new ServerModel();
+    private ServerDetails convertToModel(HashMap data, HashMap<String, SteamPlayer> players) {
+        Server serverData = new Server();
         serverData.setMap(data.get("mapName").toString());
         serverData.setNumPlayers(data.get("numberOfPlayers").toString());
         serverData.setMaxPlayers(data.get("maxPlayers").toString());
@@ -70,7 +70,7 @@ class ServerDetailsLoader extends AsyncTaskLoader<ServerDetailsModel> {
                 }
             });
         }
-        ServerDetailsModel model = new ServerDetailsModel(serverData, playersList);
+        ServerDetails model = new ServerDetails(serverData, playersList);
         return model;
     }
 

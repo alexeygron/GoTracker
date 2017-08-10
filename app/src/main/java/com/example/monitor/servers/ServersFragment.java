@@ -72,7 +72,7 @@ public class ServersFragment extends CommonListFragment implements
         mAdapter.notifyDataSetChanged();
     }
 
-    public void setData(List<ServerModel> data) {
+    public void setData(List<Server> data) {
         mAdapter.setData(data);
     }
 

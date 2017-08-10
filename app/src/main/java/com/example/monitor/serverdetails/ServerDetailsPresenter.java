@@ -6,13 +6,13 @@ import android.content.Loader;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.example.monitor.servers.ServerModel;
+import com.example.monitor.servers.Server;
 import com.example.monitor.utils.Helpers;
 import com.github.koraktor.steamcondenser.steam.SteamPlayer;
 
 import java.util.ArrayList;
 
-public class ServerDetailsPresenter implements LoaderManager.LoaderCallbacks<ServerDetailsModel>{
+class ServerDetailsPresenter implements LoaderManager.LoaderCallbacks<ServerDetails>{
 
     private Context mContext;
     private IView mView;
@@ -22,7 +22,7 @@ public class ServerDetailsPresenter implements LoaderManager.LoaderCallbacks<Ser
     private static final String TAG = Helpers.makeLogTag(ServerDetailsPresenter.class);
     private static final int LOADER_ID = 1;
 
-    public ServerDetailsPresenter(Context context, String ip, LoaderManager loaderManager, IView view){
+    ServerDetailsPresenter(Context context, String ip, LoaderManager loaderManager, IView view){
         mContext = context;
         mIpAddress = ip;
         mLoaderManager = loaderManager;
@@ -34,7 +34,7 @@ public class ServerDetailsPresenter implements LoaderManager.LoaderCallbacks<Ser
         mLoaderManager.restartLoader(LOADER_ID, null, this);
     }
 
-    public void onDestroy(){
+    void onDestroy(){
         mView = null;
     }
 
@@ -47,9 +47,9 @@ public class ServerDetailsPresenter implements LoaderManager.LoaderCallbacks<Ser
     }
 
     @Override
-    public void onLoadFinished(Loader<ServerDetailsModel> loader, ServerDetailsModel data) {
+    public void onLoadFinished(Loader<ServerDetails> loader, ServerDetails data) {
         if(data != null){
-            ServerModel server = data.getServer();
+            Server server = data.getServer();
             mView.updateFields(
                     server.getMap(),
                     server.getPlayers(),
@@ -60,14 +60,11 @@ public class ServerDetailsPresenter implements LoaderManager.LoaderCallbacks<Ser
 
             ArrayList<SteamPlayer> playersList = data.getPlayersList();
             mView.setAdapterData(playersList);
-            Log.i(TAG, "result " + data.toString());
-        } else {
-            Log.i(TAG, "result " + "data is NULL");
         }
     }
 
     @Override
-    public void onLoaderReset(Loader<ServerDetailsModel> loader) {
+    public void onLoaderReset(Loader<ServerDetails> loader) {
 
     }
 

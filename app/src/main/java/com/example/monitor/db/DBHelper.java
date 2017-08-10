@@ -26,7 +26,7 @@ class DBHelper extends SQLiteOpenHelper {
     private static final String TAG = Helpers.makeLogTag(DBHelper.class);
     private static final int DB_VERSION = 3;
 
-    public DBHelper(Context context, String table) {
+    DBHelper(Context context, String table) {
         super(context, table, null, DB_VERSION);
         mTable = table;
         mContext = context;

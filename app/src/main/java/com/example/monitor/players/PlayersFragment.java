@@ -61,7 +61,7 @@ public class PlayersFragment extends CommonListFragment implements
         mAdapter.notifyDataSetChanged();
     }
 
-    public void setData(List<PlayerModel> data) {
+    public void setData(List<Player> data) {
         mAdapter.setData(data);
     }
 

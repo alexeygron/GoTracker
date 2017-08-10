@@ -3,17 +3,22 @@ package com.example.monitor.utils;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.monitor.utils.Helpers.makeLogTag;
+
+/**
+ * {@link BroadcastReceiver} to listen network status changes and notification all subscribers
+ */
 public class NetworkReceiver extends BroadcastReceiver {
 
+    // Subscribers list
     private List<NetChangeListener> mListeners;
-    private boolean mNetState;
+    private boolean state;
 
-    private static final String TAG = Helpers.makeLogTag(NetworkReceiver.class);
+    private static final String TAG = makeLogTag(NetworkReceiver.class);
 
     public NetworkReceiver() {
         this.mListeners = new ArrayList<>();
@@ -21,8 +26,7 @@ public class NetworkReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.i(TAG, "onReceive list size " + mListeners.size());
-        mNetState = Helpers.isNetworkConnected(context);
+        state = Helpers.isNetworkConnected(context);
         notifyStateToAll();
     }
 
@@ -37,9 +41,8 @@ public class NetworkReceiver extends BroadcastReceiver {
     }
 
     private void notifyState(NetChangeListener listener) {
-        if (mNetState) {
+        if (state) {
             listener.onNetworkEnabled();
-            //Log.i(TAG, "notify - Enabled for: " + listener.getClass().getSimpleName());
         } else {
             listener.onNetworkDiasbled();
         }
