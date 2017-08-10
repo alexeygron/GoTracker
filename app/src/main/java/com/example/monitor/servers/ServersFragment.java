@@ -4,17 +4,13 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.example.monitor.ui.fragment.CommonListFragment;
 import com.example.monitor.ui.view.AddItemDialog;
-import com.example.monitor.utils.Helpers;
 import com.example.monitor.utils.NetworkReceiver;
 import com.lotr.steammonitor.app.R;
 
@@ -23,18 +19,18 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.example.monitor.utils.Helpers.makeLogTag;
+
 public class ServersFragment extends CommonListFragment implements
         IView, SwipeRefreshLayout.OnRefreshListener, View.OnClickListener, AddItemDialog.Callback {
-
-    private static final String TAG = Helpers.makeLogTag(ServersFragment.class);
 
     @BindView(R.id.button_add) FloatingActionButton mButtonAdd;
     @BindView(R.id.content) FrameLayout mContentFrame;
     @BindView(R.id.message) TextView mMessageError;
-    //PullToRefreshView mPullToRefreshView;
-    //private AVLoadingIndicatorView mProgressBar;
     private FavoriteServersPresenter mPresenter;
     private NetworkReceiver mReceiver;
+
+    private static final String TAG = makeLogTag(ServersFragment.class);
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -42,7 +38,6 @@ public class ServersFragment extends CommonListFragment implements
         ButterKnife.bind(this, view);
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mButtonAdd.setOnClickListener(this);
-        //setRetainInstance(true);
         if (mPresenter == null) {
             mPresenter = new FavoriteServersPresenter(getLoaderManager(), getContext(), this);
         }
@@ -57,7 +52,7 @@ public class ServersFragment extends CommonListFragment implements
     }
 
     /**
-     * Регистрирует broadcast receiver для прослушивания изменения соединения с интернетом
+     * Register broadcast receiver for listen network connection changers
      */
     private void registerReceiver() {
         IntentFilter filter = new IntentFilter("android.net.conn.CONNECTIVITY_CHANGE");
@@ -71,7 +66,6 @@ public class ServersFragment extends CommonListFragment implements
         super.onDestroy();
         mPresenter.onDestroy();
         getActivity().getApplicationContext().unregisterReceiver(mReceiver);
-        Log.i(TAG, "OnDestroy");
     }
 
     public void updateList() {
@@ -82,35 +76,20 @@ public class ServersFragment extends CommonListFragment implements
         mAdapter.setData(data);
     }
 
-    public void showList() {
-        mContentFrame.setVisibility(View.VISIBLE);
-        mMessageError.setVisibility(View.GONE);
+    public void showList(boolean state) {
+        mContentFrame.setVisibility(state ? View.VISIBLE : View.GONE);
+        mMessageError.setVisibility(state ? View.GONE : View.VISIBLE);
     }
 
-    public void hideList() {
-        mContentFrame.setVisibility(View.GONE);
-        mMessageError.setVisibility(View.VISIBLE);
-    }
-
-
-    private void showDialog(AddItemDialog.Callback callback,int title, int hint){
+    private void showDialog(AddItemDialog.Callback callback, int title, int hint) {
         AddItemDialog dialogFragment = AddItemDialog.createInstance(
                 callback, title, hint);
         dialogFragment.show(getFragmentManager(), null);
     }
 
-    public void showSnackBar(String message) {
-        Snackbar.make(getView(), message, Snackbar.LENGTH_LONG).show();
-    }
-
     @Override
-    public void showProgress() {
-         super.showProgress();
-    }
-
-    @Override
-    public void hideProgress() {
-        super.hideProgress();
+    public void showProgress(boolean state) {
+        super.showProgress(state);
     }
 
     protected int getLayoutId() {
@@ -130,7 +109,7 @@ public class ServersFragment extends CommonListFragment implements
     }
 
     @Override
-    public void onClick(android.view.View v) {
+    public void onClick(View v) {
         switch (v.getId()) {
             case R.id.button_add:
                 showDialog(this, R.string.add_server_title, R.string.dialog_ip_text);
@@ -140,7 +119,6 @@ public class ServersFragment extends CommonListFragment implements
 
     @Override
     public void onPositiveClick(String item) {
-        Log.i(TAG, item);
         mPresenter.addServer(item);
     }
 }

@@ -2,9 +2,7 @@ package com.example.monitor.servers;
 
 import android.content.Context;
 import android.support.v4.content.AsyncTaskLoader;
-import android.util.Log;
 
-import com.example.monitor.utils.Helpers;
 import com.github.koraktor.steamcondenser.exceptions.SteamCondenserException;
 import com.github.koraktor.steamcondenser.steam.servers.SourceServer;
 import com.github.koraktor.steamcondenser.steam.sockets.SteamSocket;
@@ -13,14 +11,19 @@ import com.lotr.steammonitor.app.R;
 import java.util.HashMap;
 import java.util.concurrent.TimeoutException;
 
-public class ServerDataLoader extends AsyncTaskLoader<ServerModel> {
+import static com.example.monitor.utils.Helpers.makeLogTag;
 
-    public final String TAG = Helpers.makeLogTag(ServerDataLoader.class);
+/**
+ * Receives game servers list from network in background thread
+ */
+class ListServersLoader extends AsyncTaskLoader<ServerModel> {
+
+    public final String TAG = makeLogTag(ListServersLoader.class);
 
     private Context mContext;
     private ServerModel mServer;
 
-    public ServerDataLoader(Context context, ServerModel server) {
+    ListServersLoader(Context context, ServerModel server) {
         super(context);
         mContext = context;
         mServer = server;
@@ -28,7 +31,6 @@ public class ServerDataLoader extends AsyncTaskLoader<ServerModel> {
 
     @Override
     public ServerModel loadInBackground() {
-        Log.d(TAG, "loadInBackground");
         HashMap<String, Object> response;
         SteamSocket.setTimeout(3000);
         SourceServer sourceServer;
@@ -36,15 +38,17 @@ public class ServerDataLoader extends AsyncTaskLoader<ServerModel> {
             sourceServer = new SourceServer(mServer.getIpAddr());
             sourceServer.initialize();
             response = sourceServer.getServerInfo();
+
             return convertToModel(response);
         } catch (SteamCondenserException | TimeoutException e) {
             e.printStackTrace();
             mServer.setName(mContext.getResources().getString(R.string.err_get_server));
+
             return mServer;
         }
     }
 
-    private ServerModel convertToModel(HashMap<String, Object> response){
+    private ServerModel convertToModel(HashMap<String, Object> response) {
         mServer.setName(response.get("serverName").toString());
         mServer.setMap(response.get("mapName").toString());
         mServer.setNumPlayers(response.get("numberOfPlayers").toString());
@@ -55,27 +59,8 @@ public class ServerDataLoader extends AsyncTaskLoader<ServerModel> {
     }
 
     @Override
-    public void forceLoad() {
-        super.forceLoad();
-        Log.d(TAG, "forceLoad");
-    }
-
-    @Override
     protected void onStartLoading() {
         super.onStartLoading();
-        Log.d(TAG, "onStartLoading");
         forceLoad();
-    }
-
-    @Override
-    protected void onStopLoading() {
-        super.onStopLoading();
-        Log.d(TAG, "onStopLoading");
-    }
-
-    @Override
-    public void deliverResult(ServerModel data) {
-        super.deliverResult(data);
-        Log.d(TAG, "deliverResult");
     }
 }

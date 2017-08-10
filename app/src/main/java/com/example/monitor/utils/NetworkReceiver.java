@@ -3,8 +3,6 @@ package com.example.monitor.utils;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -40,16 +38,16 @@ public class NetworkReceiver extends BroadcastReceiver {
 
     private void notifyState(NetChangeListener listener) {
         if (mNetState) {
-            listener.networkEnabled();
+            listener.onNetworkEnabled();
             //Log.i(TAG, "notify - Enabled for: " + listener.getClass().getSimpleName());
         } else {
-            listener.networkDiasbled();
+            listener.onNetworkDiasbled();
         }
     }
 
     public interface NetChangeListener {
-        void networkEnabled();
-        void networkDiasbled();
+        void onNetworkEnabled();
+        void onNetworkDiasbled();
     }
 }
 

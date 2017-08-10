@@ -1,6 +1,5 @@
 package com.example.monitor.servers;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public interface IView {
@@ -9,13 +8,7 @@ public interface IView {
 
     void setData(List<ServerModel> data);
 
-    void showSnackBar(String message);
+    void showProgress(boolean state);
 
-    void showProgress();
-
-    void hideProgress();
-
-    void showList();
-
-    void hideList();
+    void showList(boolean state);
 }

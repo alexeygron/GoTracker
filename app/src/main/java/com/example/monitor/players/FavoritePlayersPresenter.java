@@ -5,58 +5,49 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
-import android.util.Log;
 
 import com.example.monitor.db.PlayersDao;
-import com.example.monitor.utils.Helpers;
 import com.example.monitor.utils.NetworkReceiver;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by lotr on 08.08.2016.
- */
-public class FavoritePlayersPresenter implements LoaderManager.LoaderCallbacks<PlayerModel>, NetworkReceiver.NetChangeListener {
+import static com.example.monitor.utils.Helpers.makeLogTag;
 
-    public static final int LOADER_ID = 1;
+class FavoritePlayersPresenter implements LoaderManager.LoaderCallbacks<PlayerModel>, NetworkReceiver.NetChangeListener {
+
     private Context mContext;
     private IView mView;
     private LoaderManager mLoaderManager;
-    private PlayersDao mDB;
+    private PlayersDao dao;
     private List<PlayerModel> mListData;
     private int loaderTaskIndex;
 
-    private static final String TAG = Helpers.makeLogTag(FavoritePlayersPresenter.class);
+    private static final int LOADER_ID = 1;
+    private static final String TAG = makeLogTag(FavoritePlayersPresenter.class);
 
-    public FavoritePlayersPresenter(Context context, LoaderManager lm, IView view) {
+    FavoritePlayersPresenter(Context context, LoaderManager lm, IView view) {
         mLoaderManager = lm;
         mContext = context;
         mView = view;
-        mDB = new PlayersDao(context);
+        dao = new PlayersDao(context);
         mListData = new ArrayList<>();
-        //showList();
-        //mDB.clear();
     }
 
-    public void networkEnabled() {
-        Log.i(TAG, "networkEnabled");
+    public void onNetworkEnabled() {
         showList();
-        mView.showList();
+        mView.showList(true);
     }
 
-    public void networkDiasbled() {
-        Log.i(TAG, "networkDiasbled");
-        mView.hideList();
+    public void onNetworkDiasbled() {
+        mView.showList(false);
     }
-
 
     private void showList() {
         mListData.clear();
-        mListData.addAll(mDB.get());
-        Log.i(TAG, "list size " + mListData.size());
+        mListData.addAll(dao.get());
         loaderTaskIndex = 0;
-        if(mLoaderManager.getLoader(LOADER_ID) != null) {
+        if (mLoaderManager.getLoader(LOADER_ID) != null) {
             mLoaderManager.restartLoader(LOADER_ID, null, this);
         } else {
             mLoaderManager.initLoader(LOADER_ID, null, this);
@@ -69,18 +60,16 @@ public class FavoritePlayersPresenter implements LoaderManager.LoaderCallbacks<P
         mView.updateList();
     }
 
-    public void onRefresh(){
+    void onRefresh() {
         mLoaderManager.destroyLoader(LOADER_ID);
         showList();
     }
 
     void onClickDelButton(int position) {
-        Log.i(TAG, "list size " + mListData.size());
         String label = mListData.get(position).getDbLabel();
-        mDB.delete(label);
+        dao.delete(label);
         mListData.remove(position);
         mView.setData(mListData);
-        Log.i(TAG, "del button click! " + position);
     }
 
     void onDestroy() {
@@ -91,10 +80,10 @@ public class FavoritePlayersPresenter implements LoaderManager.LoaderCallbacks<P
     /**
      * Вызывается при добавлении нового игрока в список. Проверяет корректность ID в AsyncTask
      * и записывает его в DB
+     *
      * @param steamId ID идентификатор игрока в Steam
      */
     void addPlayer(String steamId) {
-        Log.i(TAG, "new item: " + steamId);
         // Делает сетевой запрос для проверки корректности введенного ID
         // И конвертирует его, если это нужно
         new AsyncTask<String, Void, String>() {
@@ -106,8 +95,7 @@ public class FavoritePlayersPresenter implements LoaderManager.LoaderCallbacks<P
             @Override
             protected void onPostExecute(String id) {
                 super.onPostExecute(id);
-                Log.i(TAG, "Post Check id = " + id);
-                mDB.insert(id);
+                dao.insert(id);
                 onRefresh();
             }
         }.execute(steamId);
@@ -116,20 +104,19 @@ public class FavoritePlayersPresenter implements LoaderManager.LoaderCallbacks<P
     @Override
     public Loader<PlayerModel> onCreateLoader(int id, Bundle args) {
         if (mListData.size() > 0 & loaderTaskIndex < mListData.size()) {
-            mView.showProgress();
+            mView.showProgress(true);
             return new PlayersDataLoader(mContext, mListData.get(loaderTaskIndex));
         } else {
-            mView.hideProgress();
+            mView.showProgress(false);
         }
         return null;
     }
 
     @Override
     public void onLoadFinished(Loader<PlayerModel> loader, PlayerModel data) {
-        Log.i(TAG, "load: by index " + loaderTaskIndex + " " + data.toString());
-            updateList(data);
-            loaderTaskIndex++;
-            mLoaderManager.restartLoader(1, null, this);
+        updateList(data);
+        loaderTaskIndex++;
+        mLoaderManager.restartLoader(1, null, this);
     }
 
     @Override

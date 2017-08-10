@@ -11,18 +11,20 @@ import com.example.monitor.utils.Helpers;
 import com.lotr.steammonitor.app.R;
 
 /**
- * Helper for db.
+ * Manages open, create and upgrade DB
  */
 class DBHelper extends SQLiteOpenHelper {
+
+    private String mTable;
+    private Context mContext;
 
     private static final String CREATE_FAVORITES_TABLE = "create table favorites (" +
             "id integer primary key autoincrement," + "ip text," + "pos integer" + ");";
     private static final String CREATE_PLAYERS_TABLE = "create table players (" +
             "label integer primary key autoincrement," + "id text" + ");";
+
     private static final String TAG = Helpers.makeLogTag(DBHelper.class);
     private static final int DB_VERSION = 3;
-    private String mTable;
-    private Context mContext;
 
     public DBHelper(Context context, String table) {
         super(context, table, null, DB_VERSION);
@@ -36,7 +38,6 @@ class DBHelper extends SQLiteOpenHelper {
             db.execSQL(CREATE_FAVORITES_TABLE);
             ServersDao.insertSet(db, mContext.getResources().getStringArray(R.array.ips));
         } else if (mTable.equals("players")) {
-            Log.i(TAG, "Create table players");
             db.execSQL(CREATE_PLAYERS_TABLE);
             PlayersDao.insertSet(db, mContext.getResources().getStringArray(R.array.players));
         }

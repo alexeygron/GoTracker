@@ -11,11 +11,13 @@ import com.example.monitor.utils.Helpers;
 
 import java.util.ArrayList;
 
+import static com.example.monitor.utils.Helpers.makeLogTag;
+
 public class PlayersDao {
 
     private Context mContext;
 
-    private static final String TAG = Helpers.makeLogTag(PlayersDao.class);
+    private static final String TAG = makeLogTag(PlayersDao.class);
     public static final String TABLE_NAME = "players";
 
     public PlayersDao(Context context){
@@ -53,9 +55,7 @@ public class PlayersDao {
             int label = cursor.getColumnIndex("label");
             do {
                 PlayerModel player = new PlayerModel();
-                Log.d(TAG, " " + "id = " + cursor.getString(id));
                 player.setSteamID(cursor.getString(id));
-                Log.d(TAG, " " + "label = " + cursor.getString(label));
                 player.setDbLabel(cursor.getString(label));
                 data.add(player);
             } while (cursor.moveToNext());

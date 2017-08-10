@@ -3,7 +3,6 @@ package com.example.monitor.players;
 import android.content.Context;
 import android.content.res.Resources;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.example.monitor.utils.Helpers;
 import com.lotr.steammonitor.app.R;
 
 import java.util.ArrayList;
@@ -21,16 +19,14 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-/**
- * Адаптер для списка серверов.
- */
+import static com.example.monitor.utils.Helpers.makeLogTag;
 
 public class ListPlayersAdapter extends RecyclerView.Adapter<ListPlayersAdapter.Holder> {
 
     private List<PlayerModel> mData;
     private FavoritePlayersPresenter mPresenter;
 
-    private static final String TAG = Helpers.makeLogTag(ListPlayersAdapter.class);
+    private static final String TAG = makeLogTag(ListPlayersAdapter.class);
 
     public ListPlayersAdapter(FavoritePlayersPresenter presenter){
         mData = new ArrayList<>();
@@ -66,9 +62,8 @@ public class ListPlayersAdapter extends RecyclerView.Adapter<ListPlayersAdapter.
         @BindView(R.id.status) TextView mStatus;
         @BindView(R.id.avatar) ImageView mAvatar;
         @BindView(R.id.delete_frame) FrameLayout mDeleteFrame;
-        private int mPosition;
 
-        public Holder(View itemView) {
+        Holder(View itemView) {
             super(itemView);
             itemView.getId();
             ButterKnife.bind(this, itemView);
@@ -81,7 +76,6 @@ public class ListPlayersAdapter extends RecyclerView.Adapter<ListPlayersAdapter.
             int position = getLayoutPosition();
             switch(v.getId()){
                 case R.id.card_view:
-                    Log.i(TAG, "click item" + position);
                     break;
                 case R.id.delete_frame:
                     ListPlayersAdapter.this.notifyItemRemoved(position);
@@ -90,8 +84,7 @@ public class ListPlayersAdapter extends RecyclerView.Adapter<ListPlayersAdapter.
             }
         }
 
-        public void bindDoctor(PlayerModel player, int position, Context context) {
-            mPosition = position;
+        void bindDoctor(PlayerModel player, int position, Context context) {
             mPlayerName.setText(player.getPersonName());
 
             Resources res = context.getResources();
@@ -101,7 +94,7 @@ public class ListPlayersAdapter extends RecyclerView.Adapter<ListPlayersAdapter.
             } else {
                 mStatus.setText(player.getStatus(context.getResources()));
                 mStatus.setTextColor(res.getColor(player.getStatusColor()));
-                // Загружаем в imageview аватар из сети через Glide
+
                 Glide.with(context).load(player.getAvatarUrl()).into(mAvatar);
             }
         }

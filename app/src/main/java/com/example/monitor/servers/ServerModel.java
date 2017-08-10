@@ -5,16 +5,17 @@ import android.os.Parcelable;
 
 public class ServerModel implements Parcelable {
 
-    protected String ipAddr;
-    protected String mName;
-    protected String numPlayers;
-    protected String maxPlayers;
-    protected String mMap;
-    protected String mGame;
-    protected String mTags;
-    protected String mDbLabel;
+    private String ipAddr;
+    private String mName;
+    private String numPlayers;
+    private String maxPlayers;
+    private String mMap;
+    private String mGame;
+    private String mTags;
+    private String mDbLabel;
 
     public ServerModel() {
+
     }
 
     public ServerModel(String ip) {
@@ -87,7 +88,6 @@ public class ServerModel implements Parcelable {
     }
 
     public String getTags() {
-
         return mTags;
     }
 
@@ -133,6 +133,15 @@ public class ServerModel implements Parcelable {
 
     @Override
     public String toString() {
-        return "IpAddr " + ipAddr;
+        return "ServerModel{" +
+                "ipAddr='" + ipAddr + '\'' +
+                ", mName='" + mName + '\'' +
+                ", numPlayers='" + numPlayers + '\'' +
+                ", maxPlayers='" + maxPlayers + '\'' +
+                ", mMap='" + mMap + '\'' +
+                ", mGame='" + mGame + '\'' +
+                ", mTags='" + mTags + '\'' +
+                ", mDbLabel='" + mDbLabel + '\'' +
+                '}';
     }
 }

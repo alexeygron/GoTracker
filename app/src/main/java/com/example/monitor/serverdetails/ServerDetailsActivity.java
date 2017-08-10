@@ -8,11 +8,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.text.method.ScrollingMovementMethod;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import com.example.monitor.utils.Helpers;
 import com.github.koraktor.steamcondenser.steam.SteamPlayer;
 import com.lotr.steammonitor.app.R;
 
@@ -20,6 +18,8 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.example.monitor.utils.Helpers.makeLogTag;
 
 public class ServerDetailsActivity extends AppCompatActivity implements
         IView, SwipeRefreshLayout.OnRefreshListener {
@@ -31,12 +31,13 @@ public class ServerDetailsActivity extends AppCompatActivity implements
     @BindView(R.id.map) TextView mMap;
     @BindView(R.id.players) TextView mPlayers;
     @BindView(R.id.details_list_players) RecyclerView mRecyclerView;
-    private ListPlayersAdapter mAdapter;
+
+    private ListPlayersAdapter mListAdapter;
     private LinearLayoutManager mLayoutManager;
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private ServerDetailsPresenter mPresenter;
 
-    private static final String TAG = Helpers.makeLogTag(ServerDetailsActivity.class);
+    private static final String TAG = makeLogTag(ServerDetailsActivity.class);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,10 +48,11 @@ public class ServerDetailsActivity extends AppCompatActivity implements
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new ListPlayersAdapter();
+        mListAdapter = new ListPlayersAdapter();
         mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setAdapter(mListAdapter);
         setTitle(null);
+
         Toolbar mToolbar = (Toolbar) findViewById(R.id.main_toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -80,8 +82,8 @@ public class ServerDetailsActivity extends AppCompatActivity implements
     }
 
     public void setAdapterData(ArrayList<SteamPlayer> data){
-        mAdapter.setData(data);
-        mAdapter.notifyDataSetChanged();
+        mListAdapter.setData(data);
+        mListAdapter.notifyDataSetChanged();
     }
 
     @Override

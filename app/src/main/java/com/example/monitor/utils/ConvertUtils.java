@@ -3,11 +3,7 @@ package com.example.monitor.utils;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.TimeZone;
 
-/**
- * Занимается конвертацией одних объектов в другие.
- */
 public class ConvertUtils {
 
     public static String formatTime(Float source){

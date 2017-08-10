@@ -1,14 +1,12 @@
 package com.example.monitor.serverdetails;
 
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.monitor.utils.ConvertUtils;
-import com.example.monitor.utils.Helpers;
 import com.github.koraktor.steamcondenser.steam.SteamPlayer;
 import com.lotr.steammonitor.app.R;
 
@@ -18,21 +16,19 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-/**
- * Адаптер для списка серверов.
- */
+import static com.example.monitor.utils.Helpers.makeLogTag;
 
-public class ListPlayersAdapter extends RecyclerView.Adapter<ListPlayersAdapter.Holder> {
+class ListPlayersAdapter extends RecyclerView.Adapter<ListPlayersAdapter.Holder> {
 
-    private static final String TAG = Helpers.makeLogTag(ListPlayersAdapter.class);
+    private static final String TAG = makeLogTag(ListPlayersAdapter.class);
 
     private List<SteamPlayer> mData;
 
-    public ListPlayersAdapter(){
+    ListPlayersAdapter() {
         mData = new ArrayList<>();
     }
 
-    void setData(List<SteamPlayer> data){
+    void setData(List<SteamPlayer> data) {
         mData.clear();
         mData.addAll(data);
     }
@@ -61,21 +57,18 @@ public class ListPlayersAdapter extends RecyclerView.Adapter<ListPlayersAdapter.
         @BindView(R.id.player_score) TextView mPlayerScore;
         @BindView(R.id.player_rate) TextView mPlayerTime;
 
-        public Holder(View itemView) {
+        Holder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-            /*mPlayerName = (TextView) itemView.findViewById(R.id.player_name);
-            mPlayerScore = (TextView) itemView.findViewById(R.id.player_score);
-            mPlayerTime = (TextView) itemView.findViewById(R.id.player_rate);*/
-            itemView.setOnClickListener(this);
+            //itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
-           Log.i(TAG, "Click " + getLayoutPosition());
+
         }
 
-        public void bindDoctor(SteamPlayer player) {
+        void bindDoctor(SteamPlayer player) {
             mPlayerName.setText(player.getName());
             mPlayerScore.setText(String.valueOf(player.getScore()));
             mPlayerTime.setText(ConvertUtils.formatTime(player.getConnectTime()));

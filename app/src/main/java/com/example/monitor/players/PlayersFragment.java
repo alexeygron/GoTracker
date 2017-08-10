@@ -1,6 +1,5 @@
 package com.example.monitor.players;
 
-import android.content.Context;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -47,14 +46,9 @@ public class PlayersFragment extends CommonListFragment implements
         registerReceiver();
     }
 
-    public void showList() {
-        mContentFrame.setVisibility(View.VISIBLE);
-        mMessageError.setVisibility(View.GONE);
-    }
-
-    public void hideList() {
-        mContentFrame.setVisibility(View.GONE);
-        mMessageError.setVisibility(View.VISIBLE);
+    public void showList(boolean state) {
+        mContentFrame.setVisibility(state ? View.VISIBLE : View.GONE);
+        mMessageError.setVisibility(state ? View.GONE : View.VISIBLE);
     }
 
     private void showDialog(AddItemDialog.Callback callback,int title, int hint){
@@ -78,13 +72,8 @@ public class PlayersFragment extends CommonListFragment implements
 
 
     @Override
-    public void showProgress() {
-        super.showProgress();
-    }
-
-    @Override
-    public void hideProgress() {
-        super.hideProgress();
+    public void showProgress(boolean state) {
+        super.showProgress(state);
     }
 
     @Override
@@ -95,7 +84,7 @@ public class PlayersFragment extends CommonListFragment implements
     }
 
     /**
-     * Регистрирует broadcast receiver для прослушивания изменения соединения с интернетом
+     * Register broadcast receiver for listen network connection changers
      */
     private void registerReceiver() {
         IntentFilter filter = new IntentFilter("android.net.conn.CONNECTIVITY_CHANGE");

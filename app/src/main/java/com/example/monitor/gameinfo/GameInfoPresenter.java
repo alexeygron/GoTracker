@@ -5,40 +5,39 @@ import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.text.TextUtils;
-import android.util.Log;
 
-import com.example.monitor.servers.ServerModel;
-import com.example.monitor.utils.Helpers;
 import com.example.monitor.utils.NetworkReceiver;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class GameInfoPresenter implements LoaderManager.LoaderCallbacks<String>, NetworkReceiver.NetChangeListener {
+import static com.example.monitor.utils.Helpers.makeLogTag;
+
+class GameInfoPresenter implements LoaderManager.LoaderCallbacks<String>, NetworkReceiver.NetChangeListener {
 
     private IView mView;
     private Context mContext;
     private LoaderManager mLoaderManager;
 
-    public static final int LOADER_ID = 1;
+    private static final int LOADER_ID = 1;
 
-    private static final String TAG = Helpers.makeLogTag(GameInfoPresenter.class);
+    private static final String TAG = makeLogTag(GameInfoPresenter.class);
 
-    public GameInfoPresenter(Context context, LoaderManager lm, IView view){
+    GameInfoPresenter(Context context, LoaderManager lm, IView view) {
         mContext = context;
         mLoaderManager = lm;
         mView = view;
     }
 
-    public void showLst(){
-        if(mLoaderManager.getLoader(LOADER_ID) != null) {
+    void showLst() {
+        if (mLoaderManager.getLoader(LOADER_ID) != null) {
             mLoaderManager.restartLoader(LOADER_ID, null, this);
         } else {
             mLoaderManager.initLoader(LOADER_ID, null, this);
         }
     }
 
-    private void jsonToFields(String json){
+    private void jsonToFields(String json) {
         try {
             JSONObject root = new JSONObject(json);
             JSONObject app = root.getJSONObject("result").getJSONObject("app");
@@ -66,33 +65,28 @@ public class GameInfoPresenter implements LoaderManager.LoaderCallbacks<String>,
     }
 
     @Override
-    public void networkEnabled() {
-        Log.i(TAG, "networkEnabled");
+    public void onNetworkEnabled() {
         showLst();
-        mView.showView();
+        mView.showView(true);
     }
 
     @Override
-    public void networkDiasbled() {
-        Log.i(TAG, "networkDiasbled");
-        mView.hideView();
+    public void onNetworkDiasbled() {
+        mView.showView(false);
     }
 
     @Override
     public Loader<String> onCreateLoader(int id, Bundle args) {
-        mView.showProgress();
+        mView.showProgress(true);
         return new GameInfoLoader(mContext);
     }
 
     @Override
     public void onLoadFinished(Loader<String> loader, String data) {
-        if (!TextUtils.isEmpty(data)){
-            Log.i(TAG, "loading result: " + data.toString());
+        if (!TextUtils.isEmpty(data)) {
             jsonToFields(data);
-        } else {
-            Log.i(TAG, "loading result is NULL");
         }
-        mView.hideProgress();
+        mView.showProgress(false);
     }
 
     @Override
@@ -100,7 +94,7 @@ public class GameInfoPresenter implements LoaderManager.LoaderCallbacks<String>,
 
     }
 
-    public void onDestroy(){
+    void onDestroy() {
         mView = null;
         mLoaderManager.destroyLoader(LOADER_ID);
     }

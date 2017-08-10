@@ -1,14 +1,10 @@
 package com.example.monitor.gameinfo;
 
 import android.content.IntentFilter;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.monitor.ui.fragment.CommonFragment;
@@ -19,13 +15,12 @@ import com.lotr.steammonitor.app.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-/**
- * Отображает таб с общей информацией об игре
- */
-public class GameInfoFragment extends CommonFragment implements IView, SwipeRefreshLayout.OnRefreshListener{
+import static com.example.monitor.utils.Helpers.makeLogTag;
 
-    private GameInfoPresenter mPresenter;
-    private NetworkReceiver mReceiver;
+/**
+ * Displays common information about game and its servers
+ */
+public class GameInfoFragment extends CommonFragment implements IView, SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.refresh) android.support.v4.widget.SwipeRefreshLayout mRefresh;
     @BindView(R.id.message) TextView mMessageError;
@@ -42,13 +37,15 @@ public class GameInfoFragment extends CommonFragment implements IView, SwipeRefr
     @BindView(R.id.timestamp) TextView mTimestamp;
     @BindView(R.id.time) TextView mTime;
 
-    private static final String TAG = Helpers.makeLogTag(GameInfoFragment.class);
+    private GameInfoPresenter mPresenter;
+    private NetworkReceiver mReceiver;
+
+    private static final String TAG = makeLogTag(GameInfoFragment.class);
 
     @Override
     public void onViewCreated(android.view.View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
-        //setRetainInstance(true);
         mSwipeRefreshLayout.setOnRefreshListener(this);
         if (mPresenter == null) {
             mPresenter = new GameInfoPresenter(getContext(), getLoaderManager(), this);
@@ -56,13 +53,10 @@ public class GameInfoFragment extends CommonFragment implements IView, SwipeRefr
         registerReceiver();
     }
 
-    /**
-     * Заполняет поля textview полученными значениями
-     */
     public void updateFields(String players, String servers, String searching,
                              String searchSeconds, String scheduler, String logon,
                              String community, String items, String leaderboards,
-                             String version, String timestamp, String time){
+                             String version, String timestamp, String time) {
         mPlayers.setText(players);
         mServers.setText(servers);
         mSearching.setText(searching);
@@ -75,12 +69,10 @@ public class GameInfoFragment extends CommonFragment implements IView, SwipeRefr
         mVersion.setText(version);
         mTimestamp.setText(timestamp);
         mTime.setText(time);
-
-        Log.i(TAG, "data for fields " + servers + version + timestamp);
     }
 
     /**
-     * Регистрирует broadcast receiver для прослушивания изменения соединения с интернетом
+     * Register broadcast receiver for listen network connection changers
      */
     private void registerReceiver() {
         IntentFilter filter = new IntentFilter("android.net.conn.CONNECTIVITY_CHANGE");
@@ -102,26 +94,13 @@ public class GameInfoFragment extends CommonFragment implements IView, SwipeRefr
     }
 
     @Override
-    public void showProgress() {
-        super.showProgress();
+    public void showProgress(boolean state) {
+        super.showProgress(state);
     }
 
-    @Override
-    public void hideProgress() {
-        super.hideProgress();
-    }
-
-    @Override
-    public void showView() {
-        mRefresh.setVisibility(View.VISIBLE);
-        mMessageError.setVisibility(View.GONE);
-    }
-
-
-    @Override
-    public void hideView() {
-        mRefresh.setVisibility(View.GONE);
-        mMessageError.setVisibility(View.VISIBLE);
+    public void showView(boolean state) {
+        mRefresh.setVisibility(state ? View.VISIBLE : View.GONE);
+        mMessageError.setVisibility(state ? View.GONE : View.VISIBLE);
     }
 
     @Override

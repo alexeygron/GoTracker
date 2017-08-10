@@ -6,32 +6,29 @@ import android.util.Log;
 
 import com.example.monitor.utils.Helpers;
 
+import static com.example.monitor.utils.Helpers.makeLogTag;
+
 public abstract class BaseLoader extends AsyncTaskLoader {
 
-    private static String TAG = Helpers.makeLogTag(BaseLoader.class);
+    private static String TAG = makeLogTag(BaseLoader.class);
 
     public BaseLoader(Context context, String childTag) {
         super(context);
-        TAG = childTag + "Loader";
     }
 
     @Override
     public void forceLoad() {
         super.forceLoad();
-        Log.d(TAG, "forceLoad");
     }
 
     @Override
     protected void onStartLoading() {
         super.onStartLoading();
-        Log.d(TAG, "onStartLoading");
         forceLoad();
     }
 
     @Override
     protected void onStopLoading() {
         super.onStopLoading();
-        Log.d(TAG, "onStopLoading");
     }
-
 }

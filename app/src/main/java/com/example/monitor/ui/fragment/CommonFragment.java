@@ -11,15 +11,11 @@ import com.lotr.steammonitor.app.R;
 import com.wang.avi.AVLoadingIndicatorView;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
-/**
- * Содержит общую функциональность для всех остальных фрагментов в приложении.
- */
 public abstract class CommonFragment extends Fragment {
 
-    public AVLoadingIndicatorView mProgressBar;
     @BindView(R.id.refresh) protected SwipeRefreshLayout mSwipeRefreshLayout;
+    public AVLoadingIndicatorView mProgressBar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
@@ -29,12 +25,8 @@ public abstract class CommonFragment extends Fragment {
         return rootView;
     }
 
-    public void showProgress() {
-        mProgressBar.setVisibility(android.view.View.VISIBLE);
-    }
-
-    public void hideProgress() {
-        mProgressBar.setVisibility(android.view.View.GONE);
+    public void showProgress(boolean state) {
+        mProgressBar.setVisibility(state ? View.VISIBLE : View.GONE);
     }
 
     protected abstract int getLayoutId();

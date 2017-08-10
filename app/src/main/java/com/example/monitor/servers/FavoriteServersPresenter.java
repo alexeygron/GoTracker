@@ -2,7 +2,6 @@ package com.example.monitor.servers;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
@@ -10,16 +9,14 @@ import android.util.Log;
 
 import com.example.monitor.db.ServersDao;
 import com.example.monitor.serverdetails.ServerDetailsActivity;
-import com.example.monitor.utils.Helpers;
 import com.example.monitor.utils.NetworkReceiver;
+import com.lotr.steammonitor.app.BuildConfig;
 
 import java.util.ArrayList;
-import java.util.List;
 
-/**
- * Презентер из пттерна MVP для
- */
-public class FavoriteServersPresenter implements LoaderManager.LoaderCallbacks<ServerModel>, NetworkReceiver.NetChangeListener {
+import static com.example.monitor.utils.Helpers.makeLogTag;
+
+class FavoriteServersPresenter implements LoaderManager.LoaderCallbacks<ServerModel>, NetworkReceiver.NetChangeListener {
 
     private IView mView;
     private Context mContext;
@@ -27,19 +24,17 @@ public class FavoriteServersPresenter implements LoaderManager.LoaderCallbacks<S
     private ServersDao mDB;
     private ArrayList<ServerModel> mListData;
     private int loaderTaskIndex;
-    private NetworkReceiver mReceiver;
 
-    public static final int LOADER_ID = 1;
+    private static final int LOADER_ID = 1;
 
-    private static final String TAG = Helpers.makeLogTag(FavoriteServersPresenter.class);
+    private static final String TAG = makeLogTag(FavoriteServersPresenter.class);
 
-    public FavoriteServersPresenter(LoaderManager lm, Context context, IView view) {
+    FavoriteServersPresenter(LoaderManager lm, Context context, IView view) {
         mView = view;
         mContext = context;
         mLoaderManager = lm;
         mDB = new ServersDao(context);
         mListData = new ArrayList<>();
-        //registerReceiver();
     }
 
     private void updateList(ServerModel server) {
@@ -52,40 +47,37 @@ public class FavoriteServersPresenter implements LoaderManager.LoaderCallbacks<S
         mListData.clear();
         mListData.addAll(mDB.get());
         loaderTaskIndex = 0;
-        if(mLoaderManager.getLoader(LOADER_ID) != null) {
+        if (mLoaderManager.getLoader(LOADER_ID) != null) {
             mLoaderManager.restartLoader(LOADER_ID, null, this);
         } else {
             mLoaderManager.initLoader(LOADER_ID, null, this);
         }
-        Log.i(TAG, "list size " + mListData.size());
     }
 
-    public ArrayList<ServerModel> getData(){
+    public ArrayList<ServerModel> getData() {
         return mListData;
     }
 
-    public void setData(ArrayList<ServerModel> data){
+    public void setData(ArrayList<ServerModel> data) {
         mListData.addAll(data);
     }
 
-    public void networkEnabled() {
-        Log.i(TAG, "networkEnabled");
+    public void onNetworkEnabled() {
+        if (BuildConfig.DEBUG) Log.i(TAG, "network_enabled");
         showList();
-        mView.showList();
+        mView.showList(true);
     }
 
-    public void networkDiasbled() {
-        Log.i(TAG, "networkDiasbled");
-        mView.hideList();
+    public void onNetworkDiasbled() {
+        if (BuildConfig.DEBUG) Log.i(TAG, "network_disabled");
+        mView.showList(false);
     }
 
     void onClickDelButton(int position) {
-        Log.i(TAG, "list size " + mListData.size());
         String id = mListData.get(position).getDbId();
         mDB.delete(id);
         mListData.remove(position);
         mView.setData(mListData);
-        Log.i(TAG, "del button click! " + position);
     }
 
     void addServer(String ip) {
@@ -93,15 +85,12 @@ public class FavoriteServersPresenter implements LoaderManager.LoaderCallbacks<S
         onRefresh();
     }
 
-    public void onRefresh() {
+    void onRefresh() {
         mLoaderManager.destroyLoader(LOADER_ID);
         showList();
     }
 
     void onClickListItem(int position) {
-        Log.i(TAG, "list item click!");
-        //ServerDetailsFragment fragment = new ServerDetailsFragment();
-        //mFragmentManager.beginTransaction().add(R.id.main_container, fragment, "DETAILS").addToBackStack(null).commit();
         Intent i = new Intent(mContext, ServerDetailsActivity.class);
         ServerModel server = mListData.get(position);
         i.putExtra("name", server.getmName());
@@ -120,10 +109,10 @@ public class FavoriteServersPresenter implements LoaderManager.LoaderCallbacks<S
     @Override
     public Loader<ServerModel> onCreateLoader(int id, Bundle args) {
         if (mListData.size() > 0 & loaderTaskIndex < mListData.size()) {
-            mView.showProgress();
-            return new ServerDataLoader(mContext, mListData.get(loaderTaskIndex));
+            mView.showProgress(true);
+            return new ListServersLoader(mContext, mListData.get(loaderTaskIndex));
         } else {
-            mView.hideProgress();
+            mView.showProgress(false);
         }
         return null;
     }
@@ -133,7 +122,6 @@ public class FavoriteServersPresenter implements LoaderManager.LoaderCallbacks<S
         if (data != null) {
             updateList(data);
             loaderTaskIndex++;
-            Log.i(TAG, "loader result " + data.toString());
             mLoaderManager.restartLoader(LOADER_ID, null, this);
         }
     }
@@ -142,37 +130,15 @@ public class FavoriteServersPresenter implements LoaderManager.LoaderCallbacks<S
     public void onLoaderReset(Loader<ServerModel> loader) {
     }
 
-   /* private void registerReceiver(){
-        IntentFilter filter = new IntentFilter("android.net.conn.CONNECTIVITY_CHANGE");
-        mReceiver = new NetworkReceiver();
-        mReceiver.addListener(this);
-        mContext.registerReceiver(mReceiver, filter);
-    }
-    */
-
     void onResume() {
-        Log.i(TAG, "data " + mListData.size());
-        if(mListData.size() != 0){
+        if (mListData.size() != 0) {
             mView.setData(mListData);
             mView.updateList();
         }
     }
 
-
     void onDestroy() {
         mView = null;
         mLoaderManager.destroyLoader(LOADER_ID);
-    }
-
-
-    void init() {
-        mDB.insert("86.104.11.123:27015");
-        mDB.insert("46.174.53.181:27015");
-        mDB.insert("192.95.29.182:27017");
-        mDB.insert("185.113.141.19:27103");
-        mDB.insert("46.174.50.142:55555");
-        mDB.insert("51.255.232.67:27015");
-        mDB.insert("195.88.208.182:27015");
-        // showList();
     }
 }

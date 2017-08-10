@@ -2,7 +2,7 @@ package com.example.monitor.players;
 
 import android.content.res.Resources;
 
-import com.example.monitor.utils.Config;
+import com.example.monitor.Config;
 import com.example.monitor.utils.ConvertUtils;
 import com.github.koraktor.steamcondenser.exceptions.WebApiException;
 import com.github.koraktor.steamcondenser.steam.community.SteamId;
@@ -42,7 +42,7 @@ public class PlayerModel {
     public static String checkSteamId(String sourceId) {
         Long convertedId = null;
         try {
-            WebApi.setApiKey(Config.WEB_API_KEY);
+            WebApi.setApiKey(Config.STEAM_API_KEY);
             convertedId = SteamId.resolveVanityUrl(sourceId);
         } catch (WebApiException e) {
             e.printStackTrace();

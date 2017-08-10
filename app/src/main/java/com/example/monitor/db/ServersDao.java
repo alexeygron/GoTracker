@@ -12,10 +12,12 @@ import com.lotr.steammonitor.app.R;
 
 import java.util.ArrayList;
 
+import static com.example.monitor.utils.Helpers.makeLogTag;
+
 public class ServersDao {
 
     private Context mContext;
-    private static final String TAG = Helpers.makeLogTag(ServersDao.class);
+    private static final String TAG = makeLogTag(ServersDao.class);
     private static final String TABLE_MANE = "favorites";
 
     public ServersDao(Context context){
@@ -45,8 +47,6 @@ public class ServersDao {
             int idIndex = cursor.getColumnIndex("id");
             do {
                 ServerModel server = new ServerModel();
-                //Log.d(TAG, " " + "ip = " + cursor.getString(ipIndex));
-                //Log.d(TAG, " " + "id = " + cursor.getString(idIndex));
                 server.setIpAddr(cursor.getString(ipIndex));
                 server.setDbId(cursor.getString(idIndex));
                 data.add(server);

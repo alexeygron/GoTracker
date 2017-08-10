@@ -1,18 +1,10 @@
 package com.example.monitor.gameinfo;
 
-import com.example.monitor.servers.ServerModel;
-
-import java.util.List;
-
 public interface IView {
 
-    void showProgress();
+    void showProgress(boolean state);
 
-    void hideProgress();
-
-    void showView();
-
-    void hideView();
+    void showView(boolean state);
 
     void updateFields(String servers, String players, String searching,
                  String searchSeconds, String scheduler, String logon,

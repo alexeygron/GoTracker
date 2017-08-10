@@ -2,7 +2,6 @@ package com.example.monitor.ui.fragment;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,10 +14,7 @@ import com.lotr.steammonitor.app.R;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-/**
- *  Содержит общую функциональность для фрагментов отображающих экран списка.
- */
-public abstract class CommonListFragment extends CommonFragment{
+public abstract class CommonListFragment extends CommonFragment {
 
     @BindView(R.id.list_servers) protected RecyclerView mRecyclerView;
     protected ListServersAdapter mAdapter;
@@ -33,11 +29,10 @@ public abstract class CommonListFragment extends CommonFragment{
         mLayoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             mRecyclerView.addItemDecoration(new VerticalSpaceItemDecoration(10));
         }
 
-        //mRecyclerView.addItemDecoration(new VerticalSpaceItemDecoration(5));
         mRecyclerView.setItemAnimator(mitemAnimator);
     }
 }

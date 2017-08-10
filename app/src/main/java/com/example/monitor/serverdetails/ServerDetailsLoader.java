@@ -2,10 +2,8 @@ package com.example.monitor.serverdetails;
 
 import android.content.AsyncTaskLoader;
 import android.content.Context;
-import android.util.Log;
 
 import com.example.monitor.servers.ServerModel;
-import com.example.monitor.utils.Helpers;
 import com.github.koraktor.steamcondenser.exceptions.SteamCondenserException;
 import com.github.koraktor.steamcondenser.steam.SteamPlayer;
 import com.github.koraktor.steamcondenser.steam.servers.SourceServer;
@@ -17,17 +15,19 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.concurrent.TimeoutException;
 
+import static com.example.monitor.utils.Helpers.makeLogTag;
+
 /**
- * Загружает из сети в фоновом потоке информацию о сервере.
+ * Receives details about this game server and players list from network in background thread
  */
-public class ServerDetailsLoader extends AsyncTaskLoader<ServerDetailsModel> {
+class ServerDetailsLoader extends AsyncTaskLoader<ServerDetailsModel> {
 
-    public final String TAG = Helpers.makeLogTag(ServerDetailsLoader.class);
-    private String ipAddress;
+    public final String TAG = makeLogTag(ServerDetailsLoader.class);
+    private String ip;
 
-    public ServerDetailsLoader(Context context, String ip) {
+    ServerDetailsLoader(Context context, String ip) {
         super(context);
-        ipAddress = ip;
+        this.ip = ip;
     }
 
     @Override
@@ -35,7 +35,7 @@ public class ServerDetailsLoader extends AsyncTaskLoader<ServerDetailsModel> {
         HashMap<String, Object> data;
         HashMap<String, SteamPlayer> players;
         try {
-            SourceServer server = new SourceServer(ipAddress);
+            SourceServer server = new SourceServer(ip);
             SteamSocket.setTimeout(3000);
             server.initialize();
             data = server.getServerInfo();
@@ -75,27 +75,8 @@ public class ServerDetailsLoader extends AsyncTaskLoader<ServerDetailsModel> {
     }
 
     @Override
-    public void forceLoad() {
-        super.forceLoad();
-        Log.d(TAG, "forceLoad");
-    }
-
-    @Override
     protected void onStartLoading() {
         super.onStartLoading();
-        Log.d(TAG, "onStartLoading");
         forceLoad();
-    }
-
-    @Override
-    protected void onStopLoading() {
-        super.onStopLoading();
-        Log.d(TAG, "onStopLoading");
-    }
-
-    @Override
-    public void deliverResult(ServerDetailsModel data) {
-        super.deliverResult(data);
-        Log.d(TAG, "deliverResult");
     }
 }

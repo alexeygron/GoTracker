@@ -8,7 +8,7 @@ import com.lotr.steammonitor.app.R;
 import butterknife.ButterKnife;
 
 /**
- * Отображает информацию об использовании приложения.
+ * In process
  */
 public class HelperActivity extends AppCompatActivity {
 

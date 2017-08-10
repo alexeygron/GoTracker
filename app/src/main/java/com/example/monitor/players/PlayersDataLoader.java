@@ -4,7 +4,7 @@ import android.content.Context;
 import android.support.v4.content.AsyncTaskLoader;
 import android.util.Log;
 
-import com.example.monitor.utils.Config;
+import com.example.monitor.Config;
 import com.example.monitor.utils.Helpers;
 import com.github.koraktor.steamcondenser.exceptions.SteamCondenserException;
 import com.github.koraktor.steamcondenser.steam.community.WebApi;
@@ -33,7 +33,7 @@ public class PlayersDataLoader extends AsyncTaskLoader<PlayerModel> {
         Log.d(TAG, "loadInBackground");
         String responce;
         try {
-            WebApi.setApiKey(Config.WEB_API_KEY);
+            WebApi.setApiKey(Config.STEAM_API_KEY);
             Map<String, Object> params = new HashMap<>();
             params.put("steamids", mPlayer.getSteamID());
             responce = WebApi.getJSON("ISteamUser", "GetPlayerSummaries", 2, params);
