@@ -6,7 +6,7 @@ android {
     compileOptions.encoding = 'utf-8'
 
     defaultConfig {
-        applicationId "com.lotr.steammonitor.app"
+        applicationId "me.sorn"
         minSdkVersion 14
         minSdkVersion 19
         targetSdkVersion 28
