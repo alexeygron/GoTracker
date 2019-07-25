@@ -1,5 +1,6 @@
 package com.example.monitor.players;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -55,9 +56,11 @@ class FavoritePlayersPresenter implements LoaderManager.LoaderCallbacks<Player>,
     }
 
     private void updateList(Player player) {
-        mListData.set(loaderTaskIndex, player);
-        mView.setData(mListData);
-        mView.updateList();
+        if (loaderTaskIndex < mListData.size()) {
+            mListData.set(loaderTaskIndex, player);
+            mView.setData(mListData);
+            mView.updateList();
+        }
     }
 
     void onRefresh() {
@@ -80,6 +83,7 @@ class FavoritePlayersPresenter implements LoaderManager.LoaderCallbacks<Player>,
     /**
      * Validate and save new player ID in DB
      */
+    @SuppressLint("StaticFieldLeak")
     void addPlayer(String steamId) {
         new AsyncTask<String, Void, String>() {
             @Override
@@ -112,7 +116,11 @@ class FavoritePlayersPresenter implements LoaderManager.LoaderCallbacks<Player>,
     public void onLoadFinished(Loader<Player> loader, Player data) {
         updateList(data);
         loaderTaskIndex++;
-        mLoaderManager.restartLoader(1, null, this);
+        if (loaderTaskIndex < mListData.size()) {
+            mLoaderManager.restartLoader(1, null, this);
+        } else {
+            mView.showProgress(false);
+        }
     }
 
     @Override

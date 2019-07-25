@@ -38,9 +38,11 @@ class FavoriteServersPresenter implements LoaderManager.LoaderCallbacks<Server>,
     }
 
     private void updateList(Server server) {
-        mListData.set(loaderTaskIndex, server);
-        mView.setData(mListData);
-        mView.updateList();
+        if (loaderTaskIndex < mListData.size()) {
+            mListData.set(loaderTaskIndex, server);
+            mView.setData(mListData);
+            mView.updateList();
+        }
     }
 
     private void showList() {
@@ -122,7 +124,11 @@ class FavoriteServersPresenter implements LoaderManager.LoaderCallbacks<Server>,
         if (data != null) {
             updateList(data);
             loaderTaskIndex++;
-            mLoaderManager.restartLoader(LOADER_ID, null, this);
+            if (loaderTaskIndex < mListData.size()) {
+                mLoaderManager.restartLoader(LOADER_ID, null, this);
+            } else {
+                mView.showProgress(false);
+            }
         }
     }
 
